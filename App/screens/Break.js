@@ -26,21 +26,28 @@ render(){
 
     <View>
     <TouchableOpacity 
-    onPress={() => this.props.navigation.navigate("SideBar")} 
-    >
+    onPress={() => this.props.navigation.navigate("ActiveSession")}>
+      <Text style={styles.button}>Finish Break</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity 
+    onPress={() => this.props.navigation.navigate("SideBar")}>
       <Text style={styles.button}>Side Menu</Text>
     </TouchableOpacity>
 
     <TouchableOpacity 
-    onPress={() => this.props.navigation.navigate("SessionHistory")} 
-    >
+    onPress={() => this.props.navigation.navigate("SessionCreation")}>
+      <Text style={styles.button}>Session</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity 
+    onPress={() => this.props.navigation.navigate("SessionHistory")}>
       <Text style={styles.button}>History</Text>
     </TouchableOpacity>
 
     <TouchableOpacity 
-    onPress={() => this.props.navigation.navigate("SessionCreation")} 
-    >
-      <Text style={styles.button}>Session</Text>
+    onPress={() => this.props.navigation.navigate("Activities")}>
+      <Text style={styles.button}>Activities</Text>
     </TouchableOpacity>
     </View>
         );
