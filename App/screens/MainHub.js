@@ -1,5 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, StatusBar, SafeAreaView, ImageBackground } from 'react-native';
+import { 
+    StyleSheet, 
+    Text, 
+    View, 
+    TouchableOpacity, 
+    Dimensions, 
+    StatusBar, 
+    SafeAreaView, 
+    ImageBackground,
+    ScrollView
+} from 'react-native';
 
 // Constants that help define the shape of our screen/buttons
 const screen = Dimensions.get('window');
@@ -31,6 +41,7 @@ const styles = StyleSheet.create({
 class MainHub extends React.Component {
     render() {
         return (
+            <ScrollView>
             <View style={styles.container} >
                 <TouchableOpacity style={styles.button}
                     onPress={() => this.props.navigation.navigate("Activities")}>
@@ -66,7 +77,55 @@ class MainHub extends React.Component {
                     onPress={() => this.props.navigation.navigate("SessionHistory")}>
                     <Text style={styles.text}> Session History </Text>
                 </TouchableOpacity>
+
+                {/* Levi Edits to the file lists. */}
+
+                <TouchableOpacity style={styles.button}
+                    onPress={() => this.props.navigation.navigate("ActiveSession")}>
+                    <Text style={styles.text}> ActiveSession </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button}
+                    onPress={() => this.props.navigation.navigate("Login")}>
+                    <Text style={styles.text}> Login </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button}
+                    onPress={() => this.props.navigation.navigate("Break")}>
+                    <Text style={styles.text}> Break </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button}
+                    onPress={() => this.props.navigation.navigate("CreateUser")}>
+                    <Text style={styles.text}> CreateUser </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button}
+                    onPress={() => this.props.navigation.navigate("ForgotPassUser")}>
+                    <Text style={styles.text}> ForgotPassUser </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button}
+                    onPress={() => this.props.navigation.navigate("OrgAdminSuiteSettings")}>
+                    <Text style={styles.text}> OrgAdminSuiteSettings </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button}
+                    onPress={() => this.props.navigation.navigate("SessionCreation")}>
+                    <Text style={styles.text}> SessionCreation </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button}
+                    onPress={() => this.props.navigation.navigate("Settings")}>
+                    <Text style={styles.text}> Settings </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button}
+                    onPress={() => this.props.navigation.navigate("SideBar")}>
+                    <Text style={styles.text}> SideBar </Text>
+                </TouchableOpacity>
             </View>
+        </ScrollView>
         )
     }
 }

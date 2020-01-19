@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
@@ -46,6 +46,18 @@ const styles = StyleSheet.create({
         lineHeight: 32,
         textAlign: "left",
     },
+    button: {
+        backgroundColor: 'blue',
+        borderColor: 'white',
+        borderWidth: 1,
+        borderRadius: 12,
+        color: 'white',
+        fontSize: 24,
+        fontWeight: 'bold',
+        overflow: 'hidden',
+        padding: 12,
+        textAlign:'center',
+      },
 });
 
 class DailyHistory extends React.Component {
@@ -59,6 +71,25 @@ class DailyHistory extends React.Component {
                     <Text style={styles.text4}>Points Earned: 428 </Text>
                     <Text style={styles.text5}>Steps Taken: 6,120 </Text>
                 </View>
+                <TouchableOpacity 
+                    onPress={() => this.props.navigation.navigate("SideBar")}>
+                    <Text style={styles.button}>Side Menu</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    onPress={() => this.props.navigation.navigate("SessionCreation")}>
+                    <Text style={styles.button}>Session</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    onPress={() => this.props.navigation.navigate("SessionHistory")}>
+                    <Text style={styles.button}>History</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    onPress={() => this.props.navigation.navigate("Activities")}>
+                    <Text style={styles.button}>Activities</Text>
+                </TouchableOpacity>
             </View>
         )
     }
