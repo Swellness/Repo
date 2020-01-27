@@ -26,39 +26,39 @@ render(){
 
     <View>
     <TouchableOpacity 
-    onPress={() => this.props.navigation.navigate("Login")} 
+    onPress={() => this.props.navigation.navigate("Break")} 
     >
-      <Text style={styles.button}>Signout</Text>
+      <Text style={styles.button}>Take a Break</Text>
     </TouchableOpacity>
 
     <TouchableOpacity 
-    onPress={() => this.props.navigation.navigate("Rewards")} 
+    onPress={() => this.props.navigation.navigate("PostSession")} 
     >
-      <Text style={styles.button}>Rewards</Text>
+      <Text style={styles.button}>End Session</Text>
     </TouchableOpacity>
 
     <TouchableOpacity 
-    onPress={() => this.props.navigation.navigate("OrganizationalLead")} 
+    onPress={() => this.props.navigation.navigate("SideBar")} 
     >
-      <Text style={styles.button}>LeaderBoards</Text>
+      <Text style={styles.button}>Side Menu</Text>
     </TouchableOpacity>
 
     <TouchableOpacity 
-    onPress={() => this.props.navigation.navigate("Profile")} 
+    onPress={() => this.props.navigation.navigate("SessionCreation")} 
     >
-      <Text style={styles.button}>Profile</Text>
+      <Text style={styles.button}>Session</Text>
     </TouchableOpacity>
 
     <TouchableOpacity 
-    onPress={() => this.props.navigation.navigate("OrgAdminSuiteSettings")} 
+    onPress={() => this.props.navigation.navigate("SessionHistory")} 
     >
-      <Text style={styles.button}>Org. Admin</Text>
+      <Text style={styles.button}>History</Text>
     </TouchableOpacity>
 
     <TouchableOpacity 
-    onPress={() => this.props.navigation.navigate("Settings")} 
+    onPress={() => this.props.navigation.navigate("Activities")} 
     >
-      <Text style={styles.button}>Settings</Text>
+      <Text style={styles.button}>Activities</Text>
     </TouchableOpacity>
     </View>
         );

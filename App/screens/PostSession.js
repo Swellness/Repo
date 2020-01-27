@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
 class PostSession extends React.Component {
     render() {
         return (
+            <ScrollView>
             <View style={styles.container} >
                 <Text style={styles.headerText}>Good job today!!</Text>
                 <Text style={styles.text}> Daily Challenge: </Text>
@@ -85,10 +86,27 @@ class PostSession extends React.Component {
                     <Text style={styles.text5}> Points Earned: 78</Text>
                 </View>
                 <TouchableOpacity style={styles.button}
-                /*onPress={() => this.props.navigation.navigate("SessionCreation")}*/>
+                onPress={() => this.props.navigation.navigate("SessionCreation")}>
                     <Text style={styles.text6}> New Session </Text>
                 </TouchableOpacity>
+                {/* <TouchableOpacity style={styles.button}
+                onPress={() => this.props.navigation.navigate("SideBar")}>
+                <Text style={styles.button}>Side Menu</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button}
+                onPress={() => this.props.navigation.navigate("SessionCreation")}>
+                <Text style={styles.button}>Session</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button}
+                onPress={() => this.props.navigation.navigate("SessionHistory")}>
+                <Text style={styles.button}>History</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button}
+                onPress={() => this.props.navigation.navigate("Activities")}>
+                <Text style={styles.button}>Activities</Text>
+                </TouchableOpacity> */}
             </View>
+            </ScrollView>
         )
     }
 }

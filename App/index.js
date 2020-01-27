@@ -10,6 +10,16 @@ import Profile from "./screens/Profile";
 import Rewards from "./screens/Rewards";
 import SessionHistory from "./screens/SessionHistory";
 
+import ActiveSession from "./screens/ActiveSession";
+import Break from "./screens/Break";
+import CreateUser from "./screens/CreateUser";
+import ForgotPassUser from "./screens/ForgotPassUser";
+import Login from "./screens/Login";
+import OrgAdminSuiteSettings from "./screens/OrgAdminSuiteSettings";
+import SessionCreation from "./screens/SessionCreation";
+import Settings from "./screens/Settings";
+import SideBar from "./screens/SideBar";
+
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack"
 
@@ -149,6 +159,106 @@ const AppNavigator = createStackNavigator({
           title="Info"
           color="#000000"
         />,
+    }
+  },
+  // Here are Levi's edits and additions to the screens
+  ActiveSession:
+  {
+    screen: ActiveSession,
+    navigationOptions: {
+      headerTitle: "Active Session",
+      headerStyle:
+      {
+        backgroundColor: "#c2c5cc",
+      }
+    }
+  },
+  Break:
+  {
+    screen: Break,
+    navigationOptions: {
+      headerTitle: "Break",
+      headerStyle:
+      {
+        backgroundColor: "#c2c5cc",
+      }
+    }
+  },
+  CreateUser:
+  {
+    screen: CreateUser,
+    navigationOptions: {
+      headerTitle: "Create User",
+      headerStyle:
+      {
+        backgroundColor: "#c2c5cc",
+      }
+    }
+  },
+  ForgotPassUser:
+  {
+    screen: ForgotPassUser,
+    navigationOptions: {
+      headerTitle: "Forgot User Password",
+      headerStyle:
+      {
+        backgroundColor: "#c2c5cc",
+      }
+    }
+  },
+  Login:
+  {
+    screen: Login,
+    navigationOptions: {
+      headerTitle: "Login",
+      headerStyle:
+      {
+        backgroundColor: "#c2c5cc",
+      }
+    }
+  },
+  OrgAdminSuiteSettings:
+  {
+    screen: OrgAdminSuiteSettings,
+    navigationOptions: {
+      headerTitle: "Admin Settings",
+      headerStyle:
+      {
+        backgroundColor: "#c2c5cc",
+      }
+    }
+  },
+  SessionCreation:
+  {
+    screen: SessionCreation,
+    navigationOptions: {
+      headerTitle: "Session Creation",
+      headerStyle:
+      {
+        backgroundColor: "#c2c5cc",
+      }
+    }
+  },
+  Settings:
+  {
+    screen: Settings,
+    navigationOptions: {
+      headerTitle: "Settings",
+      headerStyle:
+      {
+        backgroundColor: "#c2c5cc",
+      }
+    }
+  },
+  SideBar:
+  {
+    screen: SideBar,
+    navigationOptions: {
+      headerTitle: "Sidebar",
+      headerStyle:
+      {
+        backgroundColor: "#c2c5cc",
+      }
     }
   },
 });
