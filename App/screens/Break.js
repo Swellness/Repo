@@ -7,7 +7,6 @@ import {
   StyleSheet,
   onPress,
   Text,
-  Button
 } from "react-native";
 import {
   Container,

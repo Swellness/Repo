@@ -4,11 +4,9 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView
 } from "react-native";
 import {
   Container,
-  Header,
   Content,
   Footer,
   FooterTab,

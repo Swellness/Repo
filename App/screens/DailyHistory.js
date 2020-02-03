@@ -1,5 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { 
+  StyleSheet, 
+  Text,
+  View, 
+  TouchableOpacity } from "react-native";
 import {
   Container,
   Header,
@@ -72,7 +76,7 @@ const styles = StyleSheet.create({
 class DailyHistory extends React.Component {
   render() {
     return (
-      <Containter>
+      <Container>
         <Content>
           <Text style={styles.text1}>TBWO</Text>
           <View style={styles.container2}>

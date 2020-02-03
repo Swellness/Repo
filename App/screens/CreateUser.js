@@ -1,53 +1,23 @@
 import React from "react";
 import {
-  View,
-  ScrollView,
-  StatusBar,
-  TouchableOpacity,
   StyleSheet,
-  onPress,
-  Text,
-  Button,
-  TextInput,
   Image
 } from "react-native";
 import {
   Container,
-  Header,
   Content,
   Footer,
   FooterTab,
   Button,
-  Icon
+  Icon,
+  Form, 
+  Item, 
+  Input,
+  Label,
+  Text,
 } from "native-base";
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "#C2C5CC",
-    textAlign: "center",
-    position: "absolute",
-    width: 221,
-    height: 55,
-    left: 75,
-    top: 10,
-    lineHeight: 40,
-    fontSize: 32,
-    fontWeight: "600",
-    textAlign: "center"
-  },
-  color: {
-    backgroundColor: "blue"
-  },
-  stretch: {
-    width: 375,
-    height: 200,
-    resizeMode: "stretch"
-  },
-  TextBoxStyle: {
-    height: 50,
-    borderColor: "gray",
-    borderWidth: 1
-  },
   stretch: {
     width: 375,
     height: 200,
@@ -56,15 +26,7 @@ const styles = StyleSheet.create({
 });
 
 import { 
-  Container, 
-  Header, 
-  Content, 
-  Form, 
-  Item, 
-  Input, 
-  Button, 
-  Text,
-  Label } from 'native-base';
+   } from 'native-base';
 
 export default class Start extends React.Component {
   render() {

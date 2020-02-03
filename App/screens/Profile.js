@@ -1,13 +1,8 @@
 import React from "react";
 import {
-  View,
-  ScrollView,
-  StatusBar,
   TouchableOpacity,
   StyleSheet,
-  onPress,
   Text,
-  Button
 } from "react-native";
 import {
   Container,
