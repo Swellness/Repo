@@ -1,13 +1,19 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { 
+  StyleSheet,
+} from "react-native";
 import {
   Container,
-  Header,
   Content,
   Footer,
   FooterTab,
   Button,
-  Icon
+  Form,
+  Item,
+  Input,
+  Label,
+  Icon,
+  Text,
 } from "native-base";
 
 const styles = StyleSheet.create({

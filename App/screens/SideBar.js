@@ -1,5 +1,10 @@
 import React from "react";
-import { View, ScrollView, StatusBar, TouchableOpacity, StyleSheet, onPress, Text, Button } from "react-native";
+import { 
+  View, 
+  TouchableOpacity, 
+  StyleSheet, 
+  Text, 
+} from "react-native";
 
 const styles = StyleSheet.create({
   button: {

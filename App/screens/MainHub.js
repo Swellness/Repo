@@ -2,13 +2,8 @@ import React from "react";
 import {
   StyleSheet,
   Text,
-  View,
   TouchableOpacity,
   Dimensions,
-  StatusBar,
-  SafeAreaView,
-  ImageBackground,
-  ScrollView
 } from "react-native";
 
 import {
