@@ -60,6 +60,12 @@ render(){
     >
       <Text style={styles.button}>Settings</Text>
     </TouchableOpacity>
+
+    <TouchableOpacity 
+    onPress={() => this.props.navigation.navigate("Profile")} 
+    >
+      <Text style={styles.button}>Profile</Text>
+    </TouchableOpacity>
     </View>
         );
     }
