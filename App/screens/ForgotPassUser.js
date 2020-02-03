@@ -24,30 +24,24 @@ const styles = StyleSheet.create({
     borderWidth: 1
   }
 });
-
 export default function App() {
   return (
     <Container>
       <Content>
-        <Text style={{ fontSize: 32 }}> Reset Your Password</Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text></Text>
-        <Text style={{ textAlign: "center", fontSize: 20 }}>
-          If you are unable to gain access to your account, please enter your
-          email to reset your password:
-        </Text>
-        <Text></Text>
-        <Text></Text>
-        <Text style={{ textAlign: "center", fontSize: 20 }}>Email</Text>
-        <TextInput
-          style={styles.TextBoxStyle}
-          placeholder="JohnMadden@apu.edu"
-          onChangeText={text => setImageLink(text)}
-        />
+        <Form>
+        <Text style = {{fontSize: 32,}}> Reset Your Password</Text>
+        <Text style = {{textAlign: "center", fontSize: 20,}}
+        >If you are unable to gain access to your account, 
+        please enter your email to reset your password:</Text>
+        <Text style = {{textAlign: "center", fontSize: 20,}}>Email</Text>
+          <Item stackedLabel>
+            <Label>Email</Label>
+            <Input />
+          </Item>
+          <Button rounded>
+            <Text>Submit</Text>
+          </Button>
+        </Form>
       </Content>
       <Footer>
         <FooterTab style={{ backgroundColor: "#c2c5cc" }}>

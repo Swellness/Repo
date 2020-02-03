@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   View,
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1
   },
+
   stretch: {
     width: 375,
     height: 200,
@@ -66,44 +68,45 @@ const styles = StyleSheet.create({
   }
 });
 
+import { 
+  Container, 
+  Header, 
+  Content, 
+  Form, 
+  Item, 
+  Input, 
+  Button, 
+  Text,
+  Label } from 'native-base';
+
 export default class Start extends React.Component {
   render() {
     return (
       <Container>
         <Content>
-          <Image
-            style={styles.stretch}
-            source={require("../Pictures/swellness_logo_outline.png")}
-          />
-          <Text>UserName</Text>
-          <TextInput
-            style={styles.TextBoxStyle}
-            placeholder="JohnMadden"
-            onChangeText={text => setImageLink(text)}
-          />
-          <Text>Password</Text>
-          <TextInput
-            style={styles.TextBoxStyle}
-            placeholder="**********"
-            onChangeText={text => setImageLink(text)}
-          />
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("CreateUser")}
-          >
-            <Text style={styles.Button1}>New User</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("SessionCreation")}
-          >
-            <Text style={styles.Button2}>Login</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("ForgotPassUser")}
-          >
-            <Text style={styles.Button3}>Forgot Password</Text>
-          </TouchableOpacity>
+        <Form>
+        <Image style={styles.stretch} source={require('../Pictures/swellness_logo_outline.png')}/>
+          <Item stackedLabel>
+            <Label>Username</Label>
+            <Input />
+          </Item>
+          <Item stackedLabel last>
+            <Label>Password</Label>
+            <Input />
+          </Item>
+          <Button rounded
+          onPress={() => this.props.navigation.navigate("CreateUser")}>
+            <Text>New User</Text>
+          </Button>
+          <Button rounded
+          onPress={() => this.props.navigation.navigate("SessionCreation")}>
+            <Text>Login</Text>
+          </Button>
+          <Button transparent
+          onPress={() => this.props.navigation.navigate("ForgotPassUser")}>
+            <Text>Forgot Password</Text>
+          </Button>
+        </Form>
         </Content>
         <Footer>
           <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
