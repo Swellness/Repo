@@ -1,8 +1,11 @@
 import React from "react";
 import {
+  View,
   TouchableOpacity,
   StyleSheet,
   Text,
+  Spacer,
+  Image
 } from "react-native";
 import {
   Container,
@@ -15,8 +18,12 @@ import {
 } from "native-base";
 
 const styles = StyleSheet.create({
+  textDisplay: {
+    fontSize:30,
+    textAlign: "left",
+    color: "black"
+  },
   button: {
-    backgroundColor: "blue",
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 12,
@@ -24,11 +31,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     overflow: "hidden",
-    padding: 12,
-    textAlign: "center"
-  },
-  color: {
-    backgroundColor: "blue"
+    padding: 5,
+    textAlign: "center",
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 
@@ -37,41 +43,43 @@ export default class Start extends React.Component {
     return (
       <Container>
         <Content>
-          <TouchableOpacity
+        <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+        <Image
+        source={require('../Pictures/clockSess.png')}
+        />
+        <Text style={styles.textDisplay}>1:00:00</Text>
+        </View>
+          
+          <Text style={styles.textDisplay}>Time till next Activity: 15 min</Text>
+          <Text style={styles.textDisplay}>Time till next Break: 30 min</Text>
+
+          <Button 
             onPress={() => this.props.navigation.navigate("Break")}
           >
             <Text style={styles.button}>Take a Break</Text>
-          </TouchableOpacity>
+          </Button>
 
-          <TouchableOpacity
+          <Button 
             onPress={() => this.props.navigation.navigate("PostSession")}
           >
             <Text style={styles.button}>End Session</Text>
-          </TouchableOpacity>
+          </Button>
 
-          <TouchableOpacity
+          {/* <Button 
             onPress={() => this.props.navigation.navigate("SideBar")}
           >
             <Text style={styles.button}>Side Menu</Text>
-          </TouchableOpacity>
+          </Button> */}
 
-          <TouchableOpacity
+          <Button 
             onPress={() => this.props.navigation.navigate("SessionCreation")}
           >
             <Text style={styles.button}>Session</Text>
-          </TouchableOpacity>
+          </Button>
 
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("SessionHistory")}
-          >
-            <Text style={styles.button}>History</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("Activities")}
-          >
-            <Text style={styles.button}>Activities</Text>
-          </TouchableOpacity>
         </Content>
         <Footer>
           <FooterTab style={{ backgroundColor: "#c2c5cc" }}>

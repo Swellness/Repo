@@ -2,7 +2,8 @@ import React from "react";
 import { 
   StyleSheet, 
   Text, 
-  TouchableOpacity 
+  View,
+  Image
 } from "react-native";
 import {
   Container,
@@ -33,7 +34,6 @@ const styles = StyleSheet.create({
     top: 56
   },
   button: {
-    backgroundColor: "blue",
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 12,
@@ -41,9 +41,23 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     overflow: "hidden",
-    padding: 12,
-    textAlign: "center"
-  }
+    padding: 5,
+    textAlign: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize:30,
+      fontWeight: "bold",
+    },
+    subText:{
+      fontSize:13,
+      justifyContent: "center",
+    textAlign: "center",
+    }
+
 });
 
 class SessionHistory extends React.Component {
@@ -51,33 +65,40 @@ class SessionHistory extends React.Component {
     return (
       <Container>
         <Content>
-          <Text style={styles.text}>
-            Tap on a Day to see its stats, or select the Month to view all your
-            stats for that Month.
-          </Text>
-          <TouchableOpacity
+        <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+        <Text style={styles.subText}>Tap on a Day to see its stats, or select the Month to view all your stats for that Month.</Text>
+        <Image
+        source={require('../Pictures/calHist.png')}
+        /> 
+        <Text style={styles.title}>January</Text>
+        </View>
+
+          {/* <Button
             onPress={() => this.props.navigation.navigate("SideBar")}
           >
             <Text style={styles.button}>Side Menu</Text>
-          </TouchableOpacity>
+          </Button> */}
 
-          <TouchableOpacity
+          <Button
             onPress={() => this.props.navigation.navigate("SessionCreation")}
           >
             <Text style={styles.button}>Session</Text>
-          </TouchableOpacity>
+          </Button>
 
-          <TouchableOpacity
+          <Button
             onPress={() => this.props.navigation.navigate("Activities")}
           >
             <Text style={styles.button}>Activities</Text>
-          </TouchableOpacity>
+          </Button>
 
-          <TouchableOpacity
+          <Button
             onPress={() => this.props.navigation.navigate("DailyHistory")}
           >
             <Text style={styles.button}>Daily History</Text>
-          </TouchableOpacity>
+          </Button>
         </Content>
         <Footer>
           <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
