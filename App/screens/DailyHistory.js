@@ -1,9 +1,10 @@
 import React from "react";
-import { 
-  StyleSheet, 
+import {
+  StyleSheet,
   Text,
-  View, 
-  TouchableOpacity } from "react-native";
+  View,
+  TouchableOpacity
+} from "react-native";
 import {
   Container,
   Header,
@@ -11,7 +12,11 @@ import {
   Footer,
   FooterTab,
   Button,
-  Icon
+  Icon,
+  Left,
+  Body,
+  Right,
+  Title,
 } from "native-base";
 
 const styles = StyleSheet.create({
@@ -77,6 +82,21 @@ class DailyHistory extends React.Component {
   render() {
     return (
       <Container>
+        <Header>
+          <Left>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
+              <Icon name='arrow-back' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Header</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              <Icon name='menu' />
+            </Button>
+          </Right>
+        </Header>
         <Content>
           <Text style={styles.text1}>TBWO</Text>
           <View style={styles.container2}>

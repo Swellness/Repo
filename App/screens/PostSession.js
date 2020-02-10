@@ -11,7 +11,11 @@ import {
   Footer,
   FooterTab,
   Button,
-  Icon
+  Icon,
+  Left,
+  Body,
+  Right,
+  Title,
 } from "native-base";
 
 const styles = StyleSheet.create({
@@ -89,6 +93,21 @@ class PostSession extends React.Component {
   render() {
     return (
       <Container>
+        <Header>
+          <Left>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
+              <Icon name='arrow-back' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Header</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              <Icon name='menu' />
+            </Button>
+          </Right>
+        </Header>
         <Content>
           <Text style={styles.headerText}>Good job today!!</Text>
           <Text style={styles.text}> Daily Challenge: </Text>

@@ -28,137 +28,62 @@ const AppNavigator = createStackNavigator({
   {
     screen: MainHub,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Main Menu",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      }
     }
   },
   PostSession:
   {
     screen: PostSession,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "",
-      headerBackTitle: "",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      },
-      headerRight: () =>
-        <Button
-          onPress={() => alert('TBWO')}
-          title="Info"
-          color="#000000"
-        />,
     }
   },
   SessionHistory:
   {
     screen: SessionHistory,
     navigationOptions: {
-      headerTitle: "Your Stats",
-      headerBackTitle: "",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      },
-      headerRight: () =>
-        <Button
-          onPress={() => alert('TBWO')}
-          title="Info"
-          color="#000000"
-        />,
+      headerShown: false,
     }
   },
   DailyHistory:
   {
     screen: DailyHistory,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Stats",
-      headerBackTitle: "",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      },
-      headerRight: () =>
-        <Button
-          onPress={() => alert('TBWO')}
-          title="Info"
-          color="#000000"
-        />,
     }
   },
   Rewards:
   {
     screen: Rewards,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Redeem",
-      headerBackTitle: "",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      },
-      headerRight: () =>
-        <Button
-          onPress={() => alert('TBWO')}
-          title="Info"
-          color="#000000"
-        />,
     }
   },
   Leaderboard:
   {
     screen: Leaderboard,
     navigationOptions: {
-      headerTitle: "Leaderboard",
-      headerBackTitle: "",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      },
-      headerRight: () =>
-        <Button
-          onPress={() => alert('TBWO')}
-          title="Info"
-          color="#000000"
-        />,
+      headerShown: false,
     }
   },
   Activities:
   {
     screen: Activities,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Activites",
-      headerBackTitle: "",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      },
-      headerRight: () =>
-        <Button
-          onPress={() => alert('TBWO')}
-          title="Info"
-          color="#000000"
-        />,
     }
   },
   Profile:
   {
     screen: Profile,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Profile",
-      headerBackTitle: "",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      },
-      headerRight: () =>
-        <Button
-          onPress={() => alert('TBWO')}
-          title="Info"
-          color="#000000"
-        />,
     }
   },
   // Here are Levi's edits and additions to the screens
@@ -166,99 +91,72 @@ const AppNavigator = createStackNavigator({
   {
     screen: ActiveSession,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Active Session",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      }
     }
   },
   Break:
   {
     screen: Break,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Break",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      }
     }
   },
   CreateUser:
   {
     screen: CreateUser,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Create User",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      }
     }
   },
   ForgotPassUser:
   {
     screen: ForgotPassUser,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Forgot User Password",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      }
     }
   },
   Login:
   {
     screen: Login,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Login",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      }
     }
   },
   OrgAdminSuiteSettings:
   {
     screen: OrgAdminSuiteSettings,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Admin Settings",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      }
     }
   },
   SessionCreation:
   {
     screen: SessionCreation,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Session Creation",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      }
     }
   },
   Settings:
   {
     screen: Settings,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Settings",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      }
     }
   },
   SideBar:
   {
     screen: SideBar,
     navigationOptions: {
+      headerShown: false,
       headerTitle: "Sidebar",
-      headerStyle:
-      {
-        backgroundColor: "#c2c5cc",
-      }
     }
   },
 });

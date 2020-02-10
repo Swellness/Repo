@@ -15,7 +15,11 @@ import {
   Footer,
   FooterTab,
   Button,
-  Icon
+  Icon,
+  Left,
+  Body,
+  Right,
+  Title,
 } from "native-base";
 
 const styles = StyleSheet.create({
@@ -40,6 +44,21 @@ export default class Start extends React.Component {
   render() {
     return (
       <Container>
+        <Header>
+          <Left>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
+              <Icon name='arrow-back' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Header</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              <Icon name='menu' />
+            </Button>
+          </Right>
+        </Header>
         <Content>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate("ActiveSession")}

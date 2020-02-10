@@ -1,8 +1,8 @@
 import React from "react";
-import { 
-  StyleSheet, 
-  Text, 
-  TouchableOpacity 
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity
 } from "react-native";
 import {
   Container,
@@ -11,7 +11,11 @@ import {
   Footer,
   FooterTab,
   Button,
-  Icon
+  Icon,
+  Left,
+  Body,
+  Right,
+  Title,
 } from "native-base";
 
 const styles = StyleSheet.create({
@@ -50,6 +54,21 @@ class SessionHistory extends React.Component {
   render() {
     return (
       <Container>
+        <Header>
+          <Left>
+            <Button transparent onPress={() => this.props.navigation.goBack()}>
+              <Icon name='arrow-back' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Header</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              <Icon name='menu' />
+            </Button>
+          </Right>
+        </Header>
         <Content>
           <Text style={styles.text}>
             Tap on a Day to see its stats, or select the Month to view all your
