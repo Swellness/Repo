@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity
-} from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import {
   Container,
   Header,
@@ -15,7 +11,7 @@ import {
   Left,
   Body,
   Right,
-  Title,
+  Title
 } from "native-base";
 
 const styles = StyleSheet.create({
@@ -37,7 +33,6 @@ const styles = StyleSheet.create({
     top: 56
   },
   button: {
-    backgroundColor: "blue",
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 12,
@@ -45,7 +40,20 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     overflow: "hidden",
-    padding: 12,
+    padding: 5,
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  title: {
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: 30,
+    fontWeight: "bold"
+  },
+  subText: {
+    fontSize: 13,
+    justifyContent: "center",
     textAlign: "center"
   }
 });
@@ -57,7 +65,7 @@ class SessionHistory extends React.Component {
         <Header>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
-              <Icon name='arrow-back' />
+              <Icon name="arrow-back" />
             </Button>
           </Left>
           <Body>
@@ -65,38 +73,46 @@ class SessionHistory extends React.Component {
           </Body>
           <Right>
             <Button transparent>
-              <Icon name='menu' />
+              <Icon name="menu" />
             </Button>
           </Right>
         </Header>
         <Content>
-          <Text style={styles.text}>
-            Tap on a Day to see its stats, or select the Month to view all your
-            stats for that Month.
-          </Text>
-          <TouchableOpacity
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Text style={styles.subText}>
+              Tap on a Day to see its stats, or select the Month to view all
+              your stats for that Month.
+            </Text>
+            <Image source={require("../Pictures/calHist.png")} />
+            <Text style={styles.title}>January</Text>
+          </View>
+
+          {/* <Button
             onPress={() => this.props.navigation.navigate("SideBar")}
           >
             <Text style={styles.button}>Side Menu</Text>
-          </TouchableOpacity>
+          </Button> */}
 
-          <TouchableOpacity
+          <Button
             onPress={() => this.props.navigation.navigate("SessionCreation")}
           >
             <Text style={styles.button}>Session</Text>
-          </TouchableOpacity>
+          </Button>
 
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("Activities")}
-          >
+          <Button onPress={() => this.props.navigation.navigate("Activities")}>
             <Text style={styles.button}>Activities</Text>
-          </TouchableOpacity>
+          </Button>
 
-          <TouchableOpacity
+          <Button
             onPress={() => this.props.navigation.navigate("DailyHistory")}
           >
             <Text style={styles.button}>Daily History</Text>
-          </TouchableOpacity>
+          </Button>
         </Content>
         <Footer>
           <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
