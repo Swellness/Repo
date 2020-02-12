@@ -3,6 +3,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   Text,
+  Image,
+  View
 } from "react-native";
 import {
   Container,
@@ -20,7 +22,6 @@ import {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "blue",
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 12,
@@ -28,8 +29,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     overflow: "hidden",
-    padding: 12,
-    textAlign: "center"
+    padding: 5,
+    textAlign: "center",
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   color: {
     backgroundColor: "blue"
@@ -56,29 +59,42 @@ export default class Start extends React.Component {
           </Right>
         </Header>
         <Content>
-          <TouchableOpacity
+        <View style={{
+                marginStart:30
+              }}>
+        <Image
+        source={require('../Pictures/AppLogo.png')}
+        />
+        <Text style={{fontStyle:'italic'}}>“When life gives you lemons? Don't make lemonade...”</Text>
+        </View>
+
+        <View>
+        <Text style={{fontSize:30}}>Activity Frequency: 30 mins</Text>
+        <Text style={{fontSize:30}}>Hours Working: 8 hrs</Text>
+          </View>      
+          <Button
             onPress={() => this.props.navigation.navigate("ActiveSession")}
           >
             <Text style={styles.button}>Start Session</Text>
-          </TouchableOpacity>
+          </Button>
 
-          <TouchableOpacity
+          {/* <Button
             onPress={() => this.props.navigation.navigate("SideBar")}
           >
             <Text style={styles.button}>Side Menu</Text>
-          </TouchableOpacity>
+          </Button> */}
 
-          <TouchableOpacity
+          <Button
             onPress={() => this.props.navigation.navigate("SessionHistory")}
           >
             <Text style={styles.button}>History</Text>
-          </TouchableOpacity>
+          </Button>
 
-          <TouchableOpacity
+          <Button
             onPress={() => this.props.navigation.navigate("Activities")}
           >
             <Text style={styles.button}>Activities</Text>
-          </TouchableOpacity>
+          </Button>
         </Content>
         <Footer>
           <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
