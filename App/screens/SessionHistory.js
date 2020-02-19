@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ Component } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import {
   Container,
@@ -13,13 +13,16 @@ import {
   Right,
   Title
 } from "native-base";
+import CalendarPicker from 'react-native-calendar-picker';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    // alignItems: "center",
+    // justifyContent: "center"
+    //marginTop: 10
+
   },
   text: {
     fontSize: 18,
@@ -59,7 +62,23 @@ const styles = StyleSheet.create({
 });
 
 class SessionHistory extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedStartDate: null,
+    };
+    this.onDateChange = this.onDateChange.bind(this);
+  }
+ 
+  onDateChange(date) {
+    this.setState({
+      selectedStartDate: date,
+    });
+  }
+
   render() {
+    const { selectedStartDate } = this.state;
+    const startDate = selectedStartDate ? selectedStartDate.toString() : '';
     return (
       <Container>
         <Header>
@@ -69,28 +88,29 @@ class SessionHistory extends React.Component {
             </Button>
           </Left>
           <Body>
-            <Title>Header</Title>
+            <Title>History</Title>
           </Body>
           <Right>
-            <Button transparent>
+            <Button transparent onPress={() => this.props.navigation.navigate('SideBar')}>
               <Icon name="menu" />
             </Button>
           </Right>
         </Header>
         <Content>
-          <View
-            style={{
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Text style={styles.subText}>
+
+          <View style={styles.container}>
+        <CalendarPicker
+          onDateChange={this.onDateChange}
+        />
+ 
+        <View>
+        <Text style={styles.subText}>
               Tap on a Day to see its stats, or select the Month to view all
               your stats for that Month.
             </Text>
-            <Image source={require("../Pictures/calHist.png")} />
-            <Text style={styles.title}>January</Text>
-          </View>
+          <Text>SELECTED DATE:{ startDate }</Text>
+        </View>
+      </View>
 
           {/* <Button
             onPress={() => this.props.navigation.navigate("SideBar")}
