@@ -64,7 +64,7 @@ export const updateData = (database, collection, objId, object) => {
 //example object: const output = { "hours": data1, "points": data2 }
 
 
-updateData()
+
 
 export const logout = () => {
     Stitch.defaultAppClient.auth.logout().then(user => { //takes the client and runs auth.logout() to log the client out
