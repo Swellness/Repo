@@ -8,6 +8,7 @@ import {
 import {
   Container,
   Content,
+  Header,
   Footer,
   FooterTab,
   Button,

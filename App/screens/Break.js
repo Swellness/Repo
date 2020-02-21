@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import {
   View,
   ScrollView,
@@ -22,6 +22,7 @@ import {
   Right,
   Title,
 } from "native-base";
+import moment from 'moment';
 
 const styles = StyleSheet.create({
   button: {
@@ -50,6 +51,24 @@ const styles = StyleSheet.create({
 
 
 export default class Start extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      //defauilt value of the time
+      time: '',
+    };
+  }
+  componentDidMount() {
+    var that = this;
+ 
+    //Getting the current date-time with required format and UTC   
+    var date = moment()
+      // .utcOffset('+05:30')
+      .format(' hh:mm a');
+ 
+    that.setState({ time: date });
+    //Settign up time to show
+  }
   render() {
     return (
 
@@ -80,10 +99,13 @@ export default class Start extends React.Component {
         />
         </View>
             
-          <View>
+          {/* <View>
             <Text style={{fontSize:30}}>Current Time: 4:36 pm</Text>
             <Text style={{fontSize:30}}>Time remaining: 15 min</Text>
-          </View>
+          </View> */}
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ fontSize: 30 }}>Current Time: {this.state.time}</Text>
+      </View>
           
           <Button
             onPress={() => this.props.navigation.navigate("ActiveSession")}
