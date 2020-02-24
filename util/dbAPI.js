@@ -27,7 +27,7 @@ export const hasDefaultClient = () => { //checks if client exists
 }
 
 export const loadDb = (database) => { //returns RemoteMongoDatabase, almost never used
-    const db = this.state.client.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db(database)
+    const db = Stitch.defaultAppClients.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db(database)
     return db;
 }
 
