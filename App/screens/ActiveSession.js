@@ -131,6 +131,7 @@ export default class Start extends React.Component {
 
   interval = null;
 
+  
   componentDidUpdate(prevProp, prevState) {
     if (this.state.remainingSeconds === 0 && prevState.remainingSeconds !== 0) {
       this.stop();
@@ -148,7 +149,7 @@ export default class Start extends React.Component {
       remainingSeconds:
         parseInt(state.selectedMinutes, 10) * 60 +
         parseInt(state.selectedSeconds, 10),
-      isRunning: true
+      isRunning: true,
     }));
 
     this.interval = setInterval(() => {
@@ -164,6 +165,7 @@ export default class Start extends React.Component {
     this.setState({
       remainingSeconds: 5, // temporary
       isRunning: false
+      
     });
   };
 

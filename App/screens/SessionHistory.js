@@ -72,8 +72,8 @@ class SessionHistory extends React.Component {
  
   onDateChange(date) {
     this.setState({
-      selectedStartDate: date,
-    });
+      selectedStartDate: date.format('MMMM Do YYYY'),
+    }); 
   }
 
   render() {
@@ -100,7 +100,7 @@ class SessionHistory extends React.Component {
 
           <View style={styles.container}>
         <CalendarPicker
-          onDateChange={this.onDateChange}
+          onDateChange={this.onDateChange} 
         />
  
         <View>
@@ -108,7 +108,7 @@ class SessionHistory extends React.Component {
               Tap on a Day to see its stats, or select the Month to view all
               your stats for that Month.
             </Text>
-          <Text>SELECTED DATE:{ startDate }</Text>
+          <Text>You Selected:{ startDate}</Text>
         </View>
       </View>
 

@@ -23,6 +23,7 @@ import {
   Title,
 } from "native-base";
 import moment from 'moment';
+import CountDown from 'react-native-countdown-component';
 
 const styles = StyleSheet.create({
   button: {
@@ -80,7 +81,7 @@ export default class Start extends React.Component {
             </Button>
           </Left>
           <Body>
-            <Title>Header</Title>
+            <Title>Break</Title>
           </Body>
           <Right>
             <Button transparent>
@@ -99,11 +100,22 @@ export default class Start extends React.Component {
         />
         </View>
             
-          {/* <View>
-            <Text style={{fontSize:30}}>Current Time: 4:36 pm</Text>
-            <Text style={{fontSize:30}}>Time remaining: 15 min</Text>
-          </View> */}
+
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={{ fontSize: 30 }}>Time remaining: </Text>
+          <CountDown
+        size={30}
+        until={900}
+        onFinish={() => alert('Finished')}
+        digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: '#grey'}}
+        digitTxtStyle={{color: 'blue'}}
+        timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
+        separatorStyle={{color: 'black'}}
+        timeToShow={['H', 'M', 'S']}
+        timeLabels={{m: null, s: null}}
+        showSeparator
+      />
+            
         <Text style={{ fontSize: 30 }}>Current Time: {this.state.time}</Text>
       </View>
           
