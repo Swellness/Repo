@@ -2,6 +2,7 @@ import React from "react";
 import {
   StyleSheet,
   Image,
+  View,
 } from "react-native";
 import {
   Container,
@@ -10,7 +11,6 @@ import {
   FooterTab,
   Button,
   Icon,
-  Form,
   Item,
   Input,
   Text,
@@ -20,7 +20,7 @@ import {
 const styles = StyleSheet.create({
   stretch: {
     width: 375,
-    height: 200,
+    height: 195,
     resizeMode: "stretch"
   }
 });
@@ -30,8 +30,17 @@ export default class Start extends React.Component {
     return (
       <Container>
         <Content>
-          <Form>
+          <View style={{ 
+            justifyContent: "center",
+            alignItems: "center",
+            paddingTop: 50,
+            flex: 1}}>
             <Image style={styles.stretch} source={require('../Pictures/swellness_logo_outline.png')} />
+          </View>
+            
+          <View style={{
+          paddingHorizontal: 50,
+          paddingBottom: 50,}}>
             <Item stackedLabel>
               <Label>Username</Label>
               <Input />
@@ -41,18 +50,21 @@ export default class Start extends React.Component {
               <Input />
             </Item>
             <Button rounded
-              onPress={() => this.props.navigation.navigate("CreateUser")}>
+              onPress={() => this.props.navigation.navigate("CreateUser")}
+              style={{ marginTop: 25 }}>
               <Text>New User</Text>
             </Button>
             <Button rounded
-              onPress={() => this.props.navigation.navigate("SessionCreation")}>
+              onPress={() => this.props.navigation.navigate("SessionCreation")}
+              style={{ marginTop: 10 }}>
               <Text>Login</Text>
             </Button>
             <Button transparent
-              onPress={() => this.props.navigation.navigate("ForgotPassUser")}>
+              onPress={() => this.props.navigation.navigate("ForgotPassUser")}
+              style={styles.button}>
               <Text>Forgot Password</Text>
             </Button>
-          </Form>
+          </View>
         </Content>
         <Footer>
           <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
