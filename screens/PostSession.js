@@ -3,11 +3,14 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity, SafeAreaView, StatusBar
+  TouchableOpacity,
+  SafeAreaView,
+  StatusBar
 } from "react-native";
 import {
   Container,
   Content,
+  Header,
   Footer,
   FooterTab,
   Button,
@@ -102,7 +105,7 @@ class PostSession extends React.Component {
               </Button>
             </Left>
             <Body>
-              <Title>Session Complete</Title>
+              <Title>Post-Session</Title>
             </Body>
             <Right>
               <Button transparent onPress={() => this.props.navigation.openDrawer()}>

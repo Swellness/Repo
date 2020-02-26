@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     resizeMode: "stretch",
   },
   button: {
-    marginTop: 10,
+    marginTop: 20,
     alignItems: "center",
     justifyContent: "center",
     marginLeft: width / 4,
@@ -35,7 +35,22 @@ const styles = StyleSheet.create({
   }
 });
 
+const db = require('../util/dbAPI')
+
 export default class Start extends React.Component {
+
+  constructor(props) { //state and method instantiation
+    super(props);
+    this.state = {
+      username: undefined,
+      password: undefined,
+    };
+  }
+
+  async componentDidMount() {
+    db.loadClient()
+  }
+
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -44,25 +59,25 @@ export default class Start extends React.Component {
           <Content>
             <Form>
               <Image style={styles.stretch} source={require('../Pictures/swellness_logo_outline.png')} />
-              <Item stackedLabel>
+              <Item stackedLabel >
                 <Label>Username</Label>
-                <Input />
+                <Input onChangeText={(username) => this.setState({ username })} />
               </Item>
-              <Item stackedLabel last>
+              <Item stackedLabel last >
                 <Label>Password</Label>
-                <Input />
+                <Input onChangeText={(password) => this.setState({ password })} />
               </Item>
               <Button rounded style={styles.button}
-                onPress={() => this.props.navigation.navigate("CreateUser")}>
-                <Text>New User</Text>
-              </Button>
-              <Button rounded style={styles.button}
-                onPress={() => this.props.navigation.navigate("SessionCreation")}>
+                onPress={() => { db.login(this.state.username, this.state.password), this.props.navigation.navigate("SessionCreation") }}>
                 <Text>Login</Text>
               </Button>
-              <Button transparent style={styles.button}
+              <Button transparent
                 onPress={() => this.props.navigation.navigate("ForgotPassUser")}>
                 <Text>Forgot Password</Text>
+              </Button>
+              <Button transparent
+                onPress={() => this.props.navigation.navigate("CreateUser")}>
+                <Text>New User</Text>
               </Button>
             </Form>
           </Content>

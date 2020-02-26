@@ -1,12 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   View,
-  ScrollView,
+  SafeAreaView,
+  StatusBar,
   TouchableOpacity,
   StyleSheet,
   onPress,
   Text,
-  Image, SafeAreaView, StatusBar
+  Image
 } from "react-native";
 import {
   Container,
@@ -21,6 +22,8 @@ import {
   Right,
   Title,
 } from "native-base";
+import moment from 'moment';
+import CountDown from 'react-native-countdown-component';
 
 const styles = StyleSheet.create({
   button: {
@@ -49,10 +52,29 @@ const styles = StyleSheet.create({
 
 
 export default class Start extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      //defauilt value of the time
+      time: '',
+    };
+  }
+  componentDidMount() {
+    var that = this;
+
+    //Getting the current date-time with required format and UTC   
+    var date = moment()
+      // .utcOffset('+05:30')
+      .format(' hh:mm a');
+
+    that.setState({ time: date });
+    //Settign up time to show
+  }
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar hidden={true} translucent={true} />
+
         <Container>
           <Header>
             <Left>
@@ -80,9 +102,23 @@ export default class Start extends React.Component {
               />
             </View>
 
-            <View>
-              <Text style={{ fontSize: 30 }}>Current Time: 4:36 pm</Text>
-              <Text style={{ fontSize: 30 }}>Time remaining: 15 min</Text>
+
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={{ fontSize: 30 }}>Time remaining: </Text>
+              <CountDown
+                size={30}
+                until={900}
+                onFinish={() => alert('Finished')}
+                digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#grey' }}
+                digitTxtStyle={{ color: 'blue' }}
+                timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
+                separatorStyle={{ color: 'black' }}
+                timeToShow={['H', 'M', 'S']}
+                timeLabels={{ m: null, s: null }}
+                showSeparator
+              />
+
+              <Text style={{ fontSize: 30 }}>Current Time: {this.state.time}</Text>
             </View>
 
             <Button
@@ -90,6 +126,18 @@ export default class Start extends React.Component {
             >
               <Text style={styles.button}>End Break</Text>
             </Button>
+
+            {/* <Button
+            onPress={() => this.props.navigation.navigate("SideBar")}
+          >
+            <Text style={styles.button}>Side Menu</Text>
+          </Button> */}
+
+            {/* <Button
+            onPress={() => this.props.navigation.navigate("SessionCreation")}
+          >
+            <Text style={styles.button}>Session</Text>
+          </Button> */}
             <View style={{
               justifyContent: 'center',
               alignItems: 'center',
@@ -103,6 +151,17 @@ export default class Start extends React.Component {
               <Text>Points Earned: 23</Text>
 
             </View>
+            {/* <Button
+            onPress={() => this.props.navigation.navigate("SessionHistory")}
+          >
+            <Text style={styles.button}>History</Text>
+          </Button> */}
+
+            <Button
+              onPress={() => this.props.navigation.navigate("Activities")}
+            >
+              <Text style={styles.button}>Activities</Text>
+            </Button>
           </Content>
           <Footer>
             <FooterTab style={{ backgroundColor: "#c2c5cc" }}>

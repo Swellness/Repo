@@ -2,7 +2,7 @@ import React from "react";
 import {
   TouchableOpacity,
   StyleSheet,
-  Text, SafeAreaView, StatusBar
+  Text, SafeAreaView, StatusBar, View, Image
 } from "react-native";
 import {
   Container,
@@ -58,6 +58,50 @@ export default class Start extends React.Component {
             </Right>
           </Header>
           <Content>
+            <View style={{
+              justifyContent: "center",
+              alignItems: "center",
+              paddingTop: 50,
+              flex: 1
+            }}>
+
+              <Image
+                style={{ paddingBottom: 5, height: 200, width: 200 }}
+                source={require('../Pictures/profile_default.png')}
+              />
+
+              <Button transparent >
+                <Text style={{ color: '#1a53ff' }}>change picture</Text>
+              </Button>
+
+            </View>
+
+            <View
+              style={{
+                paddingHorizontal: 50,
+                paddingBottom: 50,
+              }}>
+
+              <Text style={{ color: "#868686", fontSize: 18 }}>First Name</Text>
+              <Text style={styles.textBox}> John</Text>
+              <Text style={{ color: "#868686", fontSize: 18 }}>Last Name</Text>
+              <Text style={styles.textBox}> Madden</Text>
+              <Text style={{ color: "#868686", fontSize: 18 }}>Date of Birth</Text>
+              <Text style={styles.textBox}> 4/10/1936</Text>
+              <Text style={{ color: "#868686", fontSize: 18 }}>Email</Text>
+              <Text style={styles.textBox}> JohnMadden@apu.edu</Text>
+              <Button iconLeft style={{ width: 50 }}>
+                <Icon name='settings' />
+              </Button>
+              <Text style={{ color: "#868686", fontSize: 18 }}>Id Number</Text>
+              <Text style={styles.textBox}> 19691978</Text>
+              <Text style={{ color: "#868686", fontSize: 18 }}>Password</Text>
+              <Text style={styles.textBox}> ***********</Text>
+              <Button iconLeft style={{ width: 50 }}>
+                <Icon name='settings' />
+              </Button>
+
+            </View>
           </Content>
           <Footer>
             <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
