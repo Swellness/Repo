@@ -52,7 +52,7 @@ export const addData = (database, collection, input) => {
         .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`)) //db.collection selects a collection and insertOne inserts the document and logs if successful or failure
         .catch(err => console.error(`Failed to insert item: ${err}`))
 }
-//equivalent of taking a Stich colection object and applying the insertOne method
+//equivalent of taking a Stich collection object and applying the insertOne method
 
 
 export const updateData = (database, collection, objId, object) => {

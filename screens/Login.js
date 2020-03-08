@@ -42,7 +42,7 @@ export default class Start extends React.Component {
   constructor(props) { //state and method instantiation
     super(props);
     this.state = {
-      username: undefined,
+      email: undefined,
       password: undefined,
     };
   }
@@ -60,15 +60,15 @@ export default class Start extends React.Component {
             <Form>
               <Image style={styles.stretch} source={require('../Pictures/swellness_logo_outline.png')} />
               <Item stackedLabel >
-                <Label>Username</Label>
-                <Input onChangeText={(username) => this.setState({ username })} />
+                <Label>Email</Label>
+                <Input onChangeText={(email) => this.setState({ email })} />
               </Item>
               <Item stackedLabel last >
                 <Label>Password</Label>
                 <Input onChangeText={(password) => this.setState({ password })} />
               </Item>
               <Button rounded style={styles.button}
-                onPress={() => { db.login(this.state.username, this.state.password), this.props.navigation.navigate("SessionCreation") }}>
+                onPress={() => { db.login(this.state.email, this.state.password), this.props.navigation.navigate("SessionCreation") }}>
                 <Text>Login</Text>
               </Button>
               <Button transparent
