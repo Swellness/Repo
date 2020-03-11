@@ -34,16 +34,18 @@ export const loadDb = (database) => { //returns RemoteMongoDatabase, almost neve
 
 export const loadCollection = (database, collection) => { //returns RemoteMongoCollection, use this one
     const ctn = Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db(database).collection(collection)
-    return ctn
+    return ctn;
 }
 
-export const login = (username, password) => { //logs in and returns user object
+export const login = (username, password) => {//logs in and returns user object
     console.log("attempting login using  " + username + " and " + password)
     Stitch.defaultAppClient.auth.loginWithCredential(new UserPasswordCredential(username, password)) //takes username and password combo and attempts email/pw auth through stitch
         .then(user => {
             console.log(`Successfully logged in as user ${user.profile.email}`);
+            return true
         }).catch(err => {
             console.log(`Failed to log in ${err}`);
+            return false;
         });
 }
 
@@ -62,9 +64,6 @@ export const updateData = (database, collection, objId, object) => {
 
 
 //example object: const output = { "hours": data1, "points": data2 }
-
-
-
 
 export const logout = () => {
     Stitch.defaultAppClient.auth.logout().then(user => { //takes the client and runs auth.logout() to log the client out

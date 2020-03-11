@@ -1,25 +1,30 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-native-animated
 
 PATH: 
-  C:\Users\Jeremy\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Jeremy\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\Python27;C:\curl-7.66.0-win64-mingw;C:\Program Files (x86)\Calibre2;C:\Ruby26-x64\bin;C:\Users\Jeremy\AppData\Local\Microsoft\WindowsApps;C:\Users\Jeremy\AppData\Roaming\npm;C:\Users\Jeremy\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Jeremy\AppData\Local\Yarn\bin;C:\Users\Jeremy\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+  C:\Users\Jeremy\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Jeremy\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Intel\iCLS Client;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Intel\iCLS Client;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\OpenVPN\bin;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\WINDOWS\System32\OpenSSH;C:\Program Files\PuTTY;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\MySQL\MySQL Server 5.6\bin;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\Users\Jeremy\AppData\Local\Programs\Python\Python37-32\Scripts;C:\Users\Jeremy\AppData\Local\Programs\Python\Python37-32;C:\Users\Jeremy\AppData\Local\Programs\Python\Launcher;C:\Users\Jeremy\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\MySQL\MySQL Server 5.6\bin;C:\Users\Jeremy\AppData\Roaming\npm;C:\Users\Jeremy\AppData\Local\Android\Sdk\platform-tools;C:\Users\Jeremy\AppData\Local\Yarn\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
 
 Yarn version: 
-  1.17.3
+  1.22.0
 
 Node version: 
-  12.10.0
+  10.16.3
 
 Platform: 
   win32 x64
 
 Trace: 
-  SyntaxError: D:\cs480\repo\package.json: Unexpected token < in JSON at position 421
-      at JSON.parse (<anonymous>)
-      at C:\Program Files (x86)\Yarn\lib\cli.js:1625:59
-      at Generator.next (<anonymous>)
-      at step (C:\Program Files (x86)\Yarn\lib\cli.js:304:30)
-      at C:\Program Files (x86)\Yarn\lib\cli.js:315:13
+  Error: https://registry.yarnpkg.com/react-native-animated: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66084:18)
+      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140727:22)
+      at Request.emit (events.js:198:13)
+      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141699:10)
+      at Request.emit (events.js:198:13)
+      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141621:12)
+      at Object.onceWrapper (events.js:286:20)
+      at IncomingMessage.emit (events.js:203:15)
+      at endReadableNT (_stream_readable.js:1145:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
 
 npm manifest: 
   {
@@ -36,21 +41,18 @@ npm manifest:
       "expo": "~36.0.0",
       "expo-font": "^8.0.0",
       "expo-sensors": "~8.0.0",
-      "mongodb-stitch-react-native-sdk": "^4.8.0",
-  <<<<<<< HEAD
-  =======
       "moment": "^2.24.0",
-  >>>>>>> d8260e7947f7bfddeb57fc6d2a5e294ef9a7bd3c
+      "mongodb-stitch-react-native-sdk": "^4.8.0",
       "native-base": "^2.13.8",
       "react": "~16.9.0",
       "react-dom": "~16.9.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
-      "react-native-gesture-handler": "^1.6.0",
+      "react-native-calendar-picker": "^6.0.5",
+      "react-native-countdown-component": "^2.6.0",
+      "react-native-gesture-handler": "~1.5.0",
       "react-native-reanimated": "^1.7.0",
       "react-native-safe-area-context": "^0.7.3",
       "react-native-screens": "^2.0.0-beta.10",
-      "react-native-calendar-picker": "^6.0.5",
-      "react-native-countdown-component": "^2.6.0",
       "react-native-vector-icons": "^6.6.0",
       "react-native-web": "~0.11.7",
       "react-navigation": "^4.1.1",
@@ -2734,12 +2736,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
     integrity sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
   
-  has-ansi@^2.0.0:
-    version "2.0.0"
-    resolved "https://registry.yarnpkg.com/has-ansi/-/has-ansi-2.0.0.tgz#34f5049ce1ecdf2b0649af3ef24e45ed35416d91"
-    integrity sha1-NPUEnOHs3ysGSa8+8k5F7TVBbZE=
+  "hammerjs@git+https://github.com/naver/hammer.js.git":
+    version "2.0.17-snapshot"
+    resolved "git+https://github.com/naver/hammer.js.git#54bc698b25edd6e1b76ca975ebaced5ce0467d51"
     dependencies:
-      ansi-regex "^2.0.0"
+      "@types/hammerjs" "^2.0.36"
   
   has-ansi@^2.0.0:
     version "2.0.0"
@@ -3430,11 +3431,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
     integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
   
-  <<<<<<< HEAD
-  lodash@^4.0.0, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.6.0:
-  =======
   lodash@^4.0.0, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.6.0:
-  >>>>>>> d8260e7947f7bfddeb57fc6d2a5e294ef9a7bd3c
     version "4.17.15"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
     integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -3857,14 +3854,11 @@ Lockfile:
     dependencies:
       minimist "0.0.8"
   
-  <<<<<<< HEAD
-  =======
   moment@^2.24.0:
     version "2.24.0"
     resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
     integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
   
-  >>>>>>> d8260e7947f7bfddeb57fc6d2a5e294ef9a7bd3c
   mongodb-stitch-core-sdk@^4.8.0:
     version "4.8.0"
     resolved "https://registry.yarnpkg.com/mongodb-stitch-core-sdk/-/mongodb-stitch-core-sdk-4.8.0.tgz#3fbb5a9c46f8af5837aa9d71f4def79850df9d58"
@@ -4532,8 +4526,6 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
     integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
   
-  <<<<<<< HEAD
-  =======
   react-native-calendar-picker@^6.0.5:
     version "6.0.5"
     resolved "https://registry.yarnpkg.com/react-native-calendar-picker/-/react-native-calendar-picker-6.0.5.tgz#a91b1c5cd2057b4405e30339934b1136890efe92"
@@ -4551,7 +4543,6 @@ Lockfile:
       prop-types "^15.5.8"
       sprintf-js "^1.1.1"
   
-  >>>>>>> d8260e7947f7bfddeb57fc6d2a5e294ef9a7bd3c
   react-native-drawer@2.5.1:
     version "2.5.1"
     resolved "https://registry.yarnpkg.com/react-native-drawer/-/react-native-drawer-2.5.1.tgz#08b9314184f48c724f1b467f8859797369798654"
@@ -4564,25 +4555,16 @@ Lockfile:
     version "0.2.2"
     resolved "https://registry.yarnpkg.com/react-native-easy-grid/-/react-native-easy-grid-0.2.2.tgz#f0be33620be1ebe2d2295918eb58b0a27e8272ab"
     integrity sha512-MlYrNIldnEMKn6TVatQN1P64GoVlwGIuz+8ncdfJ0Wq/xtzUkQwlil8Uksyp7MhKfENE09MQnGNcba6Mx3oSAA==
-  <<<<<<< HEAD
     dependencies:
       lodash "^4.17.15"
   
   react-native-gesture-handler@~1.5.0:
-    version "1.5.3"
-    resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.5.3.tgz#191b44701fab7ba54c27a2438cb5eaa252666e66"
-    integrity sha512-y2/jw0uHAQtEPR02PHAah6tdMymrVtZFoHqjlEWdhK807w2sgU5CySYINK/nOTczd+zB4GMX+9euA3VfbGJ5aA==
-  =======
-  >>>>>>> d8260e7947f7bfddeb57fc6d2a5e294ef9a7bd3c
-    dependencies:
-      lodash "^4.17.15"
-  
-  react-native-gesture-handler@^1.6.0:
-    version "1.6.0"
-    resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.6.0.tgz#e9a4e1d0c7ac21eb0d6b6ec013e73f9c0c33a629"
-    integrity sha512-KulGCWKTxa6xBpPP4LWEPmmLqBqOe2jbtdlILOVF/dR4EgImiaBVrKdOHeRMyMzJOYAWxs5uDZsyA8hgSsm+lw==
+    version "1.5.6"
+    resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.5.6.tgz#5d90145f624e3707db2930f43ab41579683e2375"
+    integrity sha512-z2jLUkRiRc0PBAC9UcXYkqy3VUzBG0cYQAGMsDHsd90JgrzudHAFRJV9fvFm18wNauFTNnJievjZ0C3rI2ydhw==
     dependencies:
       "@egjs/hammerjs" "^2.0.17"
+      hammerjs "https://github.com/naver/hammer.js.git"
       hoist-non-react-statics "^2.3.1"
       invariant "^2.2.4"
       prop-types "^15.7.2"
@@ -4600,12 +4582,6 @@ Lockfile:
       prop-types "^15.6.2"
       react-native-iphone-x-helper "^1.0.3"
   
-  <<<<<<< HEAD
-  react-native-safe-area-context@0.6.0:
-    version "0.6.0"
-    resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-0.6.0.tgz#f53f5a5bcafb462a8798a26b145e68946389ad60"
-    integrity sha512-blY0akr3ZLTuZFdUotmjV+7LVXpBnd5CGFlNhTiarNNGJoHu79K42IJpUpmtg75iC9aWbSW7QHstlP0xz11V0A==
-  =======
   react-native-reanimated@^1.7.0:
     version "1.7.0"
     resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.7.0.tgz#896db2576552ac59d288a1f6c7f00afc171f240c"
@@ -4615,7 +4591,6 @@ Lockfile:
     version "0.7.3"
     resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-0.7.3.tgz#ad6bd4abbabe195332c53810e4ce5851eb21aa2a"
     integrity sha512-9Uqu1vlXPi+2cKW/CW6OnHxA76mWC4kF3wvlqzq4DY8hn37AeiXtLFs2WkxH4yXQRrnJdP6ivc65Lz+MqwRZAA==
-  >>>>>>> d8260e7947f7bfddeb57fc6d2a5e294ef9a7bd3c
   
   react-native-safe-area-view@^0.14.8:
     version "0.14.8"

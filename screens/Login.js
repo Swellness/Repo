@@ -45,6 +45,8 @@ export default class Start extends React.Component {
       email: undefined,
       password: undefined,
     };
+    this._handleLogin = this._handleLogin.bind(this);
+
   }
 
   async componentDidMount() {
@@ -68,7 +70,7 @@ export default class Start extends React.Component {
                 <Input onChangeText={(password) => this.setState({ password })} />
               </Item>
               <Button rounded style={styles.button}
-                onPress={() => { db.login(this.state.email, this.state.password), this.props.navigation.navigate("SessionCreation") }}>
+                onPress={() => this._handleLogin(this.state.email, this.state.password)}>
                 <Text>Login</Text>
               </Button>
               <Button transparent
@@ -85,4 +87,19 @@ export default class Start extends React.Component {
       </SafeAreaView>
     );
   }
+
+  _handleLogin = (email, password) => {
+
+    db.login(email, password);
+    this.props.navigation.navigate("SessionCreation");
+
+    // if (flag) {
+    //   this.props.navigation.navigate("SessionCreation");
+    // }
+    // else {
+    //   alert("login failed");
+    // }
+  }
+  //                onPress={() => { db.login(this.state.email, this.state.password), this.props.navigation.navigate("SessionCreation") }}>
+
 }

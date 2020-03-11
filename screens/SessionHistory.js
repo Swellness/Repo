@@ -14,6 +14,8 @@ import {
   Title
 } from "native-base";
 import CalendarPicker from 'react-native-calendar-picker';
+const db = require('../util/dbAPI')
+
 
 const styles = StyleSheet.create({
   container: {
@@ -66,14 +68,21 @@ class SessionHistory extends React.Component {
     super(props);
     this.state = {
       selectedStartDate: null,
+      data: undefined
     };
+
     this.onDateChange = this.onDateChange.bind(this);
+    this._query = this._query.bind(this);
   }
 
   onDateChange(date) {
     this.setState({
       selectedStartDate: date.format('MMMM Do YYYY'),
+      data: date.format('MMMM Do YYYY')
+
     });
+
+
   }
 
   render() {
@@ -110,7 +119,7 @@ class SessionHistory extends React.Component {
                   Tap on a Day to see its stats, or select the Month to view all
                   your stats for that Month.
             </Text>
-                <Text>You Selected:{startDate}</Text>
+                <Text>Date: {startDate}</Text>
               </View>
             </View>
 
@@ -120,7 +129,7 @@ class SessionHistory extends React.Component {
             <Text style={styles.button}>Side Menu</Text>
           </Button> */}
 
-            <Button
+            {/* <Button
               onPress={() => this.props.navigation.navigate("SessionCreation")}
             >
               <Text style={styles.button}>Session</Text>
@@ -134,7 +143,8 @@ class SessionHistory extends React.Component {
               onPress={() => this.props.navigation.navigate("DailyHistory")}
             >
               <Text style={styles.button}>Daily History</Text>
-            </Button>
+            </Button> */}
+            <Text >Data: {this.state.data}</Text>
           </Content>
           <Footer>
             <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
@@ -158,6 +168,18 @@ class SessionHistory extends React.Component {
         </Container>
       </SafeAreaView>
     );
+  }
+
+  _query = () => { //you will have to build queries like this using the methods ive created
+    const collection = db.loadCollection('SwellnessTest', 'Users')
+
+    collection.find({}, { limit: 100 }).asArray() //find {} means find everything, limit 100 stops finding after 100, as array outputs everything to json
+      .then(docs => {
+        console.log("Found docs", docs)
+        return docs
+      }).catch(err => {
+        console.error(err)
+      });
   }
 }
 
