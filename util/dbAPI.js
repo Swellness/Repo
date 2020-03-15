@@ -36,18 +36,13 @@ export const loadCollection = (database, collection) => { //returns RemoteMongoC
     const ctn = Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db(database).collection(collection)
     return ctn;
 }
-
-export const login = (username, password) => {//logs in and returns user object
-    console.log("attempting login using  " + username + " and " + password)
-    Stitch.defaultAppClient.auth.loginWithCredential(new UserPasswordCredential(username, password)) //takes username and password combo and attempts email/pw auth through stitch
-        .then(user => {
-            console.log(`Successfully logged in as user ${user.profile.email}`);
-            return true
-        }).catch(err => {
-            console.log(`Failed to log in ${err}`);
-            return false;
-        });
-}
+//////////DEPRECATED/////////// check login.js for working version
+// export const login = (username, password) => {//logs in and returns user object
+//     console.log("attempting login using  " + username + " and " + password)
+//     Stitch.defaultAppClient.auth.loginWithCredential(new UserPasswordCredential(username, password)).then().catch(err => {console.log(`Failed to log in ${err}`)})
+    
+// }
+   
 
 export const addData = (database, collection, input) => {
     Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db(database).collection(collection).insertOne(input)

@@ -68,7 +68,7 @@ class SessionHistory extends React.Component {
     super(props);
     this.state = {
       selectedStartDate: null,
-      data: undefined
+      data: []
     };
 
     this.onDateChange = this.onDateChange.bind(this);
@@ -76,10 +76,9 @@ class SessionHistory extends React.Component {
   }
 
   onDateChange(date) {
+    this._query()
     this.setState({
       selectedStartDate: date.format('MMMM Do YYYY'),
-      data: date.format('MMMM Do YYYY')
-
     });
 
 
@@ -123,6 +122,8 @@ class SessionHistory extends React.Component {
               </View>
             </View>
 
+
+            {/* //////////////////BUTTONS/////////// */}
             {/* <Button
             onPress={() => this.props.navigation.navigate("SideBar")}
           >
@@ -144,6 +145,9 @@ class SessionHistory extends React.Component {
             >
               <Text style={styles.button}>Daily History</Text>
             </Button> */}
+            {/* //////////////////BUTTONS/////////// */}
+
+
             <Text >Data: {this.state.data}</Text>
           </Content>
           <Footer>
@@ -173,13 +177,17 @@ class SessionHistory extends React.Component {
   _query = () => { //you will have to build queries like this using the methods ive created
     const collection = db.loadCollection('SwellnessTest', 'Users')
 
-    collection.find({}, { limit: 100 }).asArray() //find {} means find everything, limit 100 stops finding after 100, as array outputs everything to json
-      .then(docs => {
-        console.log("Found docs", docs)
-        return docs
-      }).catch(err => {
-        console.error(err)
-      });
+    var data = [];
+    //find {} means find everything, limit 100 stops finding after 100, as array outputs everything to json
+
+    collection.find({}, { limit: 100 }).toArray().then(function (result) {
+      result.forEach(element => {
+      data.push(element)
+    });
+    console.log(data)
+    });
+
+    return data
   }
 }
 

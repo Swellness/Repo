@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Alert,
   StyleSheet,
   Image,
   Dimensions, SafeAreaView, StatusBar
@@ -17,6 +18,8 @@ import {
   Text,
   Label,
 } from "native-base";
+import { Stitch, UserPasswordCredential } from 'mongodb-stitch-react-native-sdk';
+
 
 var { height, width } = Dimensions.get('window');
 
@@ -44,9 +47,9 @@ export default class Start extends React.Component {
     this.state = {
       email: undefined,
       password: undefined,
+      isLoginGood: undefined
     };
     this._handleLogin = this._handleLogin.bind(this);
-
   }
 
   async componentDidMount() {
@@ -70,7 +73,7 @@ export default class Start extends React.Component {
                 <Input onChangeText={(password) => this.setState({ password })} />
               </Item>
               <Button rounded style={styles.button}
-                onPress={() => this._handleLogin(this.state.email, this.state.password)}>
+                onPress={() => this._handleLogin(this.state.email, this.state.password, 0)}>
                 <Text>Login</Text>
               </Button>
               <Button transparent
@@ -88,18 +91,25 @@ export default class Start extends React.Component {
     );
   }
 
-  _handleLogin = (email, password) => {
+  _handleLogin = (email, password, recursionCounter) => {////////first time button is pressed, isLoginGood stays as undefined, second press gives it correct value. I attempted looping through it again to just force two calls but that doesnt work the way i want it to
 
-    db.login(email, password);
-    this.props.navigation.navigate("SessionCreation");
+    console.log("attempting login using  " + email + " and " + password)
+    Stitch.defaultAppClient.auth.loginWithCredential(new UserPasswordCredential(email, password)).then(this.setState({ isLoginGood: true })).catch(err => {this.setState({ isLoginGood: false })})
 
-    // if (flag) {
-    //   this.props.navigation.navigate("SessionCreation");
-    // }
-    // else {
-    //   alert("login failed");
-    // }
+    console.log("isLoginGood: " + this.state.isLoginGood)
+
+    if(recursionCounter == 0){
+      console.log("looping")
+      this._handleLogin(email,password, 1)
+    }
+
+    if (this.state.isLoginGood == true) {
+        this.props.navigation.navigate("SessionCreation");
+      
+    }
+    else {
+      Alert.alert('Login Failed','Please try again',[{ text: 'OK' }]);
+    }
   }
-  //                onPress={() => { db.login(this.state.email, this.state.password), this.props.navigation.navigate("SessionCreation") }}>
 
 }
