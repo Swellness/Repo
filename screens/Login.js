@@ -18,7 +18,7 @@ import {
   Text,
   Label,
 } from "native-base";
-import { Stitch, UserPasswordCredential } from 'mongodb-stitch-react-native-sdk';
+import { Stitch, UserPasswordCredential, StitchUser } from 'mongodb-stitch-react-native-sdk';
 
 
 var { height, width } = Dimensions.get('window');
@@ -91,25 +91,20 @@ export default class Start extends React.Component {
     );
   }
 
-  _handleLogin = (email, password, recursionCounter) => {////////first time button is pressed, isLoginGood stays as undefined, second press gives it correct value. I attempted looping through it again to just force two calls but that doesnt work the way i want it to
-
+  _handleLogin = (email, password) => {
+    //db.logout()//fail safe since screens arent operating exactly as planned and its possible to get back to login screen without logging out
     console.log("attempting login using  " + email + " and " + password)
-    Stitch.defaultAppClient.auth.loginWithCredential(new UserPasswordCredential(email, password)).then(this.setState({ isLoginGood: true })).catch(err => {this.setState({ isLoginGood: false })})
 
-    console.log("isLoginGood: " + this.state.isLoginGood)
-
-    if(recursionCounter == 0){
-      console.log("looping")
-      this._handleLogin(email,password, 1)
+    Stitch.defaultAppClient.auth.loginWithCredential(new UserPasswordCredential(email, password))
+    .then(user => {
+      if(user){
+        console.log(`Successfully logged in as user ${user.profile.email}`);
+        this.props.navigation.navigate("SessionCreation"); //navigates if user is found ()
+      }
+  })
+    .catch(err => {
+      Alert.alert('Login Failed','Username and/or Password Incorrect',[{ text: 'OK' }])
+      console.log(err)
+    })
     }
-
-    if (this.state.isLoginGood == true) {
-        this.props.navigation.navigate("SessionCreation");
-      
-    }
-    else {
-      Alert.alert('Login Failed','Please try again',[{ text: 'OK' }]);
-    }
-  }
-
 }
