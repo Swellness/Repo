@@ -108,9 +108,12 @@ export default class Start extends React.Component {
 
   _onCreateUser(username, fname, lname, email, password, retype) {
 
-
+    if(validateEmail(email)){
+      console.log("valid email")
+  
     if (password === retype) {
-        if (password.length < 5) {
+      console.log("pw match ")
+        if (password.length <= 5) {
         Alert.alert(
           'Could Not Create User',
           'Please ensure passwords are 6 characters or longer',
@@ -150,14 +153,16 @@ export default class Start extends React.Component {
       );   
     }
   }
+  else{
+    Alert.alert(
+      'Could Not Create User',
+      'Invalid Email Address',
+      [{text: 'OK'}]
+    );    }
+}
 
-  // _checkPassword(password){
-  //   if(password.length()>5){
-  //     return true
-  //   }
-  //   else{
-  //     return false
-  //   }
-  // }
-
+}
+function validateEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
 }

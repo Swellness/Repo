@@ -55,10 +55,18 @@ export const addData = (database, collection, input) => {
 export const updateData = (database, collection, objId, object) => {
     Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db(database).collection(collection).updateOne({ objId }, { $set: object })
 }
-//equivalent of taking a Stich colection object and applying the upddateOne method
-
-
+//equivalent of taking a Stich collection object and applying the upddateOne method
 //example object: const output = { "hours": data1, "points": data2 }
+
+export const login = (username, password) => { //logs in and returns user object
+    console.log("attempting login using  " + username + " and " + password)
+    Stitch.defaultAppClient.auth.loginWithCredential(new UserPasswordCredential(username, password)) //takes username and password combo and attempts email/pw auth through stitch
+        .then(user => {
+            console.log(`Successfully logged in as user ${user.profile.email}`);
+        }).catch(err => {
+            console.log(`Failed to log in ${err}`);
+        });
+}
 
 export const logout = () => {
     Stitch.defaultAppClient.auth.logout().then(user => { //takes the client and runs auth.logout() to log the client out
