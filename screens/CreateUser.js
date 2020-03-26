@@ -130,8 +130,7 @@ export default class Start extends React.Component {
       const input = { "username":username, "fname": fname, "lname": lname, "email":email }
       db.addData("SwellnessTest", "Users", input )
       db.logout() //logs off admin
-
-
+      
       this.props.navigation.navigate("SessionCreation")
 
       Alert.alert(
@@ -139,10 +138,6 @@ export default class Start extends React.Component {
         "You are now logged in" ,
         [{text: 'OK'}]
       ); 
-
-      
-
-
     }
   }
     else {
