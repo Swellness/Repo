@@ -2,7 +2,7 @@ import React from "react";
 import {
   TouchableOpacity,
   StyleSheet,
-  Text, SafeAreaView, StatusBar
+  Text, SafeAreaView, StatusBar, Dimensions, Image
 } from "react-native";
 import {
   Container,
@@ -16,7 +16,13 @@ import {
   Body,
   Right,
   Title,
+  Row,
 } from "native-base";
+import ModalDropdown from 'react-native-modal-dropdown';
+
+// Implement for when we get dimensions of screens rather than hard coding in values.
+const screen = Dimensions.get("window");
+const buttonWidth = screen.width;
 
 const styles = StyleSheet.create({
   button: {
@@ -33,6 +39,41 @@ const styles = StyleSheet.create({
   },
   color: {
     backgroundColor: "blue"
+  },
+  text: {
+    textAlign: "center",
+    justifyContent: "center",
+    fontSize: 32,
+    fontWeight: "bold",
+  },
+  dropdown: {
+    fontSize: 24,
+    fontWeight: "500",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  dropbutton: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  dropbox: {
+    width: 200,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  actionbutton: {
+    backgroundColor: "grey",
+    height: buttonWidth,
+    marginLeft: 35,
+    width: 150,
+    height: 200,
+    marginTop: 50,
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  },
+  image: {
+    width: 150,
+    height: 200,
   }
 });
 
@@ -57,7 +98,42 @@ export default class Start extends React.Component {
               </Button>
             </Right>
           </Header>
+          <ModalDropdown
+            animated
+            style={styles.dropbutton}
+            textStyle={styles.text}
+            dropdownStyle={styles.dropbox}
+            dropdownTextStyle={styles.dropdown}
+            options={['Wrist', 'Ankle', "Knee", "Neck", "Back"]} />
           <Content>
+            <Row>
+              <TouchableOpacity style={styles.actionbutton} onPress={() => this.props.navigate}>
+                <Image
+                  source={require('../images/wriststretch1.png')}
+                  style={styles.image}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.actionbutton}>
+                <Image
+                  source={require('../images/wriststretch2.jpg')}
+                  style={styles.image}
+                />
+              </TouchableOpacity>
+            </Row>
+            <Row>
+              <TouchableOpacity style={styles.actionbutton}>
+                <Image
+                  source={require('../images/wriststretch3.png')}
+                  style={styles.image}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.actionbutton}>
+                <Image
+                  source={require('../images/wriststretch4.png')}
+                  style={styles.image}
+                />
+              </TouchableOpacity>
+            </Row>
           </Content>
           <Footer>
             <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
