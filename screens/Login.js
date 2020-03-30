@@ -45,9 +45,8 @@ export default class Start extends React.Component {
   constructor(props) { //state and method instantiation
     super(props);
     this.state = {
-      email: undefined,
-      password: undefined,
-      isLoginGood: undefined
+      email: "admin",
+      password: "swellness",
     };
     this._handleLogin = this._handleLogin.bind(this);
   }
