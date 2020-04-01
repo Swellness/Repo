@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Image, SafeAreaView, StatusBar } from "react-native";
+import { StyleSheet, Text, View, Image, SafeAreaView, StatusBar, FlatList, TouchableOpacity } from "react-native";
 import {
   Container,
   Header,
@@ -14,6 +14,8 @@ import {
   Title
 } from "native-base";
 import CalendarPicker from 'react-native-calendar-picker';
+const db = require('../util/dbAPI')
+
 
 const styles = StyleSheet.create({
   container: {
@@ -58,22 +60,34 @@ const styles = StyleSheet.create({
     fontSize: 13,
     justifyContent: "center",
     textAlign: "center"
-  }
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
 });
 
 class SessionHistory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedStartDate: null,
+      selectedStartDate: undefined,
+      data: []
     };
+
     this.onDateChange = this.onDateChange.bind(this);
+    this._query = this._query.bind(this);
+    //this._display = this._display.bind(this);
   }
 
   onDateChange(date) {
+
     this.setState({
-      selectedStartDate: date.format('MMMM Do YYYY'),
-    });
+      selectedStartDate: date.format('MM/DD/YY').toString()
+    }, () => {
+      this._query()
+    })
   }
 
   render() {
@@ -99,26 +113,30 @@ class SessionHistory extends React.Component {
             </Right>
           </Header>
           <Content>
-
             <View style={styles.container}>
               <CalendarPicker
                 onDateChange={this.onDateChange}
               />
-
               <View>
                 <Text style={styles.subText}>
                   Tap on a Day to see its stats, or select the Month to view all
                   your stats for that Month.
             </Text>
-                <Text>You Selected:{startDate}</Text>
-              </View>
-            </View>
+                <Text>{startDate}</Text>
+                <Text>Steps: {this.state.data.map(x => (x.steps))}</Text>
+                <Text>Exercises: {this.state.data.map(x => (x.exercises))}</Text>
+                <Text>Points Earned: {this.state.data.map(x => (x.points))}</Text>
 
+
+              </View>
+
+            </View>
+            {/* //////////////////BUTTONS/////////// */}
             {/* <Button
             onPress={() => this.props.navigation.navigate("SideBar")}
           >
             <Text style={styles.button}>Side Menu</Text>
-          </Button> */}
+          </Button>
 
             <Button
               onPress={() => this.props.navigation.navigate("SessionCreation")}
@@ -134,7 +152,15 @@ class SessionHistory extends React.Component {
               onPress={() => this.props.navigation.navigate("DailyHistory")}
             >
               <Text style={styles.button}>Daily History</Text>
-            </Button>
+            </Button> */}
+            {/* //////////////////BUTTONS/////////// */}
+            {/* 
+            <FlatList
+          data={this.state.data}
+          renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+        /> */}
+
+
           </Content>
           <Footer>
             <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
@@ -159,6 +185,32 @@ class SessionHistory extends React.Component {
       </SafeAreaView>
     );
   }
+
+  _query = () => { //you will have to build queries like this using the methods ive created
+    const collection = db.loadCollection('SwellnessTest', 'Session')
+    var dbData = []
+    //find {} means find everything, limit 100 stops finding after 100, as array outputs everything to json
+    // collection.find({ date: this.state.selectedStartDate }, { limit: 100 }).toArray().then(function (result) {
+    //   result.forEach(element => {
+    //     data.push(element)
+    //   });
+    //   console.log(date)
+    //   console.log(data)
+    //   console.log(data.email)
+    // });
+    collection.find({ date: this.state.selectedStartDate }, { limit: 100 }).toArray().then( result => {
+      result.map(x => console.log(x.date))
+      result.forEach(element => {
+        dbData.push(element)
+        console.log("element pushed: ", element)
+        this.setState({data:dbData}, ()=>{
+          console.log(this.state.data)
+        })
+      });
+    });
+
+  }
+
 }
 
 export default SessionHistory;

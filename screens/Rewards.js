@@ -17,6 +17,7 @@ import {
   Right,
   Title,
 } from "native-base";
+import Rewards from '../Components/rewardList';
 
 const styles = StyleSheet.create({
   button: {
@@ -33,8 +34,17 @@ const styles = StyleSheet.create({
   },
   color: {
     backgroundColor: "blue"
-  }
-});
+  },
+  title:{
+    fontSize:40,
+    textAlign: 'center'
+},
+subText:{
+    fontSize:25,
+    textAlign: 'center'
+}
+}
+);
 
 export default class Start extends React.Component {
   render() {
@@ -58,6 +68,10 @@ export default class Start extends React.Component {
             </Right>
           </Header>
           <Content>
+
+          <Text style= {styles.title}>Redeem Your Points!!</Text>
+      <Text style= {styles.subText}>You currenly have 4800 Points</Text>
+      <Rewards/>
 
           </Content>
           <Footer>

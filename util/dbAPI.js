@@ -31,11 +31,30 @@ export const loadDb = (database) => { //returns RemoteMongoDatabase, almost neve
     return db;
 }
 
-
 export const loadCollection = (database, collection) => { //returns RemoteMongoCollection, use this one
     const ctn = Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db(database).collection(collection)
-    return ctn
+    return ctn;
 }
+
+//////////DEPRECATED/////////// check login.js for working version
+// export const login = (username, password) => {//logs in and returns user object
+//     console.log("attempting login using  " + username + " and " + password)
+//     Stitch.defaultAppClient.auth.loginWithCredential(new UserPasswordCredential(username, password)).then().catch(err => {console.log(`Failed to log in ${err}`)})
+// }
+
+export const addData = (database, collection, input) => {
+    Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db(database).collection(collection).insertOne(input)
+        .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`)) //db.collection selects a collection and insertOne inserts the document and logs if successful or failure
+        .catch(err => console.error(`Failed to insert item: ${err}`))
+}
+//equivalent of taking a Stich collection object and applying the insertOne method
+
+
+export const updateData = (database, collection, objId, object) => { //database and collection are the NAME and not a DB or collection object
+    Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db(database).collection(collection).updateOne({ objId }, { $set: object })
+}
+//equivalent of taking a Stitch collection object and applying the upddateOne method
+//example object: const output = { "hours": data1, "points": data2 }
 
 export const login = (username, password) => { //logs in and returns user object
     console.log("attempting login using  " + username + " and " + password)
@@ -46,25 +65,6 @@ export const login = (username, password) => { //logs in and returns user object
             console.log(`Failed to log in ${err}`);
         });
 }
-
-export const addData = (database, collection, input) => {
-    Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db(database).collection(collection).insertOne(input)
-        .then(result => console.log(`Successfully inserted item with _id: ${result.insertedId}`)) //db.collection selects a collection and insertOne inserts the document and logs if successful or failure
-        .catch(err => console.error(`Failed to insert item: ${err}`))
-}
-//equivalent of taking a Stich colection object and applying the insertOne method
-
-
-export const updateData = (database, collection, objId, object) => {
-    Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db(database).collection(collection).updateOne({ objId }, { $set: object })
-}
-//equivalent of taking a Stich colection object and applying the upddateOne method
-
-
-//example object: const output = { "hours": data1, "points": data2 }
-
-
-
 
 export const logout = () => {
     Stitch.defaultAppClient.auth.logout().then(user => { //takes the client and runs auth.logout() to log the client out

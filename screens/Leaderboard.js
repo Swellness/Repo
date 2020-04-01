@@ -17,6 +17,7 @@ import {
   Right,
   Title,
 } from "native-base";
+import Leaderboard from '../Components/leaderBDetail';
 
 const styles = StyleSheet.create({
   button: {
@@ -58,6 +59,9 @@ export default class Start extends React.Component {
             </Right>
           </Header>
           <Content>
+
+          <Leaderboard/>
+            
           </Content>
           <Footer>
             <FooterTab style={{ backgroundColor: "#c2c5cc" }}>

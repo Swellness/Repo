@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Alert,
   StyleSheet,
   Image,
   Dimensions, SafeAreaView, StatusBar
@@ -17,6 +18,8 @@ import {
   Text,
   Label,
 } from "native-base";
+import { Stitch, UserPasswordCredential, StitchUser } from 'mongodb-stitch-react-native-sdk';
+
 
 var { height, width } = Dimensions.get('window');
 
@@ -42,9 +45,10 @@ export default class Start extends React.Component {
   constructor(props) { //state and method instantiation
     super(props);
     this.state = {
-      username: undefined,
-      password: undefined,
+      email: "admin",
+      password: "swellness",
     };
+    this._handleLogin = this._handleLogin.bind(this);
   }
 
   async componentDidMount() {
@@ -60,15 +64,15 @@ export default class Start extends React.Component {
             <Form>
               <Image style={styles.stretch} source={require('../Pictures/swellness_logo_outline.png')} />
               <Item stackedLabel >
-                <Label>Username</Label>
-                <Input onChangeText={(username) => this.setState({ username })} />
+                <Label>Email</Label>
+                <Input onChangeText={(email) => this.setState({ email })} />
               </Item>
               <Item stackedLabel last >
                 <Label>Password</Label>
                 <Input onChangeText={(password) => this.setState({ password })} />
               </Item>
               <Button rounded style={styles.button}
-                onPress={() => { db.login(this.state.username, this.state.password), this.props.navigation.navigate("SessionCreation") }}>
+                onPress={() => this._handleLogin(this.state.email, this.state.password, 0)}>
                 <Text>Login</Text>
               </Button>
               <Button transparent
@@ -85,4 +89,21 @@ export default class Start extends React.Component {
       </SafeAreaView>
     );
   }
+
+  _handleLogin = (email, password) => {
+    //db.logout()//fail safe since screens arent operating exactly as planned and its possible to get back to login screen without logging out
+    console.log("attempting login using  " + email + " and " + password)
+
+    Stitch.defaultAppClient.auth.loginWithCredential(new UserPasswordCredential(email, password))
+    .then(user => {
+      if(user){
+        console.log(`Successfully logged in as user ${user.profile.email}`);
+        this.props.navigation.navigate("SessionCreation"); //navigates if user is found ()
+      }
+  })
+    .catch(err => {
+      Alert.alert('Login Failed','Username and/or Password Incorrect',[{ text: 'OK' }])
+      console.log(err)
+    })
+    }
 }
