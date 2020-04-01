@@ -17,7 +17,7 @@ import {
   Right,
   Title,
 } from "native-base";
-import Leaderboard from '../components/leaderBDetail';
+import Leaderboard from '../Components/leaderBDetail';
 
 const styles = StyleSheet.create({
   button: {
