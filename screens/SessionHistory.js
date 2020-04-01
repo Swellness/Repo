@@ -78,7 +78,6 @@ class SessionHistory extends React.Component {
 
     this.onDateChange = this.onDateChange.bind(this);
     this._query = this._query.bind(this);
-    //this._display = this._display.bind(this);
   }
 
   onDateChange(date) {
@@ -126,8 +125,6 @@ class SessionHistory extends React.Component {
                 <Text>Steps: {this.state.data.map(x => (x.steps))}</Text>
                 <Text>Exercises: {this.state.data.map(x => (x.exercises))}</Text>
                 <Text>Points Earned: {this.state.data.map(x => (x.points))}</Text>
-
-
               </View>
 
             </View>
@@ -208,9 +205,9 @@ class SessionHistory extends React.Component {
         })
       });
     });
-
   }
 
+ 
 }
 
 export default SessionHistory;
