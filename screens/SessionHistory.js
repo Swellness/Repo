@@ -163,7 +163,7 @@ class SessionHistory extends React.Component {
 
           </Content>
           <Footer>
-            <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
+            <FooterTab>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >
@@ -198,12 +198,12 @@ class SessionHistory extends React.Component {
     //   console.log(data)
     //   console.log(data.email)
     // });
-    collection.find({ date: this.state.selectedStartDate }, { limit: 100 }).toArray().then( result => {
+    collection.find({ date: this.state.selectedStartDate }, { limit: 100 }).toArray().then(result => {
       result.map(x => console.log(x.date))
       result.forEach(element => {
         dbData.push(element)
         console.log("element pushed: ", element)
-        this.setState({data:dbData}, ()=>{
+        this.setState({ data: dbData }, () => {
           console.log(this.state.data)
         })
       });

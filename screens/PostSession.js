@@ -96,7 +96,7 @@ const db = require('../util/dbAPI')
 
 
 class PostSession extends React.Component {
-  
+
   constructor(props) { //state and method instantiation
     super(props);
     this.state = {
@@ -109,19 +109,21 @@ class PostSession extends React.Component {
     };
   }
   componentDidMount() {
-  var d = new Date().toLocaleDateString()
-  var ID = Stitch.defaultAppClient.auth.user.id //gets STITCH/APPCLIENT/AUTHOBJECT/USER
-  var user = Stitch.defaultAppClient.auth.user.profile.email
-  this.setState({date:d, id:ID, email:user},()=>{
+    var d = new Date().toLocaleDateString()
+    var ID = Stitch.defaultAppClient.auth.user.id //gets STITCH/APPCLIENT/AUTHOBJECT/USER
+    var user = Stitch.defaultAppClient.auth.user.profile.email
+    this.setState({ date: d, id: ID, email: user }, () => {
       console.log("date = " + this.state.date) //CALLBACK REQUIRED, OTHERWISE CONSOLE LOG DOESNT SEE STATE UPDATE
       console.log("id = " + this.state.id)
       console.log("email = " + this.state.email)
-      const input = { "userId": this.state.id, "email":this.state.email, "steps": this.state.steps, 
-  "exercises": this.state.exercises, "points": this.state.points, "date": this.state.date}
-  db.addData("SwellnessTest","Session",input )
+      const input = {
+        "userId": this.state.id, "email": this.state.email, "steps": this.state.steps,
+        "exercises": this.state.exercises, "points": this.state.points, "date": this.state.date
+      }
+      db.addData("SwellnessTest", "Session", input)
     }
-  )
-  
+    )
+
 
   }
   render() {
@@ -163,7 +165,7 @@ class PostSession extends React.Component {
             </TouchableOpacity>
           </Content>
           <Footer>
-            <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
+            <FooterTab>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >
