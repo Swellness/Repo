@@ -167,7 +167,7 @@ class MainHub extends React.Component {
           </TouchableOpacity>
         </Content>
         <Footer>
-          <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
+          <FooterTab>
             <Button
               onPress={() => this.props.navigation.navigate("SessionHistory")}
             >

@@ -164,7 +164,7 @@ export default class Start extends React.Component {
             </Button>
           </Content>
           <Footer>
-            <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
+            <FooterTab>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >

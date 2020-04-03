@@ -44,7 +44,7 @@ export default class Start extends React.Component {
           </Body>
 
           <Right>
-            <Button transparent>
+            <Button transparent onPress={() => this.props.navigation.openDrawer()}>
               <Icon name='menu' />
             </Button>
           </Right>
@@ -99,7 +99,7 @@ export default class Start extends React.Component {
         </Content>
 
         <Footer>
-          <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
+          <FooterTab>
             <Button
               onPress={() => this.props.navigation.navigate("SessionHistory")}
             >
