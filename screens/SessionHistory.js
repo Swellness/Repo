@@ -183,18 +183,9 @@ class SessionHistory extends React.Component {
     );
   }
 
-  _query = () => { //you will have to build queries like this using the methods ive created
+  _query = () => {
     const collection = db.loadCollection('SwellnessTest', 'Session')
     var dbData = []
-    //find {} means find everything, limit 100 stops finding after 100, as array outputs everything to json
-    // collection.find({ date: this.state.selectedStartDate }, { limit: 100 }).toArray().then(function (result) {
-    //   result.forEach(element => {
-    //     data.push(element)
-    //   });
-    //   console.log(date)
-    //   console.log(data)
-    //   console.log(data.email)
-    // });
     collection.find({ date: this.state.selectedStartDate }, { limit: 100 }).toArray().then( result => {
       result.map(x => console.log(x.date))
       result.forEach(element => {
