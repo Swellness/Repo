@@ -69,7 +69,7 @@ export default class Start extends React.Component {
               </Item>
               <Item stackedLabel last >
                 <Label>Password</Label>
-                <Input onChangeText={(password) => this.setState({ password })} />
+                <Input secureTextEntry={true} onChangeText={(password) => this.setState({ password })} />
               </Item>
               <Button rounded style={styles.button}
                 onPress={() => this._handleLogin(this.state.email, this.state.password, 0)}>
