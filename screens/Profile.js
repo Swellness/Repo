@@ -139,7 +139,7 @@ export default class Start extends React.Component {
   _update = (fname, lname) => {
     const output = { "username":this.state.username, "fname": fname, "lname": lname, "email":this.state.email }
     const options = { "upsert": false };
-    Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Users").updateOne({"email":this.state.email}, output, options).then(    this._query()    )
+    Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Users").updateOne({"email":this.state.email}, output, options).then(this._query())
 }
   _nonEditable = () => {
 

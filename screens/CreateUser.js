@@ -128,7 +128,11 @@ export default class Start extends React.Component {
       
 
       const input = { "username":username, "fname": fname, "lname": lname, "email":email }
+      const input2 = { "username":username, "points":0 }
+
       db.addData("SwellnessTest", "Users", input )
+      db.addData("SwellnessTest", "Points", input2 )
+
       db.logout() //logs off admin
       
       this.props.navigation.navigate("SessionCreation")
