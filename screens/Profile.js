@@ -22,7 +22,9 @@ import {
   Input,
   Label
 } from "native-base";
+
 import { Stitch, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
+
 const db = require('../util/dbAPI')
 const styles = StyleSheet.create({
   textBox: {
@@ -127,7 +129,6 @@ export default class Start extends React.Component {
     const collection = db.loadCollection('SwellnessTest', 'Users')
 
     var id = Stitch.defaultAppClient.auth.user.profile.email;
-
     // var dbData = []
     collection.find({ email: id }, { limit: 100 }).toArray().then(result => {
       result.map(x => {
@@ -141,6 +142,7 @@ export default class Start extends React.Component {
     const options = { "upsert": false };
     Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Users").updateOne({ "email": this.state.email }, output, options).then(this._query())
   }
+
   _nonEditable = () => {
     this._query()
     return (
@@ -174,6 +176,7 @@ export default class Start extends React.Component {
           }}
         >
           <Text>Save</Text>
+
         </Button>
       </View>
     )
@@ -211,9 +214,8 @@ export default class Start extends React.Component {
         }}
       >
         <Text>Save</Text>
+
       </Button>
     </View>)
   }
-
-
 }
