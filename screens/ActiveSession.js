@@ -9,7 +9,8 @@ import {
   Picker,
   Platform,
   Spacer,
-  SafeAreaView
+  SafeAreaView,
+  Alert,
 } from "react-native";
 import {
   Container,
@@ -24,9 +25,7 @@ import {
   Right,
   Title,
 } from "native-base";
-
 const screen = Dimensions.get("window");
-
 const styles = StyleSheet.create({
   // textDisplay: {
   //   fontSize:30,
@@ -96,15 +95,24 @@ const styles = StyleSheet.create({
     alignItems: "center"
   }
 });
-
 const formatNumber = number => `0${number}`.slice(-2);
-
 const getRemaining = time => {
   const minutes = Math.floor(time / 60);
   const seconds = time - minutes * 60;
   return { minutes: formatNumber(minutes), seconds: formatNumber(seconds) };
 };
-
+const showAlert = () => {
+  Alert.alert(
+    'Activity Time!',
+    'Time to get up and do an activity.',
+    [
+      { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
+      { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+      { text: 'OK', onPress: () => console.log("Still needs navigation") },
+    ],
+    { cancelable: false }
+  )
+}
 const createArray = length => {
   const arr = [];
   let i = 0;
@@ -115,18 +123,15 @@ const createArray = length => {
 
   return arr;
 };
-
-const AVAILABLE_MINUTES = createArray(10);
+const AVAILABLE_MINUTES = createArray(31);
 const AVAILABLE_SECONDS = createArray(60);
-
-
 export default class Start extends React.Component {
 
   state = {
     remainingSeconds: 1,
     isRunning: false,
-    selectedMinutes: "0",
-    selectedSeconds: "0"
+    selectedMinutes: "30",
+    selectedSeconds: "0",
   };
 
   interval = null;
@@ -204,6 +209,10 @@ export default class Start extends React.Component {
 
   render() {
     const { minutes, seconds } = getRemaining(this.state.remainingSeconds);
+    //  Currently infinite loops, working on it later.
+    //    for (let i = 15; i <= 30; i + 5) {
+    //      showAlert();
+    //   }
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -228,7 +237,7 @@ export default class Start extends React.Component {
             <View style={styles.container}>
               <StatusBar barStyle="light-content" />
               {this.state.isRunning ? (
-                <Text style={styles.timerText}> Time remaining: {`${minutes}:${seconds}`}</Text>
+                <Text style={styles.timerText}> Time remaining: {`${minutes}:${seconds}`} </Text>
               ) : (
                   this.renderPickers()
                 )}
@@ -273,21 +282,21 @@ export default class Start extends React.Component {
             </View>
           </Content>
           <Footer>
-            <FooterTab>
+            <FooterTab style={{}}>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >
-                <Icon name="calendar" style={{ color: "#000" }} />
+                <Icon name="calendar" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("ActiveSession")}
               >
-                <Icon active name="stopwatch" style={{ color: "#000" }} />
+                <Icon active name="stopwatch" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("Activities")}
               >
-                <Icon name="heart" style={{ color: "#000" }} />
+                <Icon name="heart" style={{ color: "#fff" }} />
               </Button>
             </FooterTab>
           </Footer>

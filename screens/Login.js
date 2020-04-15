@@ -19,10 +19,7 @@ import {
   Label,
 } from "native-base";
 import { Stitch, UserPasswordCredential, StitchUser } from 'mongodb-stitch-react-native-sdk';
-
-
 var { height, width } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
   stretch: {
     width: width - 5,
@@ -37,9 +34,7 @@ const styles = StyleSheet.create({
     marginRight: width / 4
   }
 });
-
 const db = require('../util/dbAPI')
-
 export default class Start extends React.Component {
 
   constructor(props) { //state and method instantiation
@@ -95,15 +90,15 @@ export default class Start extends React.Component {
     console.log("attempting login using  " + email + " and " + password)
 
     Stitch.defaultAppClient.auth.loginWithCredential(new UserPasswordCredential(email, password))
-    .then(user => {
-      if(user){
-        console.log(`Successfully logged in as user ${user.profile.email}`);
-        this.props.navigation.navigate("SessionCreation"); //navigates if user is found ()
-      }
-  })
-    .catch(err => {
-      Alert.alert('Login Failed','Username and/or Password Incorrect',[{ text: 'OK' }])
-      console.log(err)
-    })
-    }
+      .then(user => {
+        if (user) {
+          console.log(`Successfully logged in as user ${user.profile.email}`);
+          this.props.navigation.navigate("SessionCreation"); //navigates if user is found ()
+        }
+      })
+      .catch(err => {
+        Alert.alert('Login Failed', 'Username and/or Password Incorrect', [{ text: 'OK' }])
+        console.log(err)
+      })
+  }
 }

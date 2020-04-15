@@ -15,8 +15,6 @@ import {
 } from "native-base";
 import CalendarPicker from 'react-native-calendar-picker';
 const db = require('../util/dbAPI')
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -67,7 +65,6 @@ const styles = StyleSheet.create({
     height: 44,
   },
 });
-
 class SessionHistory extends React.Component {
   constructor(props) {
     super(props);
@@ -137,17 +134,14 @@ class SessionHistory extends React.Component {
           >
             <Text style={styles.button}>Side Menu</Text>
           </Button>
-
             <Button
               onPress={() => this.props.navigation.navigate("SessionCreation")}
             >
               <Text style={styles.button}>Session</Text>
             </Button>
-
             <Button onPress={() => this.props.navigation.navigate("Activities")}>
               <Text style={styles.button}>Activities</Text>
             </Button>
-
             <Button
               onPress={() => this.props.navigation.navigate("DailyHistory")}
             >
@@ -167,17 +161,17 @@ class SessionHistory extends React.Component {
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >
-                <Icon name="calendar" style={{ color: "#000" }} />
+                <Icon name="calendar" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("ActiveSession")}
               >
-                <Icon active name="stopwatch" style={{ color: "#000" }} />
+                <Icon active name="stopwatch" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("Activities")}
               >
-                <Icon name="heart" style={{ color: "#000" }} />
+                <Icon name="heart" style={{ color: "#fff" }} />
               </Button>
             </FooterTab>
           </Footer>
@@ -203,5 +197,4 @@ class SessionHistory extends React.Component {
   }
 
 }
-
 export default SessionHistory;

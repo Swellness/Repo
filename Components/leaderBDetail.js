@@ -4,7 +4,6 @@ import { Container, Header, Content, Button, Text } from 'native-base';
 //...
 const db = require('../util/dbAPI')
 
-
 class leaderBDetail extends React.Component {
     constructor(props) {
         super(props);
@@ -28,10 +27,10 @@ class leaderBDetail extends React.Component {
 
     render() {
         return (
-            <Container>
-                    <Button onPress={()=>{this._query()}}>
-                        <Text>Refresh</Text>
-                    </Button>
+            <Container style={{ alignItems: "center" }}>
+                <Button style={{ marginTop: 10, marginBottom: 10, width: 125, justifyContent: "center" }} onPress={() => { this._query() }}>
+                    <Text>Refresh</Text>
+                </Button>
                 <Leaderboard
                     data={this.state.data}
                     sortBy='points'
@@ -51,9 +50,8 @@ class leaderBDetail extends React.Component {
             result.forEach(element => {
                 dbData.push(element)
             })
-            this.setState({data:dbData})
+            this.setState({ data: dbData })
         });
     }
 }
-
 export default leaderBDetail;

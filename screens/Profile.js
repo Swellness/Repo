@@ -22,7 +22,9 @@ import {
   Input,
   Label
 } from "native-base";
-import { Stitch, RemoteMongoClient} from 'mongodb-stitch-react-native-sdk';
+
+import { Stitch, RemoteMongoClient } from 'mongodb-stitch-react-native-sdk';
+
 const db = require('../util/dbAPI')
 const styles = StyleSheet.create({
   textBox: {
@@ -42,7 +44,7 @@ export default class Start extends React.Component {
   constructor(props) { //state and method instantiation
     super(props);
     this.state = {
-      username:"",
+      username: "",
       fName: " ",
       lName: " ",
       DOB: " ",
@@ -106,17 +108,17 @@ export default class Start extends React.Component {
             <Button
               onPress={() => this.props.navigation.navigate("SessionHistory")}
             >
-              <Icon name="calendar" style={{ color: "#000" }} />
+              <Icon name="calendar" style={{ color: "#fff" }} />
             </Button>
             <Button
               onPress={() => this.props.navigation.navigate("ActiveSession")}
             >
-              <Icon active name="stopwatch" style={{ color: "#000" }} />
+              <Icon active name="stopwatch" style={{ color: "#fff" }} />
             </Button>
             <Button
               onPress={() => this.props.navigation.navigate("Activities")}
             >
-              <Icon name="heart" style={{ color: "#000" }} />
+              <Icon name="heart" style={{ color: "#fff" }} />
             </Button>
           </FooterTab>
         </Footer>
@@ -127,7 +129,6 @@ export default class Start extends React.Component {
     const collection = db.loadCollection('SwellnessTest', 'Users')
 
     var id = Stitch.defaultAppClient.auth.user.profile.email;
- 
     // var dbData = []
     collection.find({ email: id }, { limit: 100 }).toArray().then(result => {
       result.map(x => {
@@ -137,10 +138,11 @@ export default class Start extends React.Component {
   }
 
   _update = (fName, lName) => {
-    const output = { "username":this.state.username, "fName": fName, "lName": lName, "email":this.state.email }
+    const output = { "username": this.state.username, "fName": fName, "lName": lName, "email": this.state.email }
     const options = { "upsert": false };
-    Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Users").updateOne({"email":this.state.email}, output, options).then(this._query())
-}
+    Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Users").updateOne({ "email": this.state.email }, output, options).then(this._query())
+  }
+
   _nonEditable = () => {
     this._query()
     return (
@@ -166,14 +168,15 @@ export default class Start extends React.Component {
 
         {/* button can be removed below */}
         <Button
-          iconLeft style={{ width: 50 }}
+          style={{ marginTop: 15, alignContent: "center" }}
           onPress={() => {
 
             this.setState({ edit: !this.state.edit })
 
           }}
         >
-          <Icon name='settings' />
+          <Text>Save</Text>
+
         </Button>
       </View>
     )
@@ -186,12 +189,12 @@ export default class Start extends React.Component {
       }}>
       <Item stackedLabel >
         <Label>First Name</Label>
-        <Input style={styles.editText} placeholder={this.state.fName} onChangeText={(nFname) => this.setState({ nFname})} />
+        <Input style={styles.editText} placeholder={this.state.fName} onChangeText={(nFname) => this.setState({ nFname })} />
 
       </Item>
       <Item stackedLabel >
         <Label>Last Name</Label>
-        <Input style={styles.editText} placeholder={this.state.lName} onChangeText={(nLname) => this.setState({ nLname})} />
+        <Input style={styles.editText} placeholder={this.state.lName} onChangeText={(nLname) => this.setState({ nLname })} />
       </Item>
 
       <Item stackedLabel last>
@@ -201,19 +204,18 @@ export default class Start extends React.Component {
 
       {/* button can be removed below */}
       <Button
-        iconLeft style={{ width: 50 }}
+        style={{ marginTop: 15, alignContent: "center" }}
         onPress={() => {
-          this.setState({fName:this.state.nFname, lName:this.state.nLname}) //sets old f/l name to new first and last name so it immediately reads it correctly rather than waiting for next reload to show correct data
+          this.setState({ fName: this.state.nFname, lName: this.state.nLname }) //sets old f/l name to new first and last name so it immediately reads it correctly rather than waiting for next reload to show correct data
           console.log("saved")
           this._update(this.state.nFname, this.state.nLname)
           this.setState({ edit: !this.state.edit })
 
         }}
       >
-        <Icon name='save' />
+        <Text>Save</Text>
+
       </Button>
     </View>)
   }
-
- 
 }
