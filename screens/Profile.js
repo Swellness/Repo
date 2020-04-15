@@ -127,22 +127,22 @@ export default class Start extends React.Component {
     const collection = db.loadCollection('SwellnessTest', 'Users')
 
     var id = Stitch.defaultAppClient.auth.user.profile.email;
-
+ 
     // var dbData = []
     collection.find({ email: id }, { limit: 100 }).toArray().then(result => {
       result.map(x => {
-        this.setState({ username: x.username, fname: x.fname, lname: x.lname, email: x.email, usrObj: x._id })
+        this.setState({ username: x.username, fName: x.fName, lName: x.lName, email: x.email, usrObj: x._id })
       })
     });
   }
 
-  _update = (fname, lname) => {
-    const output = { "username":this.state.username, "fname": fname, "lname": lname, "email":this.state.email }
+  _update = (fName, lName) => {
+    const output = { "username":this.state.username, "fName": fName, "lName": lName, "email":this.state.email }
     const options = { "upsert": false };
     Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Users").updateOne({"email":this.state.email}, output, options).then(this._query())
 }
   _nonEditable = () => {
-
+    this._query()
     return (
       <View
         style={{
@@ -151,12 +151,12 @@ export default class Start extends React.Component {
         }}>
         <Item stackedLabel >
           <Label>First Name</Label>
-          <Input style={styles.nonEditText} disabled placeholder={this.state.fname} />
+          <Input style={styles.nonEditText} disabled placeholder={this.state.fName} />
 
         </Item>
         <Item stackedLabel >
           <Label>Last Name</Label>
-          <Input style={styles.nonEditText} disabled placeholder={this.state.lname} />
+          <Input style={styles.nonEditText} disabled placeholder={this.state.lName} />
         </Item>
 
         <Item stackedLabel last>
@@ -186,12 +186,12 @@ export default class Start extends React.Component {
       }}>
       <Item stackedLabel >
         <Label>First Name</Label>
-        <Input style={styles.editText} placeholder={this.state.fname} onChangeText={(nFname) => this.setState({ nFname})} />
+        <Input style={styles.editText} placeholder={this.state.fName} onChangeText={(nFname) => this.setState({ nFname})} />
 
       </Item>
       <Item stackedLabel >
         <Label>Last Name</Label>
-        <Input style={styles.editText} placeholder={this.state.lname} onChangeText={(nLname) => this.setState({ nLname})} />
+        <Input style={styles.editText} placeholder={this.state.lName} onChangeText={(nLname) => this.setState({ nLname})} />
       </Item>
 
       <Item stackedLabel last>
@@ -203,10 +203,11 @@ export default class Start extends React.Component {
       <Button
         iconLeft style={{ width: 50 }}
         onPress={() => {
-          this.setState({ edit: !this.state.edit })
-          this.setState({fname:this.state.nFname, lname:this.state.nLname}) //sets old f/l name to new first and last name so it immediately reads it correctly rather than waiting for next reload to show correct data
+          this.setState({fName:this.state.nFname, lName:this.state.nLname}) //sets old f/l name to new first and last name so it immediately reads it correctly rather than waiting for next reload to show correct data
           console.log("saved")
           this._update(this.state.nFname, this.state.nLname)
+          this.setState({ edit: !this.state.edit })
+
         }}
       >
         <Icon name='save' />
