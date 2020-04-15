@@ -15,8 +15,6 @@ import {
 } from "native-base";
 import CalendarPicker from 'react-native-calendar-picker';
 const db = require('../util/dbAPI')
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -67,7 +65,6 @@ const styles = StyleSheet.create({
     height: 44,
   },
 });
-
 class SessionHistory extends React.Component {
   constructor(props) {
     super(props);
@@ -137,17 +134,14 @@ class SessionHistory extends React.Component {
           >
             <Text style={styles.button}>Side Menu</Text>
           </Button>
-
             <Button
               onPress={() => this.props.navigation.navigate("SessionCreation")}
             >
               <Text style={styles.button}>Session</Text>
             </Button>
-
             <Button onPress={() => this.props.navigation.navigate("Activities")}>
               <Text style={styles.button}>Activities</Text>
             </Button>
-
             <Button
               onPress={() => this.props.navigation.navigate("DailyHistory")}
             >
@@ -167,17 +161,17 @@ class SessionHistory extends React.Component {
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >
-                <Icon name="calendar" style={{ color: "#000" }} />
+                <Icon name="calendar" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("ActiveSession")}
               >
-                <Icon active name="stopwatch" style={{ color: "#000" }} />
+                <Icon active name="stopwatch" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("Activities")}
               >
-                <Icon name="heart" style={{ color: "#000" }} />
+                <Icon name="heart" style={{ color: "#fff" }} />
               </Button>
             </FooterTab>
           </Footer>
@@ -189,15 +183,6 @@ class SessionHistory extends React.Component {
   _query = () => { //you will have to build queries like this using the methods ive created
     const collection = db.loadCollection('SwellnessTest', 'Session')
     var dbData = []
-    //find {} means find everything, limit 100 stops finding after 100, as array outputs everything to json
-    // collection.find({ date: this.state.selectedStartDate }, { limit: 100 }).toArray().then(function (result) {
-    //   result.forEach(element => {
-    //     data.push(element)
-    //   });
-    //   console.log(date)
-    //   console.log(data)
-    //   console.log(data.email)
-    // });
     collection.find({ date: this.state.selectedStartDate }, { limit: 100 }).toArray().then(result => {
       result.map(x => console.log(x.date))
       result.forEach(element => {
@@ -212,5 +197,4 @@ class SessionHistory extends React.Component {
   }
 
 }
-
 export default SessionHistory;
