@@ -49,10 +49,12 @@ export const addData = (database, collection, input) => {
 }
 //equivalent of taking a Stich collection object and applying the insertOne method
 
-
-export const updateData = (database, collection, objId, object) => { //database and collection are the NAME and not a DB or collection object
-    Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db(database).collection(collection).updateOne({ objId }, { $set: object })
-}
+//DEPRECATED
+// export const updateData = (database, collection, objId, object) => { //database and collection are the NAME and not a DB or collection object
+//     Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db(database).collection(collection).updateOne({ objId }, { $set: object })
+//     .then(result => console.log(`${result}`)) //db.collection selects a collection and insertOne inserts the document and logs if successful or failure
+//     .catch(err => console.error(`Failed to update item: ${err}`))
+// }
 //equivalent of taking a Stitch collection object and applying the upddateOne method
 //example object: const output = { "hours": data1, "points": data2 }
 

@@ -35,14 +35,14 @@ const styles = StyleSheet.create({
   color: {
     backgroundColor: "blue"
   },
-  title:{
-    fontSize:40,
+  title: {
+    fontSize: 40,
     textAlign: 'center'
-},
-subText:{
-    fontSize:25,
+  },
+  subText: {
+    fontSize: 25,
     textAlign: 'center'
-}
+  }
 }
 );
 
@@ -69,27 +69,27 @@ export default class Start extends React.Component {
           </Header>
           <Content>
 
-          <Text style= {styles.title}>Redeem Your Points!!</Text>
-      <Text style= {styles.subText}>You currenly have 4800 Points</Text>
-      <Rewards/>
+            <Text style={styles.title}>Redeem Your Points!!</Text>
+            <Text style={styles.subText}>You currenly have 800 Points</Text>
+            <Rewards />
 
           </Content>
           <Footer>
-            <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
+            <FooterTab>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >
-                <Icon name="calendar" style={{ color: "#000" }} />
+                <Icon name="calendar" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("ActiveSession")}
               >
-                <Icon active name="stopwatch" style={{ color: "#000" }} />
+                <Icon active name="stopwatch" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("Activities")}
               >
-                <Icon name="heart" style={{ color: "#000" }} />
+                <Icon name="heart" style={{ color: "#fff" }} />
               </Button>
             </FooterTab>
           </Footer>

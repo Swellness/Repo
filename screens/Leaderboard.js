@@ -60,25 +60,25 @@ export default class Start extends React.Component {
           </Header>
           <Content>
 
-          <Leaderboard/>
-            
+            <Leaderboard />
+
           </Content>
           <Footer>
-            <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
+            <FooterTab>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >
-                <Icon name="calendar" style={{ color: "#000" }} />
+                <Icon name="calendar" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("ActiveSession")}
               >
-                <Icon active name="stopwatch" style={{ color: "#000" }} />
+                <Icon active name="stopwatch" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("Activities")}
               >
-                <Icon name="heart" style={{ color: "#000" }} />
+                <Icon name="heart" style={{ color: "#fff" }} />
               </Button>
             </FooterTab>
           </Footer>

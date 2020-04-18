@@ -25,7 +25,10 @@ import OrgAdminSuiteSettings from "./screens/OrgAdminSuiteSettings";
 import Rewards from "./screens/Rewards";
 import Leaderboard from "./screens/Leaderboard";
 
+console.disableYellowBox = true;
+
 export default class App extends React.Component {
+
   constructor(props) {
     super(props);
     console.ignoredYellowBox = ['Setting a timer'];
@@ -38,6 +41,7 @@ export default class App extends React.Component {
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
     });
     this.setState({ loading: false });
+
   }
 
   render() {

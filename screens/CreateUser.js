@@ -18,11 +18,8 @@ import {
   Label,
   Text,
 } from "native-base";
-
-import { Stitch, UserPasswordAuthProviderClient } from 'mongodb-stitch-react-native-sdk';
-
+import { Stitch, UserPasswordAuthProviderClient, StitchUser, StitchUserProfile } from 'mongodb-stitch-react-native-sdk';
 var { height, width } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
   stretch: {
     width: width - 5,
@@ -37,13 +34,9 @@ const styles = StyleSheet.create({
     marginRight: width / 4
   }
 });
-
 const db = require('../util/dbAPI')
-
-
 import {
 } from 'native-base';
-
 export default class Start extends React.Component {
   constructor(props) { //state and method instantiation
     super(props);
@@ -130,6 +123,11 @@ export default class Start extends React.Component {
 
           const input = { "username": username, "fname": fname, "lname": lname, "email": email }
           db.addData("SwellnessTest", "Users", input)
+          const input2 = { "username": username, "points": 0 }
+
+          db.addData("SwellnessTest", "Users", input)
+          db.addData("SwellnessTest", "Points", input2)
+
           db.logout() //logs off admin
 
           this.props.navigation.navigate("SessionCreation")
@@ -157,7 +155,6 @@ export default class Start extends React.Component {
       );
     }
   }
-
 }
 function validateEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

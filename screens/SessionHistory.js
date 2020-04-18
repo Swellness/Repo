@@ -15,8 +15,6 @@ import {
 } from "native-base";
 import CalendarPicker from 'react-native-calendar-picker';
 const db = require('../util/dbAPI')
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -67,7 +65,6 @@ const styles = StyleSheet.create({
     height: 44,
   },
 });
-
 class SessionHistory extends React.Component {
   constructor(props) {
     super(props);
@@ -134,17 +131,14 @@ class SessionHistory extends React.Component {
           >
             <Text style={styles.button}>Side Menu</Text>
           </Button>
-
             <Button
               onPress={() => this.props.navigation.navigate("SessionCreation")}
             >
               <Text style={styles.button}>Session</Text>
             </Button>
-
             <Button onPress={() => this.props.navigation.navigate("Activities")}>
               <Text style={styles.button}>Activities</Text>
             </Button>
-
             <Button
               onPress={() => this.props.navigation.navigate("DailyHistory")}
             >
@@ -160,21 +154,21 @@ class SessionHistory extends React.Component {
 
           </Content>
           <Footer>
-            <FooterTab style={{ backgroundColor: "#c2c5cc" }}>
+            <FooterTab>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >
-                <Icon name="calendar" style={{ color: "#000" }} />
+                <Icon name="calendar" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("ActiveSession")}
               >
-                <Icon active name="stopwatch" style={{ color: "#000" }} />
+                <Icon active name="stopwatch" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("Activities")}
               >
-                <Icon name="heart" style={{ color: "#000" }} />
+                <Icon name="heart" style={{ color: "#fff" }} />
               </Button>
             </FooterTab>
           </Footer>
@@ -186,12 +180,12 @@ class SessionHistory extends React.Component {
   _query = () => {
     const collection = db.loadCollection('SwellnessTest', 'Session')
     var dbData = []
-    collection.find({ date: this.state.selectedStartDate }, { limit: 100 }).toArray().then( result => {
+    collection.find({ date: this.state.selectedStartDate }, { limit: 100 }).toArray().then(result => {
       result.map(x => console.log(x.date))
       result.forEach(element => {
         dbData.push(element)
         console.log("element pushed: ", element)
-        this.setState({data:dbData}, ()=>{
+        this.setState({ data: dbData }, () => {
           console.log(this.state.data)
         })
       });
@@ -200,5 +194,4 @@ class SessionHistory extends React.Component {
 
  
 }
-
 export default SessionHistory;
