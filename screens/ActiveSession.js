@@ -132,6 +132,7 @@ export default class Start extends React.Component {
     isRunning: false,
     selectedMinutes: "30",
     selectedSeconds: "0",
+    time:undefined
   };
 
   interval = null;
@@ -171,7 +172,7 @@ export default class Start extends React.Component {
       remainingSeconds: 5, // temporary
       isRunning: false
 
-    });
+    })
   };
 
   renderPickers = () => (
@@ -262,7 +263,7 @@ export default class Start extends React.Component {
               <Text></Text>
 
               <Button rounded
-                onPress={() => this.props.navigation.navigate("PostSession")}
+                onPress={() => this.props.navigation.navigate("PostSession", {time:this.state.remainingSeconds, startMin:this.state.selectedMinutes, startSec: this.state.selectedSeconds})}
               >
                 <Text style={styles.button}>End Session</Text>
               </Button>

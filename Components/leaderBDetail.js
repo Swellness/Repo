@@ -8,14 +8,7 @@ class leaderBDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [
-                // { userName: 'Joe', highScore: 52 },
-                // { userName: 'Jenny', highScore: 120 },
-                // { userName: 'John', highScore: 160 },
-                // { userName: 'J', highScore: 99 },
-                // { userName: 'JJ', highScore: 482 },
-                //...
-            ] //can also be an object of objects!: data: {a:{}, b:{}}
+            data: [] 
         }
         this._query = this._query.bind(this)
 
@@ -34,7 +27,7 @@ class leaderBDetail extends React.Component {
                 <Leaderboard
                     data={this.state.data}
                     sortBy='points'
-                    labelBy='username'
+                    labelBy='email'
                     evenRowColor='#f2f5f7'
                     oddRowColor='white'
                 />

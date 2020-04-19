@@ -125,7 +125,7 @@ export default class Start extends React.Component {
       </Container>
     );
   }
-  _query = () => { //you will have to build queries like this using the methods ive created
+  _query = () => { //queries DB for user information
     const collection = db.loadCollection('SwellnessTest', 'Users')
 
     var id = Stitch.defaultAppClient.auth.user.profile.email;
