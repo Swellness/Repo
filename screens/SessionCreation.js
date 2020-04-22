@@ -115,11 +115,20 @@ const AVAILABLE_MINUTES = createArray(60);
 export default class Start extends React.Component {
 
   state = {
-    totalHours: "8",
-    totalMins: "0",
+    totalHours: 8,
+    totalMins: 0,
     actFrequency: "30",
   };
 
+  componentDidMount(){ //insert pull logic here
+  var totalSeconds = 7200
+  var hours = Math.floor(totalSeconds / 3600);
+  console.log(hours)
+  totalSeconds %= 3600;
+  var minutes = Math.floor(totalSeconds / 60);
+  console.log(minutes)
+  this.setState({totalHours:hours.toString(), totalMins: minutes.toString()})
+  }
   start = () => {
     this.props.navigation.navigate("ActiveSession", {
       hours: this.state.totalHours,

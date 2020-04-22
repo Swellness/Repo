@@ -83,15 +83,15 @@ export default class Start extends React.Component {
                   //iconName='your-icon-name'
                   _color='#000'
                   _min={0}
-                  _max={1260}
+                  _max={1440}
                   _value={this.state.qSessionBoolean}
-                  _onValueChange={qSessionBoolean => { this.setState({ qSessionBoolean }) }} />
+                  _onValueChange={qSessionBoolean => {this.setState({ qSessionBoolean })}} />
                 <SliderRow
                   text='Break Length'
                   //iconName='your-icon-name'
                   _color='#000'
                   _min={0}
-                  _max={100}
+                  _max={1440}
                   _value={this.state.qBreakBoolean}
                   _onValueChange={qBreakBoolean => { this.setState({ qBreakBoolean }) }} />
               </SectionRow>

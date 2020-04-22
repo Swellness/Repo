@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   editText: {
-    fontWeight: "normal"
+    fontWeight: "100"
 
   }
 });
@@ -59,12 +59,11 @@ export default class Start extends React.Component {
     this._query = this._query.bind(this);
     this._editable = this._editable.bind(this);
     this._nonEditable = this._nonEditable.bind(this);
-
-
   }
   componentDidMount() {
     this._query()
   }
+
   render() {
     return (
       <Container>
@@ -175,7 +174,7 @@ export default class Start extends React.Component {
 
           }}
         >
-          <Text>Save</Text>
+          <Text>Edit</Text>
 
         </Button>
       </View>
@@ -199,7 +198,7 @@ export default class Start extends React.Component {
 
       <Item stackedLabel last>
         <Label>Email:</Label>
-        <Input disabled style={styles.editText} placeholder={this.state.email} />
+        <Input disabled  placeholder={this.state.email} />
       </Item>
 
       {/* button can be removed below */}
