@@ -91,41 +91,82 @@ const styles = StyleSheet.create({
     top: 474
   }
 });
-import { Stitch, UserPasswordAuthProviderClient, StitchUser, StitchUserProfile } from 'mongodb-stitch-react-native-sdk';
+import { Stitch, RemoteMongoClient, UserPasswordCredential, UserPasswordAuthProviderClient } from 'mongodb-stitch-react-native-sdk';
+import ThreeAxisSensor from "expo-sensors/build/ThreeAxisSensor";
 const db = require('../util/dbAPI')
 
 
 class PostSession extends React.Component {
 
   constructor(props) { //state and method instantiation
+
     super(props);
+    //////////this is a bunch of BS we wouldnt need if we had decided to use time objects rather than f#cking strings for keeping track of time///
+    var startMin = props.navigation.state.params.startMin;
+    var startSec = props.navigation.state.params.startSec;
+    var timeLeft = props.navigation.state.params.time;
+    var startSecondsTotal = parseInt(startMin) * 60 + parseInt(startSec)
+    var elapsedTime = startSecondsTotal - timeLeft
+    var hours = Math.floor(elapsedTime / 60 / 60);
+    var minutes = Math.floor(elapsedTime / 60) - (hours * 60);
+    var seconds = elapsedTime % 60;
+    const formatted = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+    console.log(formatted)
+    var pointsAwarded = Math.round(elapsedTime / 60);
+
+    //////////////////////////Regular People: This is taking a lot of mental energy, i should take a break Me: hAhA bRaiN go b00m////////////////////////////////////////////////    
+
     this.state = {
       id: undefined,
       email: undefined,
-      steps: undefined,
+      steps: 20, //in the demo, take 10 steps
       exercises: undefined,
-      points: undefined,
-      date: undefined
+      points: pointsAwarded,
+      date: undefined,
+      timeElapsed: formatted
     };
   }
   componentDidMount() {
+    // method to nuke session collection
+    // Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Session").deleteMany({steps:null})
+    // .then(result => console.log(`nuked`)) //db.collection selects a collection and insertOne inserts the document and logs if successful or failure
+    // .catch(err => console.error(`Failed to delete`))
+
     var d = new Date().toLocaleDateString()
     var ID = Stitch.defaultAppClient.auth.user.id //gets STITCH/APPCLIENT/AUTHOBJECT/USER
     var user = Stitch.defaultAppClient.auth.user.profile.email
     this.setState({ date: d, id: ID, email: user }, () => {
-      console.log("date = " + this.state.date) //CALLBACK REQUIRED, OTHERWISE CONSOLE LOG DOESNT SEE STATE UPDATE
-      console.log("id = " + this.state.id)
-      console.log("email = " + this.state.email)
+      //CALLBACK REQUIRED, OTHERWISE CONSOLE LOG DOESNT SEE STATE UPDATE
       const input = {
         "userId": this.state.id, "email": this.state.email, "steps": this.state.steps,
-        "exercises": this.state.exercises, "points": this.state.points, "date": this.state.date
+        "exercises": this.state.exercises, "points": this.state.points, "date": this.state.date, "sessionLength": this.state.timeElapsed
       }
       db.addData("SwellnessTest", "Session", input)
-    }
-    )
 
+      ///////updating points collections///////////////
+      const collection = db.loadCollection('SwellnessTest', 'Points')
+      var dbData = 0;
+      var newPoints = 0
+      var id = Stitch.defaultAppClient.auth.user.profile.email;
 
+      ////////GETS CURRENT POINTS///////
+      collection.find({ email: id }, { limit: 10 }).asArray().then(result => {
+        result.forEach(element => {
+          dbData = element.points
+          console.log("existing points:" + dbData)
+        })
+        ////////////////ADDS CURRENT POINTS + EARNED POINTS TO GET NEW TOTAL///////////////////
+        newPoints = dbData + this.state.points;
+        console.log("new points:" + newPoints)
+      }).then(() => {
+        ////////////PUSHES NEW TOTAL////////////////
+        const output = { "email": id, "points": newPoints } //creates output object to update
+        const options = { "upsert": false };
+        Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Points").updateOne({ "email": this.state.email }, output, options).then(console.log("updated points"))
+      })
+    })
   }
+
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -148,21 +189,21 @@ class PostSession extends React.Component {
           </Header>
           <Content>
             <Text style={styles.headerText}>Good job today!!</Text>
+            <Text style={styles.text}> Session Length: {this.state.timeElapsed}</Text>
             <Text style={styles.text}> Daily Challenge: </Text>
             <Text style={styles.text2}> 4/4 Activities </Text>
             <View style={styles.container2}>
-              <Text style={styles.text3}> Steps Taken: 428 </Text>
+              <Text style={styles.text3}> Steps Taken: {this.state.steps} </Text>
               <Text style={styles.text4}> Exercises Completed: 4</Text>
-              <Text style={styles.text5}> Points Earned: 78</Text>
-              <Text style={styles.text5}> Date: </Text>
+              <Text style={styles.text5}> Points Earned: {this.state.points}</Text>
 
             </View>
-            <TouchableOpacity
+            {/* <TouchableOpacity //seems unncessary plus its formatted poorly
               style={styles.button}
               onPress={() => this.props.navigation.navigate("SessionCreation")}
             >
               <Text style={styles.text6}> New Session </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </Content>
           <Footer>
             <FooterTab>
