@@ -865,7 +865,7 @@
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
-"@expo/vector-icons@^10.0.2":
+"@expo/vector-icons@^10.0.2", "@expo/vector-icons@^10.0.6":
   version "10.0.6"
   resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-10.0.6.tgz#5718953ff0b97827d11dae5787976fa8ce5caaed"
   integrity sha512-qNlKPNdf073LpeEpyClxAh0D3mmIK4TGAQzeKR0HVwf14RIEe17+mLW5Z6Ka5Ho/lUtKMRPDHumSllFyKvpeGg==
@@ -959,6 +959,15 @@
     "@types/istanbul-lib-coverage" "^2.0.0"
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
+
+"@react-native-community/art@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/art/-/art-1.2.0.tgz#386d95393f6042d9006f9d4bc6063fb898794460"
+  integrity sha512-a+ZcRGl/BzLa89yi33Mbn5SHavsEXqKUMdbfLf3U8MDLElndPqUetoJyGkv63+BcPO49UMWiQRP1YUz6/zfJ+A==
+  dependencies:
+    art "^0.10.3"
+    invariant "^2.2.4"
+    prop-types "^15.7.2"
 
 "@react-native-community/cli-debugger-ui@^3.0.0":
   version "3.0.0"
@@ -1367,7 +1376,7 @@ array-unique@^0.3.2:
   resolved "https://registry.yarnpkg.com/array-unique/-/array-unique-0.3.2.tgz#a894b75d4bc4f6cd679ef3244a9fd8f46ae2d428"
   integrity sha1-qJS3XUvE9s1nnvMkSp/Y9Gri1Cg=
 
-art@^0.10.0:
+art@^0.10.0, art@^0.10.3:
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/art/-/art-0.10.3.tgz#b01d84a968ccce6208df55a733838c96caeeaea2"
   integrity sha512-HXwbdofRTiJT6qZX/FnchtldzJjS3vkLJxQilc3Xj+ma2MXjY4UAyQ0ls1XZYVnDvVIBiFZbC6QsvtW86TD6tQ==
@@ -2310,10 +2319,10 @@ expo-permissions@~8.0.0:
   resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-8.0.0.tgz#5a45e8451dd7ff37c9e6ce5e2447818372547813"
   integrity sha512-GHTRmwh1rd1b0FcibluPFu93NNQyl9b1anBBDVPmomoo9Prz7kDcO5p2hFqM99r896yvAUSe0fPloPKUq4g/1A==
 
-expo-sensors@~8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/expo-sensors/-/expo-sensors-8.0.0.tgz#69d348d5a22205d11a2781648fdf79933c1ce70d"
-  integrity sha512-gIvXBfFJaY6GQKx2MGmm5ZWXqMF47ZKcdDanHlMIkfxwQiiPBoYNCAOgYH6y7X1n9PC/cF6THgf5X2C8aKMjVA==
+expo-sensors@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/expo-sensors/-/expo-sensors-8.1.0.tgz#2b46cb80c7e18a9fab9a6aca4e99c558a93389e1"
+  integrity sha512-WLpAOfrYkJiOu+Erhjg20EKcCOaFLfm1JGRz9wiLsXH8ebY13KL2qFSpTVt89eGF66DtV/zwchCqRAjrNGdzTw==
   dependencies:
     invariant "^2.2.4"
 
@@ -3386,7 +3395,7 @@ lodash.throttle@^4.1.1:
   resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
   integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
 
-lodash@^4.0.0, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.6.0:
+lodash@^4.0.0, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.6.0:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -4489,12 +4498,12 @@ react-native-calendar-picker@^6.0.5:
     prop-types "^15.6.0"
     uuid "3.2.1"
 
-react-native-countdown-component@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-countdown-component/-/react-native-countdown-component-2.6.0.tgz#0f6f38134e76ce8aedb26e47d6fc284a0352ecfa"
-  integrity sha512-jHimXUoxjK/2Izvg8imQhhWEsptxwBCjSiKfg5NHaURDtNyOgi1Ne2jX45WYs8SE75ANXTyyHXW5dKI1POcAeA==
+react-native-countdown-component@^2.7.1:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/react-native-countdown-component/-/react-native-countdown-component-2.7.1.tgz#d1e1278d792b0bb6b1bf58972e8a3ad758926a86"
+  integrity sha512-H7D/YvMjY1hCJf9xFrNh5CsIwkcel/Suno2gYR6ulWwoa2xnUgmltFWoMyEIODsUy7lIK1KCPm+Zn26QajbRaw==
   dependencies:
-    lodash "^4.17.3"
+    lodash "^4.17.13"
     prop-types "^15.5.8"
     sprintf-js "^1.1.1"
 
@@ -4556,6 +4565,13 @@ react-native-leaderboard@^1.0.6:
   integrity sha512-EXZrkthPZqKCfE8PlTx5rejlaGQ9Ac/yaEZMmNzrVjcGOtKn0Hb+O/cCxE1G8tRnGlTeBH12b50Ylbrd6KK0Yw==
   dependencies:
     prop-types "^15.6.0"
+
+react-native-progress@3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-progress/-/react-native-progress-3.6.0.tgz#feaf37491f91bb421207fd761e20cb7258a2a3a6"
+  integrity sha512-zzTe595xaaskyfR5OzaGrU4O0R+YkgdEw+EspgGD7wh8Hu0fs6ue3xLW+HEbTjOCn62pCRivwi3NxbpWNBCC7Q==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-native-ratings@^6.3.0:
   version "6.5.0"

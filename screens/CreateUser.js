@@ -120,7 +120,7 @@ export default class Start extends React.Component {
           const emailClient = Stitch.defaultAppClient.auth.getProviderClient(UserPasswordAuthProviderClient.factory, "userpass") //creates email client
           emailClient.registerWithEmail(email, password).then(() => { console.log("Successfully registered.") }).catch(err => { console.error(err) }); //registers with email and password
 
-          const input = { "username": username, "fname": fname, "lname": lname, "email": email, "lifetimeSteps": 0, "lifetimeExercises":0}
+          const input = { "username": username, "fname": fname, "lname": lname, "email": email, "lifetimeSteps": 0, "lifetimeExercises": 0 }
           db.addData("SwellnessTest", "Users", input)
           const input2 = { "email": email, "points": 0 }
           db.addData("SwellnessTest", "Points", input2)

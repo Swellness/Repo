@@ -25,13 +25,10 @@ import {
   Right,
   Title,
 } from "native-base";
+import * as Progress from 'react-native-progress';
+import moment from 'moment';
 const screen = Dimensions.get("window");
 const styles = StyleSheet.create({
-  // textDisplay: {
-  //   fontSize:30,
-  //   textAlign: "left",
-  //   color: "black"
-  // },
   button: {
     borderColor: "black",
     //borderWidth: 1,
@@ -51,47 +48,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
-  button1: {
-    borderWidth: 10,
-    borderColor: "#89AAFF",
-    width: screen.width / 2,
-    height: screen.width / 2,
-    borderRadius: screen.width / 2,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 30
-  },
-  buttonStop: {
-    borderColor: "red"
-  },
   buttonText: {
     fontSize: 45,
     color: "blue"
   },
-  buttonTextStop: {
-    color: "#FF851B"
+  progress: {
+    marginVertical: 50
   },
-  timerText: {
-    color: "black",
-    fontSize: 40,
-    textAlign: 'center'
-  },
-  picker: {
-    width: 50,
-    ...Platform.select({
-      android: {
-        color: "grey",
-        backgroundColor: "white",
-        marginLeft: 10,
-      }
-    })
-  },
-  pickerItem: {
-    color: "black",
-    fontSize: 30
-  },
-  pickerContainer: {
-    flexDirection: "row",
+  centerObj: {
+    justifyContent: "center",
+    alignContent: "center",
     alignItems: "center"
   }
 });
@@ -110,7 +76,7 @@ const showAlert = () => {
       { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
       { text: 'OK', onPress: () => console.log("Still needs navigation") },
     ],
-    { cancelable: false }
+    // { cancelable: false }
   )
 }
 const createArray = length => {
@@ -125,21 +91,30 @@ const createArray = length => {
 };
 const AVAILABLE_MINUTES = createArray(31);
 const AVAILABLE_SECONDS = createArray(60);
+let inc = 0
 export default class Start extends React.Component {
 
   state = {
-    remainingSeconds: 1,
+    remainingTime: 1,
+    remainingHours: this.props.navigation.getParam("hours"),
+    remainingMins: this.props.navigation.getParam("minutes"),
+    totalTime: 1,
     isRunning: false,
-    selectedMinutes: "30",
-    selectedSeconds: "0",
-    time:undefined
+    selectedH: this.props.navigation.getParam("hours"),
+    selectedM: this.props.navigation.getParam("minutes"),
+    selectedF: this.props.navigation.getParam("actFreq"),
+    initial: 0,
+    inc: 0
   };
 
   interval = null;
 
+  componentDidMount() {
+    this.start()
+  }
 
   componentDidUpdate(prevProp, prevState) {
-    if (this.state.remainingSeconds === 0 && prevState.remainingSeconds !== 0) {
+    if (this.state.remainingTime === 0 && prevState.remainingTime !== 0) {
       this.stop();
     }
   }
@@ -152,68 +127,72 @@ export default class Start extends React.Component {
 
   start = () => {
     this.setState(state => ({
-      remainingSeconds:
-        parseInt(state.selectedMinutes, 10) * 60 +
-        parseInt(state.selectedSeconds, 10),
+      remainingTime:
+        parseInt(state.selectedH, 10) * 60 +
+        parseInt(state.selectedM, 10),
+      totalTime:
+        parseInt(state.selectedH, 10) * 60 +
+        parseInt(state.selectedM, 10),
       isRunning: true,
     }));
 
     this.interval = setInterval(() => {
       this.setState(state => ({
-        remainingSeconds: state.remainingSeconds - 1
+        remainingTime: state.remainingTime - 1,
+        remainingHours: Math.floor(state.remainingTime / 60),
+        remainingMins: this.state.remainingTime % 60
       }));
-    }, 1000);
+      if (this.state.initial == 1) {
+        if (this.state.remainingMins % this.state.selectedF === 0) {
+          showAlert()
+        }
+      } else {
+        this.setState({
+          initial: 1
+        })
+      }
+    }, 1000); // 1000 for seconds, 60000 for minutes
+
+    console.log(this.state.remainingMins)
   };
 
   stop = () => {
     clearInterval(this.interval);
     this.interval = null;
     this.setState({
-      remainingSeconds: 5, // temporary
       isRunning: false
 
     })
   };
 
-  renderPickers = () => (
-    <View style={styles.pickerContainer}>
-      <Picker
-        style={styles.picker}
-        itemStyle={styles.pickerItem}
-        selectedValue={this.state.selectedMinutes}
-        onValueChange={itemValue => {
-          this.setState({ selectedMinutes: itemValue });
-        }}
-        mode="dropdown"
-      >
-        {AVAILABLE_MINUTES.map(value => (
-          <Picker.Item key={value} label={value} value={value} />
-        ))}
-      </Picker>
-      <Text style={styles.pickerItem}>minutes</Text>
-      <Picker
-        style={styles.picker}
-        itemStyle={styles.pickerItem}
-        selectedValue={this.state.selectedSeconds}
-        onValueChange={itemValue => {
-          this.setState({ selectedSeconds: itemValue });
-        }}
-        mode="dropdown"
-      >
-        {AVAILABLE_SECONDS.map(value => (
-          <Picker.Item key={value} label={value} value={value} />
-        ))}
-      </Picker>
-      <Text style={styles.pickerItem}>seconds</Text>
-    </View>
-  );
+  inc = () => {
+    this.setState({
+      inc: this.state.inc + 1
+    })
+  }
+
+  formatTime = () => {
+    let formatStr1 = this.state.remainingHours
+    let formatStr2 = ""
+    if (this.state.remainingMins < 10) {
+      if (this.state.remainingMins < 0) {
+        if (this.state.remainingHours == this.state.selectedH) {
+          formatStr1 = this.state.selectedH - 1
+        }
+        formatStr2 = 60 + this.state.remainingMins
+      } else {
+        formatStr2 = "0" + this.state.remainingMins
+      }
+    } else {
+      formatStr2 = this.state.remainingMins
+    }
+    let str = `${formatStr1}:${formatStr2}`
+    return str
+  }
 
   render() {
-    const { minutes, seconds } = getRemaining(this.state.remainingSeconds);
-    //  Currently infinite loops, working on it later.
-    //    for (let i = 15; i <= 30; i + 5) {
-    //      showAlert();
-    //   }
+    const progress = (this.state.totalTime - this.state.remainingTime) / this.state.totalTime
+    //console.log(progress)
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -235,51 +214,37 @@ export default class Start extends React.Component {
             </Right>
           </Header>
           <Content>
+            <View style={styles.centerObj}>
+              <Progress.Circle
+                size={200}
+                progress={progress}
+                style={styles.progress}
+                thickness={10}
+                animated
+                showsText
+                formatText={() => {
+                  return this.formatTime()
+                }}
+              />
+            </View>
             <View style={styles.container}>
-              <StatusBar barStyle="light-content" />
-              {this.state.isRunning ? (
-                <Text style={styles.timerText}> Time remaining: {`${minutes}:${seconds}`} </Text>
-              ) : (
-                  this.renderPickers()
-                )}
-              {this.state.isRunning ? (
-                <TouchableOpacity
-                  onPress={this.stop}
-                  style={[styles.button1, styles.buttonStop]}
-                >
-                  <Text style={[styles.buttonText, styles.buttonTextStop]}>Stop</Text>
-                </TouchableOpacity>
-              ) : (
-                  <TouchableOpacity onPress={this.start} style={styles.button1}>
-                    <Text style={styles.buttonText}>Start</Text>
-                  </TouchableOpacity>
-                )}
-              <Text></Text>
               <Button rounded
                 onPress={() => this.props.navigation.navigate("Break")}
               >
                 <Text style={styles.button}>Take a Break</Text>
               </Button>
-              <Text></Text>
 
               <Button rounded
                 onPress={() => this.props.navigation.navigate("PostSession", {time:this.state.remainingSeconds, startMin:this.state.selectedMinutes, startSec: this.state.selectedSeconds})}
               >
                 <Text style={styles.button}>End Session</Text>
               </Button>
-              <Text></Text>
 
               <Button rounded
                 onPress={() => this.props.navigation.navigate("SessionCreation")}
               >
                 <Text style={styles.button}>Session</Text>
               </Button>
-
-
-              {/* <Text style={styles.textDisplay}>Time till next Activity: 15 min</Text>
-          <Text style={styles.textDisplay}>Time till next Break: 30 min</Text> */}
-
-
             </View>
           </Content>
           <Footer>

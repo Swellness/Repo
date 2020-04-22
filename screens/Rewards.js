@@ -18,7 +18,7 @@ import {
   Title,
 } from "native-base";
 import Rewards from '../Components/rewardList';
-import { Stitch} from 'mongodb-stitch-react-native-sdk';
+import { Stitch } from 'mongodb-stitch-react-native-sdk';
 const db = require('../util/dbAPI')
 
 
@@ -51,32 +51,32 @@ const styles = StyleSheet.create({
 );
 
 export default class Start extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    
-    this.state = {
-      points:undefined      
-    };  
 
-    this._getPoints=this._getPoints.bind(this)
+    this.state = {
+      points: undefined
+    };
+
+    this._getPoints = this._getPoints.bind(this)
   }
 
 
-  _getPoints(){
+  _getPoints() {
     const collection = db.loadCollection('SwellnessTest', 'Points')
     var user = Stitch.defaultAppClient.auth.user.profile.email
     var data = 0
-    collection.find({email:user}, { limit: 10 }).asArray().then(result => {
+    collection.find({ email: user }, { limit: 10 }).asArray().then(result => {
       result.forEach(element => {
-          data = element.points
-          console.log("existing points:"+data)
-          this.setState({points:data})
+        data = element.points
+        console.log("existing points:" + data)
+        this.setState({ points: data })
       })
-      
-  })
+
+    })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this._getPoints()
   }
   render() {
@@ -84,14 +84,12 @@ export default class Start extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar hidden={true} translucent={true} />
         <Container>
-        
           <Header>
             <Left>
               <Button transparent onPress={() => this.props.navigation.goBack()}>
                 <Icon name='arrow-back' />
               </Button>
             </Left>
-            
             <Body>
               <Title>Rewards</Title>
             </Body>
@@ -103,10 +101,10 @@ export default class Start extends React.Component {
           </Header>
 
           <Content>
-         
-          <Button style={{ alignSelf: "center", marginTop: 10, marginBottom: 10, width: 125, justifyContent: "center" }} onPress={() => { this._getPoints() }}>
-                    <Text style={{color:"white"}}>Refresh</Text>
-                </Button>
+
+            <Button style={{ alignSelf: "center", marginTop: 10, marginBottom: 10, width: 125, justifyContent: "center" }} onPress={() => { this._getPoints() }}>
+              <Text style={{ color: "white" }}>Refresh</Text>
+            </Button>
             <Text style={styles.title}>Redeem Your Points!!</Text>
             <Text style={styles.subText}>You currently have {this.state.points} Points</Text>
             <Rewards />

@@ -72,7 +72,7 @@ const RewardDetails = ({ imageSource, title, score }) => {
             var id = Stitch.defaultAppClient.auth.user.profile.email;
             const output = { "email": id, "points": data } //creates output object to update
             const options = { "upsert": false };
-            Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Points").updateOne({ "email": id }, output, options).then(console.log("subtracted points")) 
+            Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Points").updateOne({ "email": id }, output, options).then(console.log("subtracted points"))
         })
 
 
@@ -126,5 +126,4 @@ const RewardDetails = ({ imageSource, title, score }) => {
 
     </View>
 };
-
 export default RewardDetails;
