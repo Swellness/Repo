@@ -28,6 +28,8 @@ import {
 } from "native-base";
 
 const screen = Dimensions.get("window");
+const db = require('../util/dbAPI')
+import { Stitch} from 'mongodb-stitch-react-native-sdk';
 
 const styles = StyleSheet.create({
   button: {
@@ -113,21 +115,51 @@ const AVAILABLE_MINUTES = createArray(60);
 
 
 export default class Start extends React.Component {
+constructor(props){
+  super(props)
 
-  state = {
+  this.state = {
+    defaultSecondsS:0,
+    defaultSecondsA:0,
     totalHours: 8,
     totalMins: 0,
-    actFrequency: "30",
+    actFrequency: 30,
   };
+  this._setDefaultSessionTime = this._setDefaultSessionTime.bind(this);
+}
+  
 
   componentDidMount(){ //insert pull logic here
-  var totalSeconds = 7200
-  var hours = Math.floor(totalSeconds / 3600);
-  console.log(hours)
-  totalSeconds %= 3600;
-  var minutes = Math.floor(totalSeconds / 60);
-  console.log(minutes)
-  this.setState({totalHours:hours.toString(), totalMins: minutes.toString()})
+this._setDefaultSessionTime()
+  
+  }
+
+  _setDefaultSessionTime() {
+    const collection = db.loadCollection('SwellnessTest', 'Users')
+    var user = Stitch.defaultAppClient.auth.user.profile.email
+    var data = 0
+    var data2 =0
+    collection.find({ email: user }, { limit: 1 }).asArray().then(result => {
+      result.forEach(element => {
+        data = element.defaultSessionLength
+        data2 = element.defaultActivityInterval
+        this.setState({defaultSecondsS:data, defaultSecondsA:data2})
+        console.log(data+", "+data2)
+      })
+      var totalSeconds = data
+      var hours = Math.floor(totalSeconds / 3600);
+      totalSeconds %= 3600;
+      var minutes = Math.floor(totalSeconds / 60);
+      this.setState({totalHours:hours.toString(), totalMins: minutes.toString()})
+
+      var totalSecondsA = data2
+      console.log(data2)
+      var minutes2 = Math.floor(totalSecondsA/60)
+      this.setState({actFrequency:minutes2.toString()})
+
+
+      
+    })
   }
   start = () => {
     this.props.navigation.navigate("ActiveSession", {
@@ -141,6 +173,7 @@ export default class Start extends React.Component {
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar hidden={true} translucent={true} />
+       
         <Container>
           <Header>
             <Left />
@@ -154,6 +187,9 @@ export default class Start extends React.Component {
             </Right>
           </Header>
           <Content>
+          <Button style={{ alignSelf: "center", marginTop: 10, marginBottom: 10, width: 125, justifyContent: "center" }} onPress={() => { this.componentDidMount() }}>
+              <Text style={{ color: "white" }}>Refresh</Text>
+            </Button>
             <Image
               style={{ width: 400, height: 250 }}
               source={require('../Pictures/AppLogo.png')}

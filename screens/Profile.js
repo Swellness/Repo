@@ -54,7 +54,9 @@ export default class Start extends React.Component {
       edit: false,
       nFname: "",
       nLname: "",
-      usrObj: ""
+      usrObj: "",
+      sLength:"",
+      actInterval:""
     };
     this._query = this._query.bind(this);
     this._editable = this._editable.bind(this);
@@ -131,13 +133,13 @@ export default class Start extends React.Component {
     // var dbData = []
     collection.find({ email: id }, { limit: 100 }).toArray().then(result => {
       result.map(x => {
-        this.setState({ username: x.username, fName: x.fName, lName: x.lName, email: x.email, usrObj: x._id })
+        this.setState({ username: x.username, fName: x.fName, lName: x.lName, email: x.email,sLength:x.defaultSessionLength, actInterval:x.defaultActivityInterval, usrObj: x._id })
       })
     });
   }
 
   _update = (fName, lName) => {
-    const output = { "username": this.state.username, "fName": fName, "lName": lName, "email": this.state.email }
+    const output = { "username": this.state.username, "fName": fName, "lName": lName, "email": this.state.email, "defaultSessionLength":this.state.sLength, "defaultActivityInterval":this.state.actInterval}
     const options = { "upsert": false };
     Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Users").updateOne({ "email": this.state.email }, output, options).then(this._query())
   }

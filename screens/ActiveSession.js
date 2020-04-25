@@ -235,7 +235,13 @@ export default class Start extends React.Component {
               </Button>
 
               <Button rounded
-                onPress={() => this.props.navigation.navigate("PostSession", {time:this.state.remainingSeconds, startMin:this.state.selectedMinutes, startSec: this.state.selectedSeconds})}
+                onPress={() => {
+                  // console.log("active sesh mins:"+this.state.selectedMinutes)
+                  // console.log("active sesh sec:"+this.state.selectedSeconds)
+                  this.props.navigation.navigate("PostSession", {time:this.state.remainingTime, startMin:this.state.remainingMins, startSec: this.state.remainingHours})
+                }
+                 
+                }
               >
                 <Text style={styles.button}>End Session</Text>
               </Button>

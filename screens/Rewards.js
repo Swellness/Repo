@@ -21,8 +21,6 @@ import Rewards from '../Components/rewardList';
 import { Stitch } from 'mongodb-stitch-react-native-sdk';
 const db = require('../util/dbAPI')
 
-
-
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "blue",

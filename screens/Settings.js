@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, Text, SafeAreaView, StatusBar } from "react-native";
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Left, Body, Right, Title, TouchableOpacity } from "native-base";
 import ReactNativeSettingsPage, { SectionRow, NavigateRow, CheckRow, SliderRow, SwitchRow } from 'react-native-settings-page';
-import { Stitch, RemoteMongoClient, UserPasswordCredential, UserPasswordAuthProviderClient } from 'mongodb-stitch-react-native-sdk';
+import { Stitch, RemoteMongoClient} from 'mongodb-stitch-react-native-sdk';
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "grey",
@@ -21,34 +21,29 @@ const styles = StyleSheet.create({
   }
 });
 const db = require('../util/dbAPI')
+
 export default class Start extends React.Component {
   constructor(props) { //state and method instantiation
     super(props);
     this.state = {
       updateName: "",
-      qSessionBoolean: 0,
-      qBreakBoolean: 0,
+      sessionLength: 0,
+      activityInterval: 0,
       qTutorialBoolean: false,
       check: false,
-      switch: false,
-      valueS: 0,
-      valueB: 0,
-      email: "Lcostello17@apu.edu",
-      //email: Stitch.defaultAppClient.auth.user.profile.email,
-      EXname: [],
+      email: Stitch.defaultAppClient.auth.user.profile.email,
+      usrObj: undefined
+      
     };
-    this._querySessionLength = this._querySessionLength.bind(this);
-    this._queryName = this._queryName.bind(this);
+    this._getInitialSettings = this._getInitialSettings.bind(this);
+    this._updateSettings = this._updateSettings.bind(this);
     // this._queryBreakLength = this._queryBreakLength.bind(this);
     // this._queryTutorial = this._queryTutorial.bind(this);
   }
-  async componentDidMount() {
+  componentDidMount() {
+    this._getInitialSettings()
   }
-  // state = {
-  //   check: false,
-  //   switch: false,
-  //   value: 40
-  // }
+ 
   _navigateToScreen = () => {
     const { navigation } = this.props
     navigation.navigate('Leaderboard');
@@ -78,47 +73,45 @@ export default class Start extends React.Component {
             {/* Params HERE https://reactnativeexample.com/a-react-native-library-for-a-beauty-settings-screen/ */}
             <ReactNativeSettingsPage>
               <SectionRow text='Settings'>
+                <Text>Session Length</Text>
                 <SliderRow
-                  text='Session Length'
+                  text={Math.round((this.state.sessionLength*10/3600))/10+" hours"}
                   //iconName='your-icon-name'
                   _color='#000'
                   _min={0}
-                  _max={1440}
-                  _value={this.state.qSessionBoolean}
-                  _onValueChange={qSessionBoolean => {this.setState({ qSessionBoolean })}} />
+                  _max={86399}
+                  _value={this.state.sessionLength}
+                  _onValueChange={sessionLength => {this.setState({ sessionLength })}} />
+                <Text>Activity Interval</Text>
+
                 <SliderRow
-                  text='Break Length'
+                  text='Activity Interval'
                   //iconName='your-icon-name'
+                  text={Math.round((this.state.activityInterval*1/60))/1+" minutes"}
+
                   _color='#000'
                   _min={0}
-                  _max={1440}
-                  _value={this.state.qBreakBoolean}
-                  _onValueChange={qBreakBoolean => { this.setState({ qBreakBoolean }) }} />
+                  _max={3559}
+                  _value={this.state.activityInterval}
+                  _onValueChange={activityInterval => { this.setState({ activityInterval }) }} />
               </SectionRow>
-              {/* <NavigateRow
-            text='Session Length'
-            iconName='your-icon-name'
-            onPressCallback={this._navigateToScreen} /> */}
               <SwitchRow
                 text='Tutorial'
-                //iconName='your-icon-name'
                 _value={this.state.qTutorialBoolean}
                 _onValueChange={() => { this.setState({ qTutorialBoolean: !this.state.qTutorialBoolean }) }} />
               <CheckRow
                 text='Finalize Settings'
-                //iconName='your-icon-name'
                 _color='#000'
                 _value={this.state.check}
-                _onValueChange={() => {
-                  this._querySessionLength(this.state.qSessionBoolean,
-                    this.state.qBreakBoolean, this.state.qTutorialBoolean)
+                _onValueChange={() => {this._updateSettings()
+                  
                 }} />
-              <CheckRow
+              {/* <CheckRow
                 text='Check Data'
                 //iconName='your-icon-name'
                 _color='#000'
                 _value={this.state.check}
-                _onValueChange={() => { this._queryName() }} />
+                _onValueChange={() => { this._queryName() }} /> */}
             </ReactNativeSettingsPage>
           </Content>
           <Footer>
@@ -144,33 +137,43 @@ export default class Start extends React.Component {
       </SafeAreaView>
     );
   }
-  _querySessionLength = (qSessionBoolean, qBreakBoolean, qTutorialBoolean) => {
-    const output = {
-      "breakLength": qSessionBoolean, "sessionLength": qBreakBoolean,
-      "tuturial": qTutorialBoolean, "email": this.state.email
-    }
-    const options = { "upsert": false };
-    Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory,
-      'mongodb-atlas').db("SwellnessTest").collection("Session").updateOne({ "email": this.state.email },
-        output, options).then(this._querySessionLength())
+
+  _getInitialSettings(){
+    const collection = db.loadCollection('SwellnessTest', 'Users')
+    var data = 0 //default session length
+    var data2 =0 //default activity interval
+    collection.find({ email: this.state.email }, { limit: 1 }).asArray().then(result => {
+      result.forEach(element => { //getting their information from database based on email
+        data = element.defaultSessionLength
+        data2 = element.defaultActivityInterval
+        //console.log(data+", "+data2)
+        this.setState({sessionLength:data, activityInterval:data2})
+      })      
+    })
   }
-  _queryName = () => { //you will have to build queries like this using the methods ive created
-    const exerciesCollection = db.loadCollection("SwellnessTest", "Session");
-    var EXname = []; // array to transport names to state
-    //var EXinstructions = [];// array to transport instructions to state
-    exerciesCollection.find({}, { limit: 100 }).toArray().then(result => {
-      result.map(x => {
-        EXname.push(x.breakLength) //pushing names to EXname array
-        EXname.push(x.sessionLength) //pushing names to EXname array
-        EXname.push(x.tuturial) //pushing names to EXname array
-        //EXinstructions.push(x.instructions) //pushing instructions to EXinstructions array
+  _updateSettings (){ //finds usr obj, copies it, updates settings in copy, pushes copy to act as new usr profile thus "updating" the user
+    const collection = db.loadCollection('SwellnessTest', 'Users')
+    collection.find({ email: this.state.email }, { limit: 1 }).asArray().then(result => {
+      this.setState({usrObj:result[0]},()=>{
+        var usrCopy = this.state.usrObj;
+        delete usrCopy._id //removes the id key from object since we cant reuse the ID's
+        //console.log(usrCopy)
+        //console.log("usr length:"+usrCopy.defaultSessionLength)
+        usrCopy.defaultSessionLength = this.state.sessionLength//sets new session length in copy, dividing by 600 inside math ceil then multiplying 600 rounds it to the nearest 10 minutes give or take 
+        //console.log("new length:"+usrCopy.defaultSessionLength)
+        //console.log("usr interval:"+usrCopy.defaultActivityInterval)
+        usrCopy.defaultActivityInterval = this.state.activityInterval //sets new activity interval in copy
+       // console.log("new interval:"+usrCopy.defaultActivityInterval)
+        const options = { "upsert": false }; //options for updateone function
+        /////UPDATE ONE updates usr object with copy////////
+        Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Users").updateOne({ "email": this.state.email }, usrCopy, options).then(console.log("updated settings"))
+        this.props.navigation.navigate("SessionCreation"); //navigates if user is found ()
       })
-      console.log("EXname:", EXname); //shows EXname contains the names correctly
-      //console.log("EXinstructions:", EXinstructions); //shows EXname contains the names correctly
-      this.setState({ EXinstructions: EXinstructions, EXname: EXname }, () => {
-        console.log("state variable is set: ", this.state.EXname) //verifies state set correctly
-        //console.log("state variable  is set: ", this.state.EXinstructions) //^^^^
-      });
-    });
+    })
+    
+    
+
+
   }
+   
 }

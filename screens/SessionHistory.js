@@ -180,7 +180,7 @@ class SessionHistory extends React.Component {
   _query = () => {
     const collection = db.loadCollection('SwellnessTest', 'Session')
     var dbData = []
-    collection.find({ date: this.state.selectedStartDate }, { limit: 100 }).toArray().then(result => {
+    collection.find({ date: this.state.selectedStartDate }, { limit: 1 }).toArray().then(result => {
       result.map(x => console.log(x.date))
       result.forEach(element => {
         dbData.push(element)

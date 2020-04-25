@@ -107,12 +107,20 @@ class PostSession extends React.Component {
     var timeLeft = props.navigation.state.params.time;
     var startSecondsTotal = parseInt(startMin) * 60 + parseInt(startSec)
     var elapsedTime = startSecondsTotal - timeLeft
+    // console.log("start Min:"+startMin)
+    // console.log("start Sec:"+startSec)
+    // console.log("time Left:"+timeLeft)
+
     var hours = Math.floor(elapsedTime / 60 / 60);
     var minutes = Math.floor(elapsedTime / 60) - (hours * 60);
     var seconds = elapsedTime % 60;
     const formatted = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
-    console.log(formatted)
+    // console.log("time elapsed formatted:"+formatted)
     var pointsAwarded = Math.round(elapsedTime / 60);
+    //var pointsAwarded = 1;
+    // console.log("startSecondsTotal:"+startSecondsTotal)
+    // console.log("timeleft:"+timeLeft)
+
 
     //////////////////////////Regular People: This is taking a lot of mental energy, i should take a break Me: hAhA bRaiN go b00m////////////////////////////////////////////////    
 
@@ -120,10 +128,10 @@ class PostSession extends React.Component {
       id: undefined,
       email: undefined,
       steps: 20, //in the demo, take 10 steps
-      exercises: undefined,
+      exercises: 2,
       points: pointsAwarded,
       date: undefined,
-      timeElapsed: formatted
+      timeElapsed: formatted,
     };
   }
   componentDidMount() {
@@ -157,13 +165,14 @@ class PostSession extends React.Component {
         })
         ////////////////ADDS CURRENT POINTS + EARNED POINTS TO GET NEW TOTAL///////////////////
         newPoints = dbData + this.state.points;
+        console.log("earned points:"+this.state.points) 
         console.log("new points:" + newPoints)
       }).then(() => {
         ////////////PUSHES NEW TOTAL////////////////
         const output = { "email": id, "points": newPoints } //creates output object to update
         const options = { "upsert": false };
         Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Points").updateOne({ "email": this.state.email }, output, options).then(console.log("updated points"))
-      })
+      }) 
     })
   }
 
