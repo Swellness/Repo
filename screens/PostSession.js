@@ -134,11 +134,10 @@ class PostSession extends React.Component {
       timeElapsed: formatted,
     };
   }
-  componentDidMount() {
+  componentDidMount() {   
     // method to nuke session collection
-    // Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Session").deleteMany({steps:null})
-    // .then(result => console.log(`nuked`)) //db.collection selects a collection and insertOne inserts the document and logs if successful or failure
-    // .catch(err => console.error(`Failed to delete`))
+    // Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Session").deleteMany({})
+    // .then(result => console.log(`nuked`)) .catch(err => console.error(`Failed to delete`))
 
     var d = new Date().toLocaleDateString()
     var ID = Stitch.defaultAppClient.auth.user.id //gets STITCH/APPCLIENT/AUTHOBJECT/USER

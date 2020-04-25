@@ -78,9 +78,12 @@ class SessionHistory extends React.Component {
   }
 
   onDateChange(date) {
+    var formattedDate = date.format('MM/DD/YY').toString()
+    console.log(formattedDate,"selected")
+
 
     this.setState({
-      selectedStartDate: date.format('MM/DD/YY').toString()
+      selectedStartDate: formattedDate
     }, () => {
       this._query()
     })
@@ -115,8 +118,7 @@ class SessionHistory extends React.Component {
               />
               <View>
                 <Text style={styles.subText}>
-                  Tap on a Day to see its stats, or select the Month to view all
-                  your stats for that Month.
+                  Tap on a Day to see its stats
             </Text>
                 <Text>{startDate}</Text>
                 <Text>Steps: {this.state.data.map(x => (x.steps))}</Text>

@@ -144,7 +144,7 @@ this._setDefaultSessionTime()
         data = element.defaultSessionLength
         data2 = element.defaultActivityInterval
         this.setState({defaultSecondsS:data, defaultSecondsA:data2})
-        console.log(data+", "+data2)
+        //console.log(data+", "+data2)
       })
       var totalSeconds = data
       var hours = Math.floor(totalSeconds / 3600);
@@ -153,7 +153,6 @@ this._setDefaultSessionTime()
       this.setState({totalHours:hours.toString(), totalMins: minutes.toString()})
 
       var totalSecondsA = data2
-      console.log(data2)
       var minutes2 = Math.floor(totalSecondsA/60)
       this.setState({actFrequency:minutes2.toString()})
 
@@ -162,6 +161,11 @@ this._setDefaultSessionTime()
     })
   }
   start = () => {
+    console.log(this.state.totalHours)
+    console.log(this.state.totalMins)
+    console.log(this.state.actFrequency)
+
+
     this.props.navigation.navigate("ActiveSession", {
       hours: this.state.totalHours,
       minutes: this.state.totalMins,
