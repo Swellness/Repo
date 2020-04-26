@@ -8,7 +8,7 @@ import { createAppContainer } from 'react-navigation';
 import * as Font from 'expo-font'
 
 //Stack Screens
-import MainHub from "./screens/MainHub";
+import Logout from "./screens/Logout";
 import PostSession from "./screens/PostSession";
 import Activities from "./screens/Activities";
 import DailyHistory from "./screens/DailyHistory";
@@ -70,14 +70,12 @@ export default class App extends React.Component {
       </ScrollView>
     );
 
-    const LoginStack = createStackNavigator({
-      login: { screen: Login },
-      CreateUser: { screen: CreateUser },
-      ForgotPassUser: { screen: ForgotPassUser }
-    }, {
-      initialRouteName: 'login',
-      headerMode: 'none'
-    });
+    // const LoginStack = createStackNavigator({
+
+    // }, {
+    //   initialRouteName: 'login',
+    //   headerMode: 'none'
+    // });
 
     const SessionStack = createStackNavigator({
       SessionCreation: { screen: SessionCreation },
@@ -93,15 +91,18 @@ export default class App extends React.Component {
       Profile: { screen: Profile },
       Rewards: { screen: Rewards },
       Leaderboard: { screen: Leaderboard },
-      OrgAdminSuiteSettings: { screen: OrgAdminSuiteSettings },
       Settings: { screen: Settings },
       Activities: { screen: Activities, navigationOptions: { drawerLabel: () => null } },
       DailyHistory: { screen: DailyHistory, navigationOptions: { drawerLabel: () => null } },
-      LoginStack: { screen: LoginStack, navigationOptions: { drawerLabel: () => null } },
+      Login: { screen: Login, navigationOptions: { drawerLabel: () => null } },
+      CreateUser: { screen: CreateUser, navigationOptions: { drawerLabel: () => null } },
+      Logout: { screen: Logout },
+      ForgotPassUser: { screen: ForgotPassUser, navigationOptions: { drawerLabel: () => null } },
+      //LoginStack: { screen: LoginStack, navigationOptions: { drawerLabel: () => null } },
       SessionStack: { screen: SessionStack, navigationOptions: { drawerLabel: () => null } },
       SessionHistory: { screen: SessionHistory, navigationOptions: { drawerLabel: () => null } },
     }, {
-      initialRouteName: 'LoginStack',
+      initialRouteName: 'Login',
       drawerPosition: "right"
     });
 

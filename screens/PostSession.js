@@ -89,6 +89,14 @@ const styles = StyleSheet.create({
     height: 55,
     left: 75,
     top: 474
+  },
+  view: {
+    marginHorizontal: 20,
+    backgroundColor: "#cfcac8",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    paddingBottom: 10
   }
 });
 import { Stitch, RemoteMongoClient, UserPasswordCredential, UserPasswordAuthProviderClient } from 'mongodb-stitch-react-native-sdk';
@@ -102,16 +110,19 @@ class PostSession extends React.Component {
 
     super(props);
     //////////this is a bunch of BS we wouldnt need if we had decided to use time objects rather than f#cking strings for keeping track of time///
+    var startHour = props.navigation.state.params.startHour;
     var startMin = props.navigation.state.params.startMin;
-    var startSec = props.navigation.state.params.startSec;
     var timeLeft = props.navigation.state.params.time;
-    var startSecondsTotal = parseInt(startMin) * 60 + parseInt(startSec)
-    var elapsedTime = startSecondsTotal - timeLeft
-    var hours = Math.floor(elapsedTime / 60 / 60);
-    var minutes = Math.floor(elapsedTime / 60) - (hours * 60);
-    var seconds = elapsedTime % 60;
-    const formatted = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
-    console.log(formatted)
+    var startMinTotal = parseInt(startHour) * 60 + parseInt(startMin);
+    var elapsedTime = startMinTotal - timeLeft;
+    //var hours = Math.floor(elapsedTime / 60 / 60);
+    var hours = Math.floor(elapsedTime / 60);
+    var minutes = (elapsedTime % 60) - 1;
+    // if (minutes == -1) {
+    //   minutes = 0;
+    // }
+    const formatted = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+    console.log(formatted);
     var pointsAwarded = Math.round(elapsedTime / 60);
 
     //////////////////////////Regular People: This is taking a lot of mental energy, i should take a break Me: hAhA bRaiN go b00m////////////////////////////////////////////////    
@@ -192,12 +203,15 @@ class PostSession extends React.Component {
             <Text style={styles.text}> Session Length: {this.state.timeElapsed}</Text>
             <Text style={styles.text}> Daily Challenge: </Text>
             <Text style={styles.text2}> 4/4 Activities </Text>
-            <View style={styles.container2}>
+            <View style={styles.view}>
               <Text style={styles.text3}> Steps Taken: {this.state.steps} </Text>
               <Text style={styles.text4}> Exercises Completed: 4</Text>
               <Text style={styles.text5}> Points Earned: {this.state.points}</Text>
 
             </View>
+            <Button style={{ alignSelf: "center", marginTop: 10, marginBottom: 10, justifyContent: "center" }} transparent onPress={() => this.props.navigation.navigate("SessionCreation")}>
+              <Text style={{ color: "blue" }}>Create a new Session</Text>
+            </Button>
             {/* <TouchableOpacity //seems unncessary plus its formatted poorly
               style={styles.button}
               onPress={() => this.props.navigation.navigate("SessionCreation")}
@@ -210,17 +224,17 @@ class PostSession extends React.Component {
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >
-                <Icon name="calendar" style={{ color: "#000" }} />
+                <Icon name="calendar" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("ActiveSession")}
               >
-                <Icon active name="stopwatch" style={{ color: "#000" }} />
+                <Icon active name="stopwatch" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("Activities")}
               >
-                <Icon name="heart" style={{ color: "#000" }} />
+                <Icon name="heart" style={{ color: "#fff" }} />
               </Button>
             </FooterTab>
           </Footer>

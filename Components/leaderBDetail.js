@@ -1,5 +1,7 @@
 import React from 'react';
 import Leaderboard from 'react-native-leaderboard';
+const screen = Dimensions.get("window");
+import { Dimensions } from "react-native";
 import { Container, Header, Content, Button, Text } from 'native-base';
 //...
 const db = require('../util/dbAPI')
@@ -19,17 +21,19 @@ class leaderBDetail extends React.Component {
 
     render() {
         return (
-            <Container style={{ alignItems: "center" }}>
-                <Button style={{ marginTop: 10, marginBottom: 10, width: 125, justifyContent: "center" }} onPress={() => { this._query() }}>
-                    <Text>Refresh</Text>
-                </Button>
+            <Container style={{ alignItems: "center", height: screen.height - 120 }}>
+                <Text style={{ fontSize: 26, marginVertical: 20 }}>Top Employees of the Month</Text>
+
                 <Leaderboard
                     data={this.state.data}
                     sortBy='points'
-                    labelBy='email'
+                    labelBy='fullname'
                     evenRowColor='#f2f5f7'
                     oddRowColor='white'
                 />
+                <Button style={{ marginTop: 10, marginBottom: 10, width: 125, justifyContent: "center" }} transparent onPress={() => { this._query() }}>
+                    <Text style={{ color: "blue" }}>Refresh</Text>
+                </Button>
             </Container>
 
 
