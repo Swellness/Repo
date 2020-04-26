@@ -21,8 +21,6 @@ import Rewards from '../Components/rewardList';
 import { Stitch } from 'mongodb-stitch-react-native-sdk';
 const db = require('../util/dbAPI')
 
-
-
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "blue",
@@ -84,14 +82,12 @@ export default class Start extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar hidden={true} translucent={true} />
         <Container>
-
           <Header>
             <Left>
               <Button transparent onPress={() => this.props.navigation.goBack()}>
                 <Icon name='arrow-back' />
               </Button>
             </Left>
-
             <Body>
               <Title>Rewards</Title>
             </Body>

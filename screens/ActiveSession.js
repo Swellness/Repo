@@ -30,17 +30,15 @@ import moment from 'moment';
 const screen = Dimensions.get("window");
 const styles = StyleSheet.create({
   button: {
-    borderColor: "black",
-    //borderWidth: 1,
     borderRadius: 12,
-    color: "white",
-    fontSize: 24,
-    fontWeight: "bold",
     overflow: "hidden",
     padding: 5,
     textAlign: "center",
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: screen.width / 2,
+    height: 75,
+    marginVertical: 10
   },
   container: {
     flex: 1,
@@ -49,17 +47,19 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   buttonText: {
-    fontSize: 45,
-    color: "blue"
+    color: "white",
+    fontSize: 24,
+    fontWeight: "bold",
   },
   progress: {
-    marginVertical: 50
+    marginVertical: 25
   },
   centerObj: {
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center"
-  }
+  },
+
 });
 const formatNumber = number => `0${number}`.slice(-2);
 const getRemaining = time => {
@@ -74,6 +74,17 @@ const showAlert = () => {
     [
       { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
       { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+      { text: 'OK', onPress: () => console.log("Still needs navigation") },
+    ],
+    // { cancelable: false }
+  )
+}
+const showEndAlert = () => {
+  Alert.alert(
+    'Your session is over.',
+    'Great job today!',
+    [
+      { text: 'Go to Post Session', onPress: () => console.log('Ask me later pressed') },
       { text: 'OK', onPress: () => console.log("Still needs navigation") },
     ],
     // { cancelable: false }
@@ -104,17 +115,22 @@ export default class Start extends React.Component {
     selectedM: this.props.navigation.getParam("minutes"),
     selectedF: this.props.navigation.getParam("actFreq"),
     initial: 0,
-    inc: 0
+    inc: 0,
+    time: "",
   };
 
   interval = null;
 
   componentDidMount() {
     this.start()
+    var date = moment()
+      // .utcOffset('+05:30')
+      .format(' hh:mm a');
+    this.setState({ time: date });
   }
 
   componentDidUpdate(prevProp, prevState) {
-    if (this.state.remainingTime === 0 && prevState.remainingTime !== 0) {
+    if (this.state.remainingTime === -1 && prevState.remainingTime !== -1) {
       this.stop();
     }
   }
@@ -162,7 +178,8 @@ export default class Start extends React.Component {
     this.setState({
       isRunning: false
 
-    });
+    })
+    console.log("stop")
   };
 
   inc = () => {
@@ -216,7 +233,7 @@ export default class Start extends React.Component {
           <Content>
             <View style={styles.centerObj}>
               <Progress.Circle
-                size={200}
+                size={300}
                 progress={progress}
                 style={styles.progress}
                 thickness={10}
@@ -227,23 +244,28 @@ export default class Start extends React.Component {
                 }}
               />
             </View>
+            <View style={styles.centerObj}>
+              <Text style={{ fontSize: 30 }}>Session Started at: </Text>
+              <Text style={{ fontSize: 30 }}>{this.state.time}</Text>
+            </View>
             <View style={styles.container}>
-              <Button rounded
+              <Button rounded style={styles.button}
                 onPress={() => this.props.navigation.navigate("Break")}
               >
-                <Text style={styles.button}>Take a Break</Text>
+                <Text style={styles.buttonText}>Take a Break</Text>
               </Button>
 
-              <Button rounded
-                onPress={() => this.props.navigation.navigate("PostSession")}
-              >
-                <Text style={styles.button}>End Session</Text>
-              </Button>
+              <Button rounded style={styles.button}
+                onPress={() => {
+                  // console.log("active sesh mins:"+this.state.selectedMinutes)
+                  // console.log("active sesh sec:"+this.state.selectedSeconds)
+                  this.stop()
+                  this.props.navigation.navigate("PostSession", { time: this.state.remainingTime, startHour: this.state.selectedH, startMin: this.state.selectedM })
+                }
 
-              <Button rounded
-                onPress={() => this.props.navigation.navigate("SessionCreation")}
+                }
               >
-                <Text style={styles.button}>Session</Text>
+                <Text style={styles.buttonText}>End Session</Text>
               </Button>
             </View>
           </Content>

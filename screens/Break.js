@@ -7,7 +7,8 @@ import {
   StyleSheet,
   onPress,
   Text,
-  Image
+  Image,
+  Dimensions
 } from "react-native";
 import {
   Container,
@@ -24,20 +25,19 @@ import {
 } from "native-base";
 import moment from 'moment';
 import CountDown from 'react-native-countdown-component';
+const screen = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   button: {
-    borderColor: "white",
-    borderWidth: 1,
     borderRadius: 12,
-    color: "white",
-    fontSize: 24,
-    fontWeight: "bold",
     overflow: "hidden",
     padding: 5,
     textAlign: "center",
     justifyContent: 'center',
     alignItems: 'center',
+    width: screen.width / 2,
+    height: 75,
+    marginVertical: 10
   },
   color: {
     backgroundColor: "blue"
@@ -45,7 +45,32 @@ const styles = StyleSheet.create({
   textDisplay: {
     fontSize: 30,
     textAlign: "center",
-    color: "black"
+    color: "black",
+    marginTop: 5
+  },
+  time: {
+    fontSize: 18,
+    textAlign: "center",
+    color: "black",
+    marginTop: 5
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  centerObj: {
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center"
+  },
+  view: {
+    marginHorizontal: 20,
+    backgroundColor: "#cfcac8",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    paddingBottom: 10
   }
 });
 
@@ -96,6 +121,7 @@ export default class Start extends React.Component {
             <View style={{
               justifyContent: 'center',
               alignItems: 'center',
+              marginVertical: 15
             }}>
               <Image
                 source={require('../Pictures/breakPic.png')}
@@ -118,67 +144,42 @@ export default class Start extends React.Component {
                 showSeparator
               />
 
-              <Text style={{ fontSize: 30 }}>Current Time: {this.state.time}</Text>
+              <Text style={{ fontSize: 18 }}>Break started at:{this.state.time}</Text>
             </View>
 
-            <Button
-              onPress={() => this.props.navigation.navigate("ActiveSession")}
-            >
-              <Text style={styles.button}>End Break</Text>
-            </Button>
-
-            {/* <Button
-            onPress={() => this.props.navigation.navigate("SideBar")}
-          >
-            <Text style={styles.button}>Side Menu</Text>
-          </Button> */}
-
-            {/* <Button
-            onPress={() => this.props.navigation.navigate("SessionCreation")}
-          >
-            <Text style={styles.button}>Session</Text>
-          </Button> */}
-            <View style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
+            <View style={styles.view}>
               <Text style={styles.textDisplay}>Daily Challenges</Text>
               <Text >2/4 Activities complted for today</Text>
               <Text >You still have 2 challenges remaining </Text>
               <Text style={styles.textDisplay}>Current Stats</Text>
-              <Text>Steps Taken: 428</Text>
+              <Text>Steps Taken: 10</Text>
               <Text>Total Exercises Completed: 2</Text>
-              <Text>Points Earned: 23</Text>
-
+              <Text>Points Earned: 15</Text>
             </View>
-            {/* <Button
-            onPress={() => this.props.navigation.navigate("SessionHistory")}
-          >
-            <Text style={styles.button}>History</Text>
-          </Button> */}
-
-            <Button
-              onPress={() => this.props.navigation.navigate("Activities")}
-            >
-              <Text style={styles.button}>Activities</Text>
-            </Button>
+            <View style={styles.centerObj}>
+              <Button style={styles.button}
+                onPress={() => this.props.navigation.navigate("ActiveSession")}
+              >
+                <Text style={styles.buttonText}>End Break</Text>
+              </Button>
+            </View>
           </Content>
           <Footer>
             <FooterTab>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >
-                <Icon name="calendar" style={{ color: "#000" }} />
+                <Icon name="calendar" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("ActiveSession")}
               >
-                <Icon active name="stopwatch" style={{ color: "#000" }} />
+                <Icon active name="stopwatch" style={{ color: "#fff" }} />
               </Button>
               <Button
                 onPress={() => this.props.navigation.navigate("Activities")}
               >
-                <Icon name="heart" style={{ color: "#000" }} />
+                <Icon name="heart" style={{ color: "#fff" }} />
               </Button>
             </FooterTab>
           </Footer>

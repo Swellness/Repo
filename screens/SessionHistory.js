@@ -75,13 +75,15 @@ class SessionHistory extends React.Component {
 
     this.onDateChange = this.onDateChange.bind(this);
     this._query = this._query.bind(this);
-    //this._display = this._display.bind(this);
   }
 
   onDateChange(date) {
+    var formattedDate = date.format('MM/DD/YY').toString()
+    console.log(formattedDate, "selected")
+
 
     this.setState({
-      selectedStartDate: date.format('MM/DD/YY').toString()
+      selectedStartDate: formattedDate
     }, () => {
       this._query()
     })
@@ -116,15 +118,12 @@ class SessionHistory extends React.Component {
               />
               <View>
                 <Text style={styles.subText}>
-                  Tap on a Day to see its stats, or select the Month to view all
-                  your stats for that Month.
+                  Tap on a Day to see its stats
             </Text>
                 <Text>{startDate}</Text>
                 <Text>Steps: {this.state.data.map(x => (x.steps))}</Text>
                 <Text>Exercises: {this.state.data.map(x => (x.exercises))}</Text>
                 <Text>Points Earned: {this.state.data.map(x => (x.points))}</Text>
-
-
               </View>
 
             </View>
@@ -180,10 +179,10 @@ class SessionHistory extends React.Component {
     );
   }
 
-  _query = () => { //you will have to build queries like this using the methods ive created
+  _query = () => {
     const collection = db.loadCollection('SwellnessTest', 'Session')
     var dbData = []
-    collection.find({ date: this.state.selectedStartDate }, { limit: 100 }).toArray().then(result => {
+    collection.find({ date: this.state.selectedStartDate }, { limit: 1 }).toArray().then(result => {
       result.map(x => console.log(x.date))
       result.forEach(element => {
         dbData.push(element)
@@ -193,8 +192,8 @@ class SessionHistory extends React.Component {
         })
       });
     });
-
   }
+
 
 }
 export default SessionHistory;

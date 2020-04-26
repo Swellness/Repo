@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   editText: {
-    fontWeight: "normal"
+    fontWeight: "100"
 
   }
 });
@@ -54,17 +54,19 @@ export default class Start extends React.Component {
       edit: false,
       nFname: "",
       nLname: "",
-      usrObj: ""
+      usrObj: "",
+      sLength: "",
+      actInterval: "",
+      tutorial: undefined
     };
     this._query = this._query.bind(this);
     this._editable = this._editable.bind(this);
     this._nonEditable = this._nonEditable.bind(this);
-
-
   }
   componentDidMount() {
     this._query()
   }
+
   render() {
     return (
       <Container>
@@ -125,20 +127,20 @@ export default class Start extends React.Component {
       </Container>
     );
   }
-  _query = () => { //you will have to build queries like this using the methods ive created
+  _query = () => { //queries DB for user information
     const collection = db.loadCollection('SwellnessTest', 'Users')
 
     var id = Stitch.defaultAppClient.auth.user.profile.email;
     // var dbData = []
     collection.find({ email: id }, { limit: 100 }).toArray().then(result => {
       result.map(x => {
-        this.setState({ username: x.username, fName: x.fName, lName: x.lName, email: x.email, usrObj: x._id })
+        this.setState({ username: x.username, fName: x.fName, lName: x.lName, email: x.email, sLength: x.defaultSessionLength, actInterval: x.defaultActivityInterval, usrObj: x._id, tutorial: x.tutorial })
       })
     });
   }
 
   _update = (fName, lName) => {
-    const output = { "username": this.state.username, "fName": fName, "lName": lName, "email": this.state.email }
+    const output = { "username": this.state.username, "fName": fName, "lName": lName, "email": this.state.email, "defaultSessionLength": this.state.sLength, "defaultActivityInterval": this.state.actInterval, "tutorial": this.state.tutorial }
     const options = { "upsert": false };
     Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Users").updateOne({ "email": this.state.email }, output, options).then(this._query())
   }
@@ -175,7 +177,7 @@ export default class Start extends React.Component {
 
           }}
         >
-          <Text>Save</Text>
+          <Text>Edit</Text>
 
         </Button>
       </View>
@@ -199,7 +201,7 @@ export default class Start extends React.Component {
 
       <Item stackedLabel last>
         <Label>Email:</Label>
-        <Input disabled style={styles.editText} placeholder={this.state.email} />
+        <Input disabled placeholder={this.state.email} />
       </Item>
 
       {/* button can be removed below */}
