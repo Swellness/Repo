@@ -29,7 +29,7 @@ import {
 
 const screen = Dimensions.get("window");
 const db = require('../util/dbAPI')
-import { Stitch} from 'mongodb-stitch-react-native-sdk';
+import { Stitch } from 'mongodb-stitch-react-native-sdk';
 
 const styles = StyleSheet.create({
   button: {
@@ -115,57 +115,63 @@ const AVAILABLE_MINUTES = createArray(60);
 
 
 export default class Start extends React.Component {
-constructor(props){
-  super(props)
+  constructor(props) {
+    super(props)
 
-  this.state = {
-    defaultSecondsS:0,
-    defaultSecondsA:0,
-    totalHours: 8,
-    totalMins: 0,
-    actFrequency: 30,
-  };
-  this._setDefaultSessionTime = this._setDefaultSessionTime.bind(this);
-}
-  
-
-  componentDidMount(){ //insert pull logic here
-this._setDefaultSessionTime()
-  
+    this.state = {
+      defaultSecondsS: 0,
+      defaultSecondsA: 0,
+      totalHours: 8,
+      totalMins: 0,
+      actFrequency: 30,
+      tutorial: undefined
+    };
+    this._pullSettings = this._pullSettings.bind(this);
   }
 
-  _setDefaultSessionTime() {
+ 
+  componentDidMount() { //insert pull logic here
+    this._pullSettings()
+  }
+
+  _pullSettings() { //sets default session times and looks for tutorial
     const collection = db.loadCollection('SwellnessTest', 'Users')
     var user = Stitch.defaultAppClient.auth.user.profile.email
     var data = 0
-    var data2 =0
+    var data2 = 0
+    var tut = undefined;
     collection.find({ email: user }, { limit: 1 }).asArray().then(result => {
       result.forEach(element => {
         data = element.defaultSessionLength
         data2 = element.defaultActivityInterval
-        this.setState({defaultSecondsS:data, defaultSecondsA:data2})
+        tut = element.tutorial
+        this.setState({ defaultSecondsS: data, defaultSecondsA: data2 })
         //console.log(data+", "+data2)
+      })
+      this.setState({ tutorial: tut }, () => {
+        if (this.state.tutorial) {
+          console.log("showing tutorial")
+          this.showTutorial()
+        }
       })
       var totalSeconds = data
       var hours = Math.floor(totalSeconds / 3600);
       totalSeconds %= 3600;
       var minutes = Math.floor(totalSeconds / 60);
-      this.setState({totalHours:hours.toString(), totalMins: minutes.toString()})
+      this.setState({ totalHours: hours.toString(), totalMins: minutes.toString() })
 
       var totalSecondsA = data2
-      var minutes2 = Math.floor(totalSecondsA/60)
-      this.setState({actFrequency:minutes2.toString()})
+      var minutes2 = Math.floor(totalSecondsA / 60)
+      this.setState({ actFrequency: minutes2.toString() })
 
 
-      
+
     })
   }
   start = () => {
     console.log(this.state.totalHours)
     console.log(this.state.totalMins)
     console.log(this.state.actFrequency)
-
-
     this.props.navigation.navigate("ActiveSession", {
       hours: this.state.totalHours,
       minutes: this.state.totalMins,
@@ -173,11 +179,27 @@ this._setDefaultSessionTime()
     })
   };
 
+  showTutorial = () => {
+    Alert.alert(
+      'Sample Tutorial Alert!',
+      'Other stuff here.',
+      [
+        { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
+        { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        { text: 'OK', onPress: () => console.log("Still needs navigation") },
+      ],
+      // { cancelable: false }
+    )
+  }
+
   render() {
+
+
+
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar hidden={true} translucent={true} />
-       
+
         <Container>
           <Header>
             <Left />
@@ -191,7 +213,7 @@ this._setDefaultSessionTime()
             </Right>
           </Header>
           <Content>
-          <Button style={{ alignSelf: "center", marginTop: 10, marginBottom: 10, width: 125, justifyContent: "center" }} onPress={() => { this.componentDidMount() }}>
+            <Button style={{ alignSelf: "center", marginTop: 10, marginBottom: 10, width: 125, justifyContent: "center" }} onPress={() => { this.componentDidMount() }}>
               <Text style={{ color: "white" }}>Refresh</Text>
             </Button>
             <Image

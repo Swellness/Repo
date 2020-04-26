@@ -29,7 +29,7 @@ export default class Start extends React.Component {
       updateName: "",
       sessionLength: 0,
       activityInterval: 0,
-      qTutorialBoolean: false,
+      tutorial: false,
       check: false,
       email: Stitch.defaultAppClient.auth.user.profile.email,
       usrObj: undefined
@@ -97,8 +97,8 @@ export default class Start extends React.Component {
               </SectionRow>
               <SwitchRow
                 text='Tutorial'
-                _value={this.state.qTutorialBoolean}
-                _onValueChange={() => { this.setState({ qTutorialBoolean: !this.state.qTutorialBoolean }) }} />
+                _value={this.state.tutorial}
+                _onValueChange={() => { this.setState({ tutorial: !this.state.tutorial }) }} />
               <CheckRow
                 text='Finalize Settings'
                 _color='#000'
@@ -141,13 +141,15 @@ export default class Start extends React.Component {
   _getInitialSettings(){
     const collection = db.loadCollection('SwellnessTest', 'Users')
     var data = 0 //default session length
-    var data2 =0 //default activity interval
+    var data2 =0 //default activity interval 
+    var tut = undefined //default tutorial
     collection.find({ email: this.state.email }, { limit: 1 }).asArray().then(result => {
       result.forEach(element => { //getting their information from database based on email
         data = element.defaultSessionLength
         data2 = element.defaultActivityInterval
+        tut = element.tutorial
         //console.log(data+", "+data2)
-        this.setState({sessionLength:data, activityInterval:data2})
+        this.setState({sessionLength:data, activityInterval:data2, tutorial:tut})
       })      
     })
   }
@@ -164,6 +166,7 @@ export default class Start extends React.Component {
         //console.log("usr interval:"+usrCopy.defaultActivityInterval)
         usrCopy.defaultActivityInterval = this.state.activityInterval //sets new activity interval in copy
        // console.log("new interval:"+usrCopy.defaultActivityInterval)
+       usrCopy.tutorial = this.state.tutorial
         const options = { "upsert": false }; //options for updateone function
         /////UPDATE ONE updates usr object with copy////////
         Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Users").updateOne({ "email": this.state.email }, usrCopy, options).then(console.log("updated settings"))
