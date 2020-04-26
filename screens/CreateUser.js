@@ -122,7 +122,7 @@ export default class Start extends React.Component {
 
           const input = { "username": username, "fname": fname, "lname": lname, "email": email, defaultSessionLength:28800, defaultActivityInterval:1800, tutorial:true} //session length in seconds
           db.addData("SwellnessTest", "Users", input)
-          const input2 = { "email": email, "points": 0 }
+          const input2 = { "email": email, "points": 0,  "fullname": fname+" "+lname }
           db.addData("SwellnessTest", "Points", input2)
 
           db.logout() //logs off admin

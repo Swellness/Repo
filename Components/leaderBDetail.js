@@ -26,7 +26,7 @@ class leaderBDetail extends React.Component {
                 <Leaderboard
                     data={this.state.data}
                     sortBy='points'
-                    labelBy='email'
+                    labelBy='fullname'
                     evenRowColor='#f2f5f7'
                     oddRowColor='white'
                 />

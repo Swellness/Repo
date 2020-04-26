@@ -160,7 +160,7 @@ class PostSession extends React.Component {
       collection.find({ email: id }, { limit: 10 }).asArray().then(result => {
         result.forEach(element => {
           dbData = element.points
-          console.log("existing points:" + dbData)
+
         })
         ////////////////ADDS CURRENT POINTS + EARNED POINTS TO GET NEW TOTAL///////////////////
         newPoints = dbData + this.state.points;
@@ -168,7 +168,7 @@ class PostSession extends React.Component {
         console.log("new points:" + newPoints)
       }).then(() => {
         ////////////PUSHES NEW TOTAL////////////////
-        const output = { "email": id, "points": newPoints } //creates output object to update
+        const output = { "email": id, "points": newPoints} //creates output object to update
         const options = { "upsert": false };
         Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Points").updateOne({ "email": this.state.email }, output, options).then(console.log("updated points"))
       }) 
