@@ -126,14 +126,15 @@ export default class Start extends React.Component {
           db.addData("SwellnessTest", "Points", input2)
 
           db.logout() //logs off admin
-
+          db.login(email, password) //logs in as new user
+          console.log("logged in as ", username)
           this.props.navigation.navigate("SessionCreation")
 
-          Alert.alert(
-            'User Created Successfully',
-            "You are now logged in",
-            [{ text: 'OK' }]
-          );
+          // Alert.alert( //doesnt work when tutorial alert triggers at the same time
+          //   'User Created Successfully',
+          //   "You are now logged in",
+          //   [{ text: 'OK' }]
+          // );
         }
       }
       else {

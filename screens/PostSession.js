@@ -165,6 +165,7 @@ class PostSession extends React.Component {
       collection.find({ email: id }, { limit: 10 }).asArray().then(result => {
         result.forEach(element => {
           fullname = element.fullname
+          console.log(fullname)
           dbData = element.points
           console.log("existing points:" + dbData)
         })
