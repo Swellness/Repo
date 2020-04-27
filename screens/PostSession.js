@@ -159,19 +159,22 @@ class PostSession extends React.Component {
       var dbData = 0;
       var newPoints = 0
       var id = Stitch.defaultAppClient.auth.user.profile.email;
+      var fullname = ""
 
       ////////GETS CURRENT POINTS///////
       collection.find({ email: id }, { limit: 10 }).asArray().then(result => {
         result.forEach(element => {
+          fullname = element.fullname
           dbData = element.points
           console.log("existing points:" + dbData)
         })
+        console.log("fullname:"+fullname)
         ////////////////ADDS CURRENT POINTS + EARNED POINTS TO GET NEW TOTAL///////////////////
         newPoints = dbData + this.state.points;
         console.log("new points:" + newPoints)
       }).then(() => {
         ////////////PUSHES NEW TOTAL////////////////
-        const output = { "email": id, "points": newPoints } //creates output object to update
+        const output = { "email": id, "points": newPoints, "fullname":fullname } //creates output object to update
         const options = { "upsert": false };
         Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Points").updateOne({ "email": this.state.email }, output, options).then(console.log("updated points"))
       })
@@ -202,7 +205,7 @@ class PostSession extends React.Component {
             <Text style={styles.headerText}>Good job today!!</Text>
             <Text style={styles.text}> Session Length: {this.state.timeElapsed}</Text>
             <Text style={styles.text}> Daily Challenge: </Text>
-            <Text style={styles.text2}> 4/4 Activities </Text>
+            <Text style={styles.text2}> 2/4 Activities </Text>
             <View style={styles.view}>
               <Text style={styles.text3}> Steps Taken: {this.state.steps} </Text>
               <Text style={styles.text4}> Exercises Completed: 4</Text>
