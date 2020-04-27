@@ -30,6 +30,7 @@ import moment from 'moment';
 const screen = Dimensions.get("window");
 const styles = StyleSheet.create({
   button: {
+    backgroundColor: "#647bec",
     borderRadius: 12,
     overflow: "hidden",
     padding: 5,
@@ -52,12 +53,21 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   progress: {
-    marginVertical: 25
+    marginVertical: 25,
+    color: "#647bec"
   },
   centerObj: {
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center"
+  },
+  headerStyle: {
+    backgroundColor: "white",
+    elevation: 0,
+    shadowColor: "white",
+    shadowOpacity: 0,
+    shadowOffset: { height: 0, width: 0 },
+    shadowRadius: 0
   },
 
 });
@@ -67,29 +77,6 @@ const getRemaining = time => {
   const seconds = time - minutes * 60;
   return { minutes: formatNumber(minutes), seconds: formatNumber(seconds) };
 };
-const showAlert = () => {
-  Alert.alert(
-    'Activity Time!',
-    'Time to get up and do an activity.',
-    [
-      { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
-      { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-      { text: 'OK', onPress: () => console.log("Still needs navigation") },
-    ],
-    // { cancelable: false }
-  )
-}
-const showEndAlert = () => {
-  Alert.alert(
-    'Your session is over.',
-    'Great job today!',
-    [
-      { text: 'Go to Post Session', onPress: () => console.log('Ask me later pressed') },
-      { text: 'OK', onPress: () => console.log("Still needs navigation") },
-    ],
-    // { cancelable: false }
-  )
-}
 const createArray = length => {
   const arr = [];
   let i = 0;
@@ -131,7 +118,7 @@ export default class Start extends React.Component {
 
   componentDidUpdate(prevProp, prevState) {
     if (this.state.remainingTime === -1 && prevState.remainingTime !== -1) {
-      this.stop();
+      this.showEndAlert();
     }
   }
 
@@ -140,6 +127,42 @@ export default class Start extends React.Component {
       clearInterval(this.interval);
     }
   }
+
+  showAlert = () => {
+    Alert.alert(
+      'Activity Time!',
+      'Time to get up and do an activity.',
+      [
+        { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
+        { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        { text: 'OK', onPress: () => this.props.navigation.navigate("Activities") },
+      ],
+      { cancelable: false }
+    )
+  }
+  showEndAlert = () => {
+    Alert.alert(
+      'Your session is over.',
+      'Great job today!',
+      [
+        { text: 'Go to Post Session', onPress: () => this.stop() },
+        { text: 'OK', onPress: () => console.log('Ok') },
+      ],
+      // { cancelable: false }
+    )
+  }
+  selectEndAlert = () => {
+    Alert.alert(
+      'End Session',
+      'Are you sure you want to end your session early?',
+      [
+        { text: 'Yes', onPress: () => this.stop() },
+        { text: 'Cancel', onPress: () => console.log('Ok') },
+      ],
+      // { cancelable: false }
+    )
+  }
+
 
   start = () => {
     this.setState(state => ({
@@ -160,7 +183,7 @@ export default class Start extends React.Component {
       }));
       if (this.state.initial == 1) {
         if (this.state.remainingMins % this.state.selectedF === 0) {
-          showAlert()
+          this.showAlert()
         }
       } else {
         this.setState({
@@ -180,6 +203,7 @@ export default class Start extends React.Component {
 
     })
     console.log("stop")
+    this.props.navigation.navigate("PostSession", { time: this.state.remainingTime, startHour: this.state.selectedH, startMin: this.state.selectedM })
   };
 
   inc = () => {
@@ -215,18 +239,18 @@ export default class Start extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar hidden={true} translucent={true} />
         <Container>
-          <Header>
+          <Header style={styles.headerStyle}>
             <Left>
               <Button transparent onPress={() => this.props.navigation.goBack()}>
-                <Icon name='arrow-back' />
+                <Icon style={{ color: "black" }} name='arrow-back' />
               </Button>
             </Left>
             <Body>
-              <Title>Session</Title>
+              <Title style={{ color: "black" }} >Session</Title>
             </Body>
             <Right>
               <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-                <Icon name='menu' />
+                <Icon style={{ color: "black" }} name='menu' />
               </Button>
             </Right>
           </Header>
@@ -256,21 +280,14 @@ export default class Start extends React.Component {
               </Button>
 
               <Button rounded style={styles.button}
-                onPress={() => {
-                  // console.log("active sesh mins:"+this.state.selectedMinutes)
-                  // console.log("active sesh sec:"+this.state.selectedSeconds)
-                  this.stop()
-                  this.props.navigation.navigate("PostSession", { time: this.state.remainingTime, startHour: this.state.selectedH, startMin: this.state.selectedM })
-                }
-
-                }
+                onPress={() => this.selectEndAlert()}
               >
                 <Text style={styles.buttonText}>End Session</Text>
               </Button>
             </View>
           </Content>
           <Footer>
-            <FooterTab style={{}}>
+            <FooterTab style={{ backgroundColor: "#647bec" }}>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >

@@ -64,6 +64,24 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
   },
+  headerStyle: {
+    backgroundColor: "white",
+    elevation: 0,
+    shadowColor: "white",
+    shadowOpacity: 0,
+    shadowOffset: { height: 0, width: 0 },
+    shadowRadius: 0
+  },
+  bottomText: {
+    fontSize: 32,
+    marginLeft: 10
+  },
+  view: {
+    marginHorizontal: 20,
+    backgroundColor: "#dddddd",
+    paddingBottom: 20,
+    borderRadius: 10,
+  },
 });
 class SessionHistory extends React.Component {
   constructor(props) {
@@ -96,18 +114,18 @@ class SessionHistory extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar hidden={true} translucent={true} />
         <Container>
-          <Header>
+          <Header style={styles.headerStyle}>
             <Left>
               <Button transparent onPress={() => this.props.navigation.goBack()}>
-                <Icon name="arrow-back" />
+                <Icon style={{ color: "black" }} name="arrow-back" />
               </Button>
             </Left>
             <Body>
-              <Title>History</Title>
+              <Title style={{ color: "black" }} >History</Title>
             </Body>
             <Right>
               <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-                <Icon name="menu" />
+                <Icon style={{ color: "black" }} name="menu" />
               </Button>
             </Right>
           </Header>
@@ -120,43 +138,20 @@ class SessionHistory extends React.Component {
                 <Text style={styles.subText}>
                   Tap on a Day to see its stats
             </Text>
-                <Text>{startDate}</Text>
-                <Text>Steps: {this.state.data.map(x => (x.steps))}</Text>
-                <Text>Exercises: {this.state.data.map(x => (x.exercises))}</Text>
-                <Text>Points Earned: {this.state.data.map(x => (x.points))}</Text>
+                <View style={styles.view}>
+                  <Text style={{ marginLeft: 5, marginTop: 5 }}>{startDate}</Text>
+                  <Text style={styles.bottomText}>Steps: {this.state.data.map(x => (x.steps))}</Text>
+                  <Text style={styles.bottomText}>Exercises: {this.state.data.map(x => (x.exercises))}</Text>
+                  <Text style={styles.bottomText}>Points Earned: {this.state.data.map(x => (x.points))}</Text>
+                </View>
               </View>
 
             </View>
-            {/* //////////////////BUTTONS/////////// */}
-            {/* <Button
-            onPress={() => this.props.navigation.navigate("SideBar")}
-          >
-            <Text style={styles.button}>Side Menu</Text>
-          </Button>
-            <Button
-              onPress={() => this.props.navigation.navigate("SessionCreation")}
-            >
-              <Text style={styles.button}>Session</Text>
-            </Button>
-            <Button onPress={() => this.props.navigation.navigate("Activities")}>
-              <Text style={styles.button}>Activities</Text>
-            </Button>
-            <Button
-              onPress={() => this.props.navigation.navigate("DailyHistory")}
-            >
-              <Text style={styles.button}>Daily History</Text>
-            </Button> */}
-            {/* //////////////////BUTTONS/////////// */}
-            {/* 
-            <FlatList
-          data={this.state.data}
-          renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-        /> */}
 
 
           </Content>
           <Footer>
-            <FooterTab>
+            <FooterTab style={{ backgroundColor: "#647bec" }}>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >

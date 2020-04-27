@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     textAlign: "left"
   },
   button: {
-    backgroundColor: "blue",
+    backgroundColor: "#647bec",
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 12,

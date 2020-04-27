@@ -20,7 +20,7 @@ import {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "blue",
+    backgroundColor: "#647bec",
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 12,
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   color: {
-    backgroundColor: "blue"
+    backgroundColor: "#647bec"
   }
 });
 

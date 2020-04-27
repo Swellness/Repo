@@ -32,7 +32,7 @@ class leaderBDetail extends React.Component {
                     oddRowColor='white'
                 />
                 <Button style={{ marginTop: 10, marginBottom: 10, width: 125, justifyContent: "center" }} transparent onPress={() => { this._query() }}>
-                    <Text style={{ color: "blue" }}>Refresh</Text>
+                    <Text style={{ color: "#647bec" }}>Refresh</Text>
                 </Button>
             </Container>
 

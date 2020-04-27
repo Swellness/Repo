@@ -88,9 +88,9 @@ export default class App extends React.Component {
     });
 
     const MainNavigation = createDrawerNavigator({
-      Profile: { screen: Profile },
       Rewards: { screen: Rewards },
       Leaderboard: { screen: Leaderboard },
+      Profile: { screen: Profile },
       Settings: { screen: Settings },
       Activities: { screen: Activities, navigationOptions: { drawerLabel: () => null } },
       DailyHistory: { screen: DailyHistory, navigationOptions: { drawerLabel: () => null } },
@@ -98,7 +98,6 @@ export default class App extends React.Component {
       CreateUser: { screen: CreateUser, navigationOptions: { drawerLabel: () => null } },
       Logout: { screen: Logout },
       ForgotPassUser: { screen: ForgotPassUser, navigationOptions: { drawerLabel: () => null } },
-      //LoginStack: { screen: LoginStack, navigationOptions: { drawerLabel: () => null } },
       SessionStack: { screen: SessionStack, navigationOptions: { drawerLabel: () => null } },
       SessionHistory: { screen: SessionHistory, navigationOptions: { drawerLabel: () => null } },
     }, {

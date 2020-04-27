@@ -30,7 +30,7 @@ const buttonWidth = screen.width;
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "blue",
+    backgroundColor: "#647bec",
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 12,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   color: {
-    backgroundColor: "blue"
+    backgroundColor: "#647bec"
   },
   text: {
     textAlign: "center",
@@ -78,7 +78,24 @@ const styles = StyleSheet.create({
   image: {
     width: 150,
     height: 200,
-  }
+  },
+  headerStyle: {
+    backgroundColor: "white",
+    elevation: 0,
+    shadowColor: "white",
+    shadowOpacity: 0,
+    shadowOffset: { height: 0, width: 0 },
+    shadowRadius: 0
+  },
+  view: {
+    marginHorizontal: 20,
+    backgroundColor: "#cfcac8",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    paddingBottom: 10,
+    borderRadius: 10,
+  },
 });
 
 const db = require('../util/dbAPI')
@@ -142,6 +159,7 @@ export default class Start extends React.Component {
             dataArray={arrAS}
             animation={true}
             expanded={true}
+            style={{ fontSize: 12 }}
             renderHeader={this._renderHeader}
             renderContent={this._renderContent}
           />
@@ -182,12 +200,12 @@ export default class Start extends React.Component {
         justifyContent: "space-between",
         alignItems: "center",
       }}>
-        <Text style={{ fontWeight: "600" }}>
+        <Text style={{ fontWeight: "600", fontSize: 24 }}>
           {" "}{item.title}
         </Text>
         {expanded
-          ? <Icon style={{ fontSize: 18 }} name="remove-circle" />
-          : <Icon style={{ fontSize: 18 }} name="add-circle" />}
+          ? <Icon style={{ fontSize: 24 }} name="remove-circle" />
+          : <Icon style={{ fontSize: 24 }} name="add-circle" />}
       </View>
     );
   }
@@ -221,18 +239,18 @@ export default class Start extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar hidden={true} translucent={true} />
         <Container>
-          <Header>
+          <Header style={styles.headerStyle}>
             <Left>
               <Button transparent onPress={() => this.props.navigation.goBack()}>
-                <Icon name='arrow-back' />
+                <Icon style={{ color: "black" }} name='arrow-back' />
               </Button>
             </Left>
             <Body>
-              <Title>Activities</Title>
+              <Title style={{ color: "black" }} >Activities</Title>
             </Body>
             <Right>
               <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-                <Icon name='menu' />
+                <Icon style={{ color: "black" }} name='menu' />
               </Button>
             </Right>
           </Header>
@@ -256,7 +274,7 @@ export default class Start extends React.Component {
 
           </Content>
           <Footer>
-            <FooterTab>
+            <FooterTab style={{ backgroundColor: "#647bec" }}>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >
