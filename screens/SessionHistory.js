@@ -14,6 +14,8 @@ import {
   Title
 } from "native-base";
 import CalendarPicker from 'react-native-calendar-picker';
+import { Stitch, UserPasswordAuthProviderClient, StitchUser, StitchUserProfile } from 'mongodb-stitch-react-native-sdk';
+
 const db = require('../util/dbAPI')
 const styles = StyleSheet.create({
   container: {
@@ -88,7 +90,8 @@ class SessionHistory extends React.Component {
     super(props);
     this.state = {
       selectedStartDate: undefined,
-      data: []
+      data: [],
+      email: ""
     };
 
     this.onDateChange = this.onDateChange.bind(this);
@@ -98,10 +101,12 @@ class SessionHistory extends React.Component {
   onDateChange(date) {
     var formattedDate = date.format('MM/DD/YY').toString()
     console.log(formattedDate, "selected")
+    var email = Stitch.defaultAppClient.auth.user.profile.email
+
 
 
     this.setState({
-      selectedStartDate: formattedDate
+      selectedStartDate: formattedDate, email:email
     }, () => {
       this._query()
     })
@@ -177,7 +182,7 @@ class SessionHistory extends React.Component {
   _query = () => {
     const collection = db.loadCollection('SwellnessTest', 'Session')
     var dbData = []
-    collection.find({ date: this.state.selectedStartDate }, { limit: 1 }).toArray().then(result => {
+    collection.find({ date: this.state.selectedStartDate, email:this.state.email}, { limit: 1 }).toArray().then(result => {
       result.map(x => console.log(x.date))
       result.forEach(element => {
         dbData.push(element)

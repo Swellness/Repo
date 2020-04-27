@@ -18,7 +18,7 @@ import {
   Label,
   Text,
 } from "native-base";
-import { Stitch, UserPasswordAuthProviderClient, StitchUser, StitchUserProfile } from 'mongodb-stitch-react-native-sdk';
+import { Stitch, UserPasswordAuthProviderClient } from 'mongodb-stitch-react-native-sdk';
 var { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   stretch: {
@@ -127,9 +127,12 @@ export default class Start extends React.Component {
           db.addData("SwellnessTest", "Points", input2)
 
           db.logout() //logs off admin
+          console.log("logged out ")
+
           db.login(email, password) //logs in as new user
           console.log("logged in as ", username)
-          this.props.navigation.navigate("SessionCreation")
+          setTimeout(() => {this.props.navigation.navigate("SessionCreation")
+        }, 2000);
 
           // Alert.alert( //doesnt work when tutorial alert triggers at the same time
           //   'User Created Successfully',

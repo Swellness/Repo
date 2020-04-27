@@ -133,15 +133,15 @@ class PostSession extends React.Component {
     // }
     const formatted = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
     console.log(formatted);
-    var pointsAwarded = Math.round(elapsedTime / 6);
+    var pointsAwarded = (Math.round(elapsedTime / 6))+10;
 
     //////////////////////////Regular People: This is taking a lot of mental energy, i should take a break Me: hAhA bRaiN go b00m////////////////////////////////////////////////    
 
     this.state = {
       id: undefined,
       email: undefined,
-      steps: 20, //in the demo, take 10 steps
-      exercises: undefined,
+      steps: 10, //in the demo, take 10 steps
+      exercises: 2,
       points: pointsAwarded,
       date: undefined,
       timeElapsed: formatted
@@ -149,7 +149,7 @@ class PostSession extends React.Component {
   }
   componentDidMount() {
     // method to nuke session collection
-    // Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Session").deleteMany({steps:null})
+    // Stitch.defaultAppClient.getServiceClient(RemoteMongoClient.factory, 'mongodb-atlas').db("SwellnessTest").collection("Session").deleteMany({})
     // .then(result => console.log(`nuked`)) //db.collection selects a collection and insertOne inserts the document and logs if successful or failure
     // .catch(err => console.error(`Failed to delete`))
 

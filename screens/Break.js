@@ -162,12 +162,12 @@ export default class Start extends React.Component {
 
             <View style={styles.view}>
               <Text style={styles.textDisplay}>Daily Challenges</Text>
-              <Text >2/4 Activities complted for today</Text>
+              <Text >2/4 Activities completed for today</Text>
               <Text >You still have 2 challenges remaining </Text>
               <Text style={styles.textDisplay}>Current Stats</Text>
               <Text>Steps Taken: 10</Text>
               <Text>Total Exercises Completed: 2</Text>
-              <Text>Points Earned: 15</Text>
+              {/* <Text>Points Earned: 15</Text> */}
             </View>
             <View style={styles.centerObj}>
               <Button style={styles.button}

@@ -22,7 +22,7 @@ class leaderBDetail extends React.Component {
     render() {
         return (
             <Container style={{ alignItems: "center", height: screen.height - 120 }}>
-                <Text style={{ fontSize: 26, marginVertical: 20 }}>Top Employees of the Month</Text>
+                <Text style={{ fontSize: 26, marginVertical: 20 }}>Top Users of the Month</Text>
 
                 <Leaderboard
                     data={this.state.data}
