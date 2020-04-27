@@ -38,7 +38,15 @@ const styles = StyleSheet.create({
   editText: {
     fontWeight: "100"
 
-  }
+  },
+  headerStyle: {
+    backgroundColor: "white",
+    elevation: 0,
+    shadowColor: "white",
+    shadowOpacity: 0,
+    shadowOffset: { height: 0, width: 0 },
+    shadowRadius: 0
+  },
 });
 export default class Start extends React.Component {
   constructor(props) { //state and method instantiation
@@ -70,18 +78,18 @@ export default class Start extends React.Component {
   render() {
     return (
       <Container>
-        <Header>
+        <Header style={styles.headerStyle}>
           <Left>
             <Button transparent onPress={() => this.props.navigation.goBack()}>
-              <Icon name='arrow-back' />
+              <Icon style={{ color: "black" }} name='arrow-back' />
             </Button>
           </Left>
           <Body>
-            <Title>Profile</Title>
+            <Title style={{ color: "black" }} >Profile</Title>
           </Body>
           <Right>
             <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-              <Icon name='menu' />
+              <Icon style={{ color: "black" }} name='menu' />
             </Button>
           </Right>
         </Header>
@@ -97,7 +105,7 @@ export default class Start extends React.Component {
               source={require('../Pictures/profile_default.png')}
             />
             <Button transparent >
-              <Text style={{ color: '#1A53FF' }}>change picture</Text>
+              <Text style={{ color: '#647bec' }}>change picture</Text>
             </Button>
           </View>
 
@@ -106,7 +114,7 @@ export default class Start extends React.Component {
 
         </Content>
         <Footer>
-          <FooterTab>
+          <FooterTab style={{ backgroundColor: "#647bec" }}>
             <Button
               onPress={() => this.props.navigation.navigate("SessionHistory")}
             >
@@ -170,7 +178,7 @@ export default class Start extends React.Component {
 
         {/* button can be removed below */}
         <Button
-          style={{ marginTop: 15, alignContent: "center" }}
+          style={{ marginTop: 15, alignContent: "center", backgroundColor: "#647bec" }}
           onPress={() => {
 
             this.setState({ edit: !this.state.edit })

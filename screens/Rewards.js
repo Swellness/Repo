@@ -23,7 +23,7 @@ const db = require('../util/dbAPI')
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "blue",
+    backgroundColor: "#647bec",
     borderColor: "white",
     borderWidth: 1,
     borderRadius: 12,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   color: {
-    backgroundColor: "blue"
+    backgroundColor: "#647bec"
   },
   title: {
     fontSize: 40,
@@ -44,7 +44,15 @@ const styles = StyleSheet.create({
   subText: {
     fontSize: 25,
     textAlign: 'center'
-  }
+  },
+  headerStyle: {
+    backgroundColor: "white",
+    elevation: 0,
+    shadowColor: "white",
+    shadowOpacity: 0,
+    shadowOffset: { height: 0, width: 0 },
+    shadowRadius: 0
+  },
 }
 );
 
@@ -82,34 +90,33 @@ export default class Start extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar hidden={true} translucent={true} />
         <Container>
-          <Header>
+          <Header style={styles.headerStyle}>
             <Left>
               <Button transparent onPress={() => this.props.navigation.goBack()}>
-                <Icon name='arrow-back' />
+                <Icon style={{ color: "black" }} name='menu' name='arrow-back' />
               </Button>
             </Left>
             <Body>
-              <Title>Rewards</Title>
+              <Title style={{ color: "black" }} name='menu' >Rewards</Title>
             </Body>
             <Right>
               <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-                <Icon name='menu' />
+                <Icon style={{ color: "black" }} name='menu' name='menu' />
               </Button>
             </Right>
           </Header>
 
           <Content>
-
-            <Button style={{ alignSelf: "center", marginTop: 10, marginBottom: 10, width: 125, justifyContent: "center" }} onPress={() => { this._getPoints() }}>
-              <Text style={{ color: "white" }}>Refresh</Text>
-            </Button>
             <Text style={styles.title}>Redeem Your Points!!</Text>
             <Text style={styles.subText}>You currently have {this.state.points} Points</Text>
             <Rewards />
+            <Button style={{ alignSelf: "center", marginTop: 10, marginBottom: 10, width: 125, justifyContent: "center" }} transparent onPress={() => { this._getPoints() }}>
+              <Text style={{ color: "#647bec" }}>Refresh</Text>
+            </Button>
 
           </Content>
           <Footer>
-            <FooterTab>
+            <FooterTab style={{ backgroundColor: "#647bec" }}>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >

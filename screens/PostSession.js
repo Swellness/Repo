@@ -59,25 +59,29 @@ const styles = StyleSheet.create({
   },
   text3: {
     flex: 0,
-    fontSize: 24,
+    fontSize: 32,
     lineHeight: 32,
-    textAlign: "left"
+    textAlign: "left",
+    marginTop: 20
   },
   text4: {
     flex: 0,
-    fontSize: 24,
+    fontSize: 30,
     lineHeight: 32,
-    textAlign: "left"
+    textAlign: "left",
+    marginTop: 10
   },
   text5: {
     flex: 1,
-    fontSize: 24,
+    fontSize: 30,
     lineHeight: 32,
-    textAlign: "left"
+    textAlign: "left",
+    marginTop: 10,
+    marginBottom: 20
   },
   text6: {
     fontWeight: "600",
-    fontSize: 32,
+    fontSize: 30,
     lineHeight: 40,
     textAlign: "center"
   },
@@ -92,12 +96,18 @@ const styles = StyleSheet.create({
   },
   view: {
     marginHorizontal: 20,
-    backgroundColor: "#cfcac8",
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-    paddingBottom: 10
-  }
+    backgroundColor: "#dddddd",
+    borderRadius: 10,
+
+  },
+  headerStyle: {
+    backgroundColor: "white",
+    elevation: 0,
+    shadowColor: "white",
+    shadowOpacity: 0,
+    shadowOffset: { height: 0, width: 0 },
+    shadowRadius: 0
+  },
 });
 import { Stitch, RemoteMongoClient, UserPasswordCredential, UserPasswordAuthProviderClient } from 'mongodb-stitch-react-native-sdk';
 import ThreeAxisSensor from "expo-sensors/build/ThreeAxisSensor";
@@ -183,18 +193,18 @@ class PostSession extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar hidden={true} translucent={true} />
         <Container>
-          <Header>
+          <Header style={styles.headerStyle}>
             <Left>
               <Button transparent onPress={() => this.props.navigation.goBack()}>
-                <Icon name='arrow-back' />
+                <Icon style={{ color: "black" }} name='arrow-back' />
               </Button>
             </Left>
             <Body>
-              <Title>Post-Session</Title>
+              <Title style={{ color: "black" }} >Post-Session</Title>
             </Body>
             <Right>
               <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-                <Icon name='menu' />
+                <Icon style={{ color: "black" }} name='menu' />
               </Button>
             </Right>
           </Header>
@@ -202,15 +212,15 @@ class PostSession extends React.Component {
             <Text style={styles.headerText}>Good job today!!</Text>
             <Text style={styles.text}> Session Length: {this.state.timeElapsed}</Text>
             <Text style={styles.text}> Daily Challenge: </Text>
-            <Text style={styles.text2}> 4/4 Activities </Text>
+            <Text style={styles.text2}> 2/4 Activities </Text>
             <View style={styles.view}>
               <Text style={styles.text3}> Steps Taken: {this.state.steps} </Text>
-              <Text style={styles.text4}> Exercises Completed: 4</Text>
+              <Text style={styles.text4}> Exercises Completed: 2</Text>
               <Text style={styles.text5}> Points Earned: {this.state.points}</Text>
 
             </View>
             <Button style={{ alignSelf: "center", marginTop: 10, marginBottom: 10, justifyContent: "center" }} transparent onPress={() => this.props.navigation.navigate("SessionCreation")}>
-              <Text style={{ color: "blue" }}>Create a new Session</Text>
+              <Text style={{ color: "#647bec" }}>Create a new Session</Text>
             </Button>
             {/* <TouchableOpacity //seems unncessary plus its formatted poorly
               style={styles.button}
@@ -220,7 +230,7 @@ class PostSession extends React.Component {
             </TouchableOpacity> */}
           </Content>
           <Footer>
-            <FooterTab>
+            <FooterTab style={{ backgroundColor: "#647bec" }}>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >

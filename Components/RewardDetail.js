@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         elevation: 5
     },
     openButton: {
-        backgroundColor: "#2196F3",
+        backgroundColor: "#647bec",
         borderRadius: 20,
         padding: 10,
         elevation: 2
@@ -96,7 +96,7 @@ const RewardDetails = ({ imageSource, title, score }) => {
                     <Text style={styles.modalText}>You will recieve an email shortly!</Text>
 
                     <TouchableHighlight
-                        style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                        style={{ ...styles.openButton, backgroundColor: "#647bec" }}
                         onPress={() => {
                             purchaseItem()
 
