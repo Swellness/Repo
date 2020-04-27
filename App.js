@@ -83,7 +83,8 @@ export default class App extends React.Component {
       SessionCreation: { screen: SessionCreation },
       ActiveSession: { screen: ActiveSession },
       Break: { screen: Break },
-      PostSession: { screen: PostSession }
+      PostSession: { screen: PostSession },
+      Activities: { screen: Activities }
     }, {
       initialRouteName: 'SessionCreation',
       headerMode: 'none'

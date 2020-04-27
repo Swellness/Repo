@@ -74,10 +74,18 @@ const showAlert = () => {
     [
       { text: 'Ask me later', onPress: () => console.log('Ask me later pressed') },
       { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-      { text: 'OK', onPress: () => console.log("Still needs navigation") },
+      { text: 'OK', onPress: () => this.onButtonPress() },
     ],
-    // { cancelable: false }
+    { cancelable: false }
   )
+}
+const onButtonPress = () => {
+  const resetAction = StackActions.reset({
+    index: 0,
+    key: undefined,
+    actions: [NavigationActions.navigate({ routeName: 'Activities' })]
+  });
+  this.props.navigation.dispatch(resetAction);
 }
 const createArray = length => {
   const arr = [];
