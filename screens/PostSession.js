@@ -123,7 +123,7 @@ class PostSession extends React.Component {
     // }
     const formatted = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
     console.log(formatted);
-    var pointsAwarded = Math.round(elapsedTime / 60);
+    var pointsAwarded = Math.round(elapsedTime / 6);
 
     //////////////////////////Regular People: This is taking a lot of mental energy, i should take a break Me: hAhA bRaiN go b00m////////////////////////////////////////////////    
 
@@ -208,7 +208,7 @@ class PostSession extends React.Component {
             <Text style={styles.text2}> 2/4 Activities </Text>
             <View style={styles.view}>
               <Text style={styles.text3}> Steps Taken: {this.state.steps} </Text>
-              <Text style={styles.text4}> Exercises Completed: 4</Text>
+              <Text style={styles.text4}> Exercises Completed: 2</Text>
               <Text style={styles.text5}> Points Earned: {this.state.points}</Text>
 
             </View>
