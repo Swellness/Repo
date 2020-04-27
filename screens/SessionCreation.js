@@ -31,17 +31,20 @@ const screen = Dimensions.get("window");
 const db = require('../util/dbAPI')
 import { Stitch } from 'mongodb-stitch-react-native-sdk';
 
+var { height, width } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 12,
+    borderRadius: width,
     overflow: "hidden",
-    padding: 5,
+    paddingTop: 5,
     textAlign: "center",
     justifyContent: 'center',
     alignItems: 'center',
-    width: screen.width / 2,
-    height: 75,
-    marginHorizontal: 100
+    width: screen.width / 2.2,
+    height: screen.width / 2.2,
+    marginHorizontal: 100,
+    backgroundColor: "#647bec"
   },
   viewHorizontal: {
     flex: 1,
@@ -73,6 +76,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 24,
     fontWeight: "bold",
+    width: width / 4,
+    textAlign: "center",
   },
   buttonTextStop: {
     color: "#FF851B"
@@ -89,13 +94,41 @@ const styles = StyleSheet.create({
   },
   pickerItem: {
     color: "black",
-    fontSize: 24,
+    fontSize: 18,
     marginTop: 5
   },
   pickerContainer: {
     flexDirection: "row",
     alignItems: "center"
-  }
+  },
+  headerStyle: {
+    backgroundColor: "white",
+    elevation: 0,
+    shadowColor : "white",
+    shadowOpacity: 0,
+    shadowOffset: { height: 0 , width:0 },
+    shadowRadius: 0
+  },
+  centerObj: {
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    paddingTop: 10
+  },
+  quoteView: {
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 55,
+    paddingBottom: 20
+  },
+  numbersView: {
+    justifyContent: "center",
+    alignContent: "flex-start",
+    alignItems: "flex-start",
+    paddingHorizontal: width/8,
+    paddingTop: 10
+  },
 });
 
 const formatNumber = number => `0${number}`.slice(-2);
@@ -239,86 +272,101 @@ export default class Start extends React.Component {
         <StatusBar hidden={true} translucent={true} />
 
         <Container>
-          <Header>
+          <Header style={styles.headerStyle}>
             <Left />
-            <View style={{ flex: 1, alignItems: "center", justifyContent: 'center' }}>
-              <Title>New Session</Title>
+            <View style={{ flex: 1, alignItems: "flex-end", justifyContent: 'center' }}>
+              <Title style={{color: "black"}}>New Session</Title>
             </View>
             <Right>
               <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-                <Icon name='menu' />
+                <Icon style={{color: "black"}} name='menu' />
               </Button>
             </Right>
           </Header>
           <Content>
 
-            <Image
-              style={{ width: 400, height: 250 }}
-              source={require('../Pictures/AppLogo.png')}
-            />
-            <Text style={{ fontSize: 30, textDecorationLine: 'underline' }}>Session Length:</Text>
-            <View style={styles.viewHorizontal}>
-              <Picker
-                style={styles.picker}
-                itemStyle={styles.pickerItem}
-                selectedValue={this.state.totalHours}
-                onValueChange={itemValue => {
-                  this.setState({ totalHours: itemValue });
-                }}
-                mode="dropdown"
-              >
-                {AVAILABLE_HOURS.map(value => (
-                  <Picker.Item key={value} label={value} value={value} />
-                ))}
-              </Picker>
-              <Text style={styles.pickerItem}>Hours and</Text>
-
-
-              <Picker
-                style={styles.picker}
-                itemStyle={styles.pickerItem}
-                selectedValue={this.state.totalMins}
-                onValueChange={itemValue => {
-                  this.setState({ totalMins: itemValue });
-                }}
-                mode="dropdown"
-              >
-                {AVAILABLE_MINUTES.map(value => (
-                  <Picker.Item key={value} label={value} value={value} />
-                ))}
-              </Picker>
-              <Text style={styles.pickerItem}>Minutes</Text>
+            <View style={styles.centerObj}>
+              <Image
+                style={{ width: width / 1.1, height: width / 2.12 }}
+                source={require('../Pictures/swellness_logo_outline.png')}
+              />
+            </View>
+            <View style={styles.quoteView}>
+              <Text style={{fontSize: 15, fontStyle: "italic"}}>"When life gives you lemons, Don't make Lemonade..."</Text>
             </View>
 
-            <Text style={{ fontSize: 30, textDecorationLine: 'underline' }}>Activity Frequency:</Text>
-            <View style={styles.viewHorizontal}>
-              <Text style={styles.pickerItem}>Every</Text>
-              <Picker
-                style={styles.picker}
-                itemStyle={styles.pickerItem}
-                selectedValue={this.state.actFrequency}
-                onValueChange={itemValue => {
-                  this.setState({ actFrequency: itemValue });
-                }}
-                mode="dropdown"
+            <View style={styles.numbersView}>
+              <Text style={{ fontSize: 22, fontWeight: "Bold" }}>Hours Working</Text>
+              <View style={styles.viewHorizontal}>
+                <Picker
+                  style={styles.picker}
+                  itemStyle={styles.pickerItem}
+                  selectedValue={this.state.totalHours}
+                  onValueChange={itemValue => {
+                    this.setState({ totalHours: itemValue });
+                  }}
+                  mode="dropdown"
+                >
+                  {AVAILABLE_HOURS.map(value => (
+                    <Picker.Item key={value} label={value} value={value} />
+                  ))}
+                </Picker>
+                <Text style={styles.pickerItem}>Hours</Text>
+                <Picker
+                  style={styles.picker}
+                  itemStyle={styles.pickerItem}
+                  selectedValue={this.state.totalMins}
+                  onValueChange={itemValue => {
+                    this.setState({ totalMins: itemValue });
+                  }}
+                  mode="dropdown"
+                >
+                  {AVAILABLE_MINUTES.map(value => (
+                    <Picker.Item key={value} label={value} value={value} />
+                  ))}
+                </Picker>
+                <Text style={styles.pickerItem}>Minutes</Text>
+              </View>
+              
+
+              <Text style={{ fontSize: 22, fontWeight: "Bold", textAlign: "right", margineTop: 0 }}>Activity Frequency</Text>
+              <View style={styles.viewHorizontal}>
+                <Picker
+                  style={styles.picker}
+                  itemStyle={styles.pickerItem}
+                  selectedValue={this.state.actFrequency}
+                  onValueChange={itemValue => {
+                    this.setState({ actFrequency: itemValue });
+                  }}
+                  mode="dropdown"
+                >
+                  {AVAILABLE_MINUTES.map(value => (
+                    <Picker.Item key={value} label={value} value={value} />
+                  ))}
+                </Picker>
+                <Text style={styles.pickerItem}>Minutes</Text>
+              </View>
+
+              </View>
+              <View style={styles.centerObj}>
+              <Button style={styles.button}
+                onPress={() => this.start()}
               >
-                {AVAILABLE_MINUTES.map(value => (
-                  <Picker.Item key={value} label={value} value={value} />
-                ))}
-              </Picker>
-              <Text style={styles.pickerItem}>Minutes</Text>
+                <Text style={styles.buttonText}>Start Session</Text>
+              </Button>
+              <Button style={{ alignSelf: "center", marginTop: 10, marginBottom: 10, width: 125, justifyContent: "center" }} transparent onPress={() => { this.componentDidMount() }}>
+                <Text style={{ color: "blue" }}>Reset to Default</Text>
+              </Button>
+
             </View>
-            <Button style={styles.button}
-              onPress={() => this.start()}
-            >
-              <Text style={styles.buttonText}>Start Session</Text>
-            </Button>
-            <Button style={{ alignSelf: "center", marginTop: 10, marginBottom: 10, width: 125, justifyContent: "center" }} transparent onPress={() => { this.componentDidMount() }}>
-              <Text style={{ color: "blue" }}>Reset to Default</Text>
-            </Button>
+
           </Content>
+
+
+
+
           <Footer>
-            <FooterTab>
+            <FooterTab style={{backgroundColor: "#647bec"}}>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >

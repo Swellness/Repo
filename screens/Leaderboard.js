@@ -34,7 +34,15 @@ const styles = StyleSheet.create({
   },
   color: {
     backgroundColor: "blue"
-  }
+  },
+  headerStyle: {
+    backgroundColor: "white",
+    elevation: 0,
+    shadowColor : "white",
+    shadowOpacity: 0,
+    shadowOffset: { height: 0 , width:0 },
+    shadowRadius: 0
+  },
 });
 
 export default class Start extends React.Component {
@@ -43,18 +51,18 @@ export default class Start extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar hidden={true} translucent={true} />
         <Container>
-          <Header>
+          <Header style={styles.headerStyle}>
             <Left>
               <Button transparent onPress={() => this.props.navigation.goBack()}>
-                <Icon name='arrow-back' />
+                <Icon style={{ color: "black"}} name='arrow-back' />
               </Button>
             </Left>
             <Body>
-              <Title>Leaderboard</Title>
+              <Title style={{ color: "black"}} >Leaderboard</Title>
             </Body>
             <Right>
               <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-                <Icon name='menu' />
+                <Icon style={{ color: "black"}} name='menu' />
               </Button>
             </Right>
           </Header>
@@ -64,7 +72,7 @@ export default class Start extends React.Component {
 
           </Content>
           <Footer>
-            <FooterTab>
+            <FooterTab style={{backgroundColor: "#647bec" }}>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >

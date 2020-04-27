@@ -64,6 +64,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
   },
+  headerStyle: {
+    backgroundColor: "white",
+    elevation: 0,
+    shadowColor : "white",
+    shadowOpacity: 0,
+    shadowOffset: { height: 0 , width:0 },
+    shadowRadius: 0
+  },
 });
 class SessionHistory extends React.Component {
   constructor(props) {
@@ -96,18 +104,18 @@ class SessionHistory extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar hidden={true} translucent={true} />
         <Container>
-          <Header>
+          <Header style={styles.headerStyle}>
             <Left>
               <Button transparent onPress={() => this.props.navigation.goBack()}>
-                <Icon name="arrow-back" />
+                <Icon style={{ color: "black" }} name="arrow-back" />
               </Button>
             </Left>
             <Body>
-              <Title>History</Title>
+              <Title style={{ color: "black" }} >History</Title>
             </Body>
             <Right>
               <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-                <Icon name="menu" />
+                <Icon style={{ color: "black" }} name="menu" />
               </Button>
             </Right>
           </Header>
@@ -156,7 +164,7 @@ class SessionHistory extends React.Component {
 
           </Content>
           <Footer>
-            <FooterTab>
+            <FooterTab style={{backgroundColor: "#647bec"}}>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >

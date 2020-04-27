@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginLeft: width / 4,
-    marginRight: width / 4
+    marginRight: width / 4,
+    backgroundColor: "#5976ff"
   }
 });
 export default function App() {

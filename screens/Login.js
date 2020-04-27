@@ -3,6 +3,7 @@ import {
   Alert,
   StyleSheet,
   Image,
+  View,
   Dimensions, SafeAreaView, StatusBar
 } from "react-native";
 import {
@@ -19,11 +20,13 @@ import {
   Label,
 } from "native-base";
 import { Stitch, UserPasswordCredential, StitchUser } from 'mongodb-stitch-react-native-sdk';
+
 var { height, width } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   stretch: {
-    width: width - 5,
-    height: 180,
+    width: width / 1.1,
+    height: width / 2.12,
     resizeMode: "stretch",
   },
   button: {
@@ -31,7 +34,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginLeft: width / 4,
-    marginRight: width / 4
+    marginRight: width / 4,
+    backgroundColor: "#5976ff"
+  },
+  centerObj: {
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    paddingTop: 50
   }
 });
 const db = require('../util/dbAPI')
@@ -57,27 +67,36 @@ export default class Start extends React.Component {
         <Container>
           <Content>
             <Form>
-              <Image style={styles.stretch} source={require('../Pictures/swellness_logo_outline.png')} />
-              <Item stackedLabel >
-                <Label>Email</Label>
-                <Input onChangeText={(email) => this.setState({ email })} />
-              </Item>
-              <Item stackedLabel last >
-                <Label>Password</Label>
-                <Input secureTextEntry={true} onChangeText={(password) => this.setState({ password })} />
-              </Item>
-              <Button rounded style={styles.button}
-                onPress={() => this._handleLogin(this.state.email, this.state.password, 0)}>
-                <Text>Login</Text>
-              </Button>
-              <Button transparent
-                onPress={() => this.props.navigation.navigate("ForgotPassUser")}>
-                <Text>Forgot Password</Text>
-              </Button>
-              <Button transparent
-                onPress={() => this.props.navigation.navigate("CreateUser")}>
-                <Text>New User</Text>
-              </Button>
+
+              <View style={styles.centerObj}>
+                <Image style={styles.stretch} source={require('../Pictures/swellness_logo_outline.png')} />
+              
+                </View>
+                <Item stackedLabel >
+                  <Label>Email</Label>
+                  <Input onChangeText={(email) => this.setState({ email })} />
+                </Item>
+
+                <Item stackedLabel last >
+                  <Label>Password</Label>
+                  <Input secureTextEntry={true} onChangeText={(password) => this.setState({ password })} />
+                </Item>
+
+                <Button rounded style={styles.button}
+                  onPress={() => this._handleLogin(this.state.email, this.state.password, 0)}>
+                  <Text>Login</Text>
+                </Button>
+
+                <Button transparent
+                  onPress={() => this.props.navigation.navigate("ForgotPassUser")}>
+                  <Text>Forgot Password</Text>
+                </Button>
+
+                <Button transparent
+                  onPress={() => this.props.navigation.navigate("CreateUser")}>
+                  <Text >New User</Text>
+                </Button>
+
             </Form>
           </Content>
         </Container >

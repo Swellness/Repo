@@ -22,16 +22,17 @@ import { Stitch, UserPasswordAuthProviderClient, StitchUser, StitchUserProfile }
 var { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   stretch: {
-    width: width - 5,
-    height: 180,
-    resizeMode: 'stretch',
+    width: width / 1.1,
+    height: width / 2.21,
+    resizeMode: "stretch",
   },
   button: {
     marginTop: 10,
     alignItems: "center",
     justifyContent: "center",
     marginLeft: width / 4,
-    marginRight: width / 4
+    marginRight: width / 4,
+    backgroundColor: "#5976ff"
   }
 });
 const db = require('../util/dbAPI')
@@ -62,7 +63,7 @@ export default class Start extends React.Component {
         <StatusBar hidden={true} translucent={true} />
         <Container>
           <Content>
-            <Form>
+            <Form style={{paddingTop: 50}}>
               <Image style={styles.stretch} source={require('../Pictures/Welcome_Pic.png')} />
               <Item stackedLabel>
                 <Label>Username</Label>

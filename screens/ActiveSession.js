@@ -30,6 +30,7 @@ import moment from 'moment';
 const screen = Dimensions.get("window");
 const styles = StyleSheet.create({
   button: {
+    backgroundColor: "#647bec",
     borderRadius: 12,
     overflow: "hidden",
     padding: 5,
@@ -58,6 +59,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center"
+  },
+  headerStyle: {
+    backgroundColor: "white",
+    elevation: 0,
+    shadowColor : "white",
+    shadowOpacity: 0,
+    shadowOffset: { height: 0 , width:0 },
+    shadowRadius: 0
   },
 
 });
@@ -215,18 +224,18 @@ export default class Start extends React.Component {
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar hidden={true} translucent={true} />
         <Container>
-          <Header>
+          <Header style={styles.headerStyle}>
             <Left>
               <Button transparent onPress={() => this.props.navigation.goBack()}>
-                <Icon name='arrow-back' />
+                <Icon style={{ color: "black" }} name='arrow-back' />
               </Button>
             </Left>
             <Body>
-              <Title>Session</Title>
+              <Title style={{ color: "black" }} >Session</Title>
             </Body>
             <Right>
               <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-                <Icon name='menu' />
+                <Icon style={{ color: "black" }} name='menu' />
               </Button>
             </Right>
           </Header>
@@ -270,7 +279,7 @@ export default class Start extends React.Component {
             </View>
           </Content>
           <Footer>
-            <FooterTab style={{}}>
+            <FooterTab  style={{backgroundColor: "#647bec"}}>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >

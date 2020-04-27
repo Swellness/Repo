@@ -29,6 +29,7 @@ const screen = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   button: {
+    backgroundColor: "#647bec",
     borderRadius: 12,
     overflow: "hidden",
     padding: 5,
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: screen.width / 2,
-    height: 75,
+    height: 55,
     marginVertical: 10
   },
   color: {
@@ -70,8 +71,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
-    paddingBottom: 10
-  }
+    paddingBottom: 10,
+    borderRadius: 10,
+  },
+  headerStyle: {
+    backgroundColor: "white",
+    elevation: 0,
+    shadowColor : "white",
+    shadowOpacity: 0,
+    shadowOffset: { height: 0 , width:0 },
+    shadowRadius: 0
+  },
 });
 
 
@@ -101,18 +111,18 @@ export default class Start extends React.Component {
         <StatusBar hidden={true} translucent={true} />
 
         <Container>
-          <Header>
+          <Header style={styles.headerStyle}>
             <Left>
               <Button transparent onPress={() => this.props.navigation.goBack()}>
-                <Icon name='arrow-back' />
+                <Icon style={{ color: "black" }} name='arrow-back' />
               </Button>
             </Left>
             <Body>
-              <Title>Break</Title>
+              <Title style={{ color: "black" }} >Break</Title>
             </Body>
             <Right>
               <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-                <Icon name='menu' />
+                <Icon style={{ color: "black" }} name='menu' />
               </Button>
             </Right>
           </Header>
@@ -121,7 +131,8 @@ export default class Start extends React.Component {
             <View style={{
               justifyContent: 'center',
               alignItems: 'center',
-              marginVertical: 15
+              marginVertical: 15,
+              borderRadius: 25
             }}>
               <Image
                 source={require('../Pictures/breakPic.png')}
@@ -135,8 +146,8 @@ export default class Start extends React.Component {
                 size={30}
                 until={900}
                 onFinish={() => alert('Finished')}
-                digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#grey' }}
-                digitTxtStyle={{ color: 'blue' }}
+                digitStyle={{ backgroundColor: '#FFF', borderWidth: 0, borderColor: '#grey' }}
+                digitTxtStyle={{ color: 'black' }}
                 timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
                 separatorStyle={{ color: 'black' }}
                 timeToShow={['H', 'M', 'S']}
@@ -144,7 +155,7 @@ export default class Start extends React.Component {
                 showSeparator
               />
 
-              <Text style={{ fontSize: 18 }}>Break started at:{this.state.time}</Text>
+              <Text style={{ fontSize: 18, paddingBottom: 20 }}>Break started at:{this.state.time}</Text>
             </View>
 
             <View style={styles.view}>
@@ -165,7 +176,7 @@ export default class Start extends React.Component {
             </View>
           </Content>
           <Footer>
-            <FooterTab>
+            <FooterTab style={{backgroundColor: "#647bec" }}>
               <Button
                 onPress={() => this.props.navigation.navigate("SessionHistory")}
               >
